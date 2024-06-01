@@ -1,11 +1,20 @@
 import React from "react";
+import { Navbar, Content, Footer } from "./components";
+import { Route, Routes } from "react-router-dom";
+import { Signin, Signup } from "./pages";
+import { TitleProvider } from "./contexts/TitleContext";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="font-[Montserrat]">Welcome to iTrust Investment</h1>
-      <p className="bebas-neue-regular uppercase">How can i help you today?</p>
-    </div>
+    <TitleProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Content />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+      <Footer />
+    </TitleProvider>
   );
 };
 
