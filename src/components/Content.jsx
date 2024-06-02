@@ -1,11 +1,13 @@
 import React from "react";
 import Hero from "./Hero";
+import Section from "./Section";
+Section;
 
 const Content = () => {
   return (
-    <section className="min-h-screen p-6">
+    <Section>
       <Hero />
-    </section>
+    </Section>
   );
 };
 
