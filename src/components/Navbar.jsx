@@ -2,7 +2,12 @@
 import React, { useContext } from "react";
 import { logo } from "../assets";
 import { Link } from "react-router-dom";
-import { MdMenu, MdSunny } from "react-icons/md";
+import {
+  Md14Mp,
+  MdMenu,
+  MdOutlineCurrencyBitcoin,
+  MdSunny,
+} from "react-icons/md";
 import { styles } from "../constants/styles";
 import { TitleContext } from "../contexts/TitleContext";
 
@@ -11,19 +16,24 @@ const Navbar = () => {
 
   return (
     <header
-      className={` ${styles.colors.lightBg} h-[60px] w-full flex items-center text-[#95A3B8] shadow-sm shadow-slate-50`}
+      className={` ${styles.colors.lightBg} h-[60px] w-full flex items-center text-slate-400 shadow-sm shadow-slate-50`}
     >
       <nav className={`flex justify-between px-4 py-2 items-center w-full`}>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <span>
             <MdMenu className="text-2xl" />
           </span>
-          <Link to={"/"} className="flex items-center gap-1">
-            <img src={logo} alt="" width={25} />
-            <h1 className="font-bold text-lg lg:text-xl">Quadx</h1>
+          <Link to={"/"} className="flex items-center gap-1 text-slate-600">
+            {/* <img src={logo} alt="" width={25} /> */}
+
+            <Md14Mp />
+
+            <h1 className="font-semibold text-lg lg:text-xl  font-[Montserrat]">
+              Quadx
+            </h1>
           </Link>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <span>
             <MdSunny />
           </span>

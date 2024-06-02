@@ -5,11 +5,10 @@ const initialState = {
   loading: false,
   error: false,
   success: false,
-  accessToken: null,
 };
 
-export const loginUser = createAsyncThunk(
-  "login/loginUser",
+export const createAccount = createAsyncThunk(
+  "create/createAccount",
   async (FormData) => {
     const url = "";
     try {
@@ -31,36 +30,34 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const loginSlice = createSlice({
-  name: "login",
+const createAccountSlice = createSlice({
+  name: "create",
   initialState,
   reducers: {
     reset(state) {
       state.loading = false;
-      state.accessToken = null;
+
       state.error = false;
       state.success = false;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, (state) => {
+      .addCase(createAccount.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(createAccount.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         state.success = true;
-        state.accessToken = action.payload.accessToken;
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(createAccount.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
         state.success = false;
-        state.accessToken = null;
       });
   },
 });
 
-export const { reset } = loginSlice.actions;
-export default loginSlice.reducer;
+export const { reset } = createAccountSlice.actions;
+export default createAccountSlice.reducer;

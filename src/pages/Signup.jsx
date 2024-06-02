@@ -77,7 +77,7 @@ const Signup = () => {
             <span
               className={
                 page === 1
-                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full"
+                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full text-[#2563EB]"
                   : "bg-transparent"
               }
             >
@@ -86,7 +86,7 @@ const Signup = () => {
             <span
               className={
                 page === 2
-                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full"
+                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full text-[#2563EB]"
                   : "bg-transparent"
               }
             >
@@ -95,7 +95,7 @@ const Signup = () => {
             <span
               className={
                 page === 3
-                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full"
+                  ? "bg-[#2563EB] bg-opacity-25 p-2 rounded-full text-[#2563EB]"
                   : "bg-transparent"
               }
             >
@@ -119,7 +119,9 @@ const Signup = () => {
         {page === 1 && (
           <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
             <Formspan>
-              <label htmlFor="firstName">first name</label>
+              <label htmlFor="firstName">
+                first name <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="firstName"
@@ -129,7 +131,9 @@ const Signup = () => {
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="lastName">last name</label>
+              <label htmlFor="lastName">
+                last name <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="lastName"
@@ -139,39 +143,51 @@ const Signup = () => {
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="username">username</label>
+              <label htmlFor="username">
+                username <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="username"
                 value={formData.username}
                 handleChange={handleChange}
+                placeHolder={"Enter Username"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="email">email</label>
+              <label htmlFor="email">
+                email <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="email"
                 value={formData.email}
                 handleChange={handleChange}
+                placeHolder={"Enter Email"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="password">password</label>
+              <label htmlFor="password">
+                password <span>*</span>
+              </label>
               <Input
                 type={"password"}
                 name="password"
                 value={formData.password}
                 handleChange={handleChange}
+                placeHolder={"Enter password"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="password2">confirm password</label>
+              <label htmlFor="password2">
+                confirm password <span>*</span>
+              </label>
               <Input
                 type={"password"}
                 name="password2"
                 value={formData.password2}
                 handleChange={handleChange}
+                placeHolder={"Enter password"}
               />
             </Formspan>
           </div>
@@ -180,25 +196,33 @@ const Signup = () => {
         {page === 2 && (
           <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
             <Formspan>
-              <label htmlFor="phone">phone</label>
+              <label htmlFor="phone">
+                phone <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="phone"
                 value={formData.phone}
                 handleChange={handleChange}
+                placeHolder={"Enter Phone"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="address">street address</label>
+              <label htmlFor="address">
+                street address <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="address"
                 value={formData.address}
                 handleChange={handleChange}
+                placeHolder={"123 Example Street"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="country">country</label>
+              <label htmlFor="country">
+                country <span>*</span>
+              </label>
               <select
                 className="font-normal border p-2 outline-[#2563EB]"
                 name="country"
@@ -210,7 +234,9 @@ const Signup = () => {
               </select>
             </Formspan>
             <Formspan>
-              <label htmlFor="state">state</label>
+              <label htmlFor="state">
+                state <span>*</span>
+              </label>
               <select
                 className="font-normal border p-2 outline-[#2563EB]"
                 name="state"
@@ -228,6 +254,7 @@ const Signup = () => {
                 name="city"
                 value={formData.city}
                 handleChange={handleChange}
+                placeHolder={"Enter City"}
               />
             </Formspan>
             <Formspan>
@@ -237,6 +264,7 @@ const Signup = () => {
                 name="zip"
                 value={formData.zip}
                 handleChange={handleChange}
+                placeHolder={"Enter Zipcode"}
               />
             </Formspan>
           </div>
@@ -245,16 +273,21 @@ const Signup = () => {
         {page === 3 && (
           <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
             <Formspan>
-              <label htmlFor="ssn">social security number</label>
+              <label htmlFor="ssn">
+                social security number <span>*</span>
+              </label>
               <Input
                 type={"text"}
                 name="ssn"
                 value={formData.ssn}
                 handleChange={handleChange}
+                placeHolder={"Enter SSN"}
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="dob">date of birth</label>
+              <label htmlFor="dob">
+                date of birth <span>*</span>
+              </label>
               <Input
                 type={"date"}
                 name="dob"
@@ -263,7 +296,9 @@ const Signup = () => {
               />
             </Formspan>
             <Formspan>
-              <label htmlFor="nationality">nationality</label>
+              <label htmlFor="nationality">
+                nationality <span>*</span>
+              </label>
               <select
                 className="font-normal border p-2 outline-[#2563EB]"
                 name="nationality"
@@ -291,7 +326,7 @@ const Signup = () => {
             <hr />
             <Formspan>
               <label htmlFor="investmentExperience">
-                how much investment experience do you have?
+                how much investment experience do you have? <span>*</span>
               </label>
               <select
                 className="font-normal border p-2 outline-[#2563EB]"
@@ -307,7 +342,9 @@ const Signup = () => {
               </select>
             </Formspan>
             <Formspan>
-              <label htmlFor="employmentStatus">are you employed?</label>
+              <label htmlFor="employmentStatus">
+                are you employed? <span>*</span>
+              </label>
               <select
                 className="font-normal border p-2 outline-[#2563EB]"
                 name="employmentStatus"
@@ -322,10 +359,11 @@ const Signup = () => {
             </Formspan>
             <Formspan>
               <label htmlFor="brokerageFamily">
-                do you or a family member work for another brokerage?
+                do you or a family member work for another brokerage?{" "}
+                <span>*</span>
               </label>
-              <article className="flex items-center gap-2">
-                <span className="flex">
+              <article className="flex items-center gap-4">
+                <span className="flex items-center gap-1">
                   yes{" "}
                   <input
                     type="radio"
@@ -335,7 +373,7 @@ const Signup = () => {
                     onChange={handleChange}
                   />
                 </span>
-                <span className="flex">
+                <span className="flex items-center gap-1">
                   no{" "}
                   <input
                     type="radio"
@@ -384,7 +422,7 @@ const Signup = () => {
             <Button
               type={"submit"}
               handleClick={handleSubmit}
-              title={"submit"}
+              title={"create account"}
             />
           )}
         </div>
