@@ -6,8 +6,13 @@ import Formspan from "../components/Formspan";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/loginSlice";
+import { styles } from "../constants/styles";
+import Label from "../components/Label";
+import { MdLock } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+
 // Button
 const initialState = {
   username: "",
@@ -54,20 +59,18 @@ const Signin = () => {
   return (
     <Section>
       <div className="flex flex-col gap-1 items-center text-[#333]">
-        <h3 className="capitalize font-semibold text-lg">
+        <h3 className="capitalize font-semibold text-lg">welcome back!</h3>
+        <small className="font-light text-slate-500 capitalize">
           sign in to your account.
-        </h3>
-        <small className="font-light text-slate-500">
-          start automating your trades.
         </small>
       </div>
       <form
         action=""
-        className="w-full border p-6 text-[#333] flex flex-col gap-6"
+        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[350px] md:mx-auto"
       >
         <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
           <Formspan>
-            <label htmlFor="username">username</label>
+            <Label title={"username"} />
             <Input
               type={"text"}
               placeHolder={"Enter username"}
@@ -75,9 +78,20 @@ const Signin = () => {
               handleChange={handleChange}
               name={"username"}
             />
+            <FaUser
+              className={`${styles.colors.primaryTextColor} absolute top-[31px] right-2 text-xs `}
+            />
           </Formspan>
+
           <Formspan>
-            <label htmlFor="username">username</label>
+            <span className="flex justify-between mb-1">
+              <Label title={"password"} />
+              <Link
+                className={`${styles.colors.primaryTextColor} text-xs font-thin `}
+              >
+                Forgot password?
+              </Link>
+            </span>
             <Input
               type={"text"}
               placeHolder={"Enter password"}
@@ -85,7 +99,14 @@ const Signin = () => {
               handleChange={handleChange}
               name={"password"}
             />
+            <MdLock
+              className={`${styles.colors.primaryTextColor} absolute top-[34px] right-2 text-xs `}
+            />
           </Formspan>
+          <span className="flex gap-1 items-center text-xs font-thin">
+            <input type="checkbox" name="" id="" />
+            <small>remember me</small>
+          </span>
           <span className={error ? "flex text-red-500" : "hidden"}>
             {error}
           </span>
@@ -97,6 +118,15 @@ const Signin = () => {
           />
         </div>
       </form>
+      <p className="text-center text-xs text-slate-500 font-thin">
+        Don't have an account?{" "}
+        <Link
+          to={"/signup"}
+          className={`${styles.colors.primaryTextColor} capitalize `}
+        >
+          sign up
+        </Link>
+      </p>
     </Section>
   );
 };

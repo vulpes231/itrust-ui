@@ -15,7 +15,7 @@ const Input = ({
       placeholder={placeHolder}
       value={value}
       onChange={handleChange}
-      className={`w-full border ${customClass} p-2 outline-[#2563EB] font-normal`}
+      className={`w-full border ${customClass} p-2 outline-[#2563EB] font-normal placeholder:text-xs placeholder:font-thin`}
       autoComplete="off"
     />
   );
