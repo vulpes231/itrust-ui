@@ -4,11 +4,15 @@ import Section from "../components/Section";
 import { MdContactPage, MdPersonAddAlt, MdVerifiedUser } from "react-icons/md";
 import Formspan from "../components/Formspan";
 import Input from "../components/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Label from "../components/Label";
+import { useDispatch, useSelector } from "react-redux";
+import { createAccount } from "../features/signupSlice";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { changeTitle } = useContext(TitleContext);
 
   const [page, setPage] = useState(1);
@@ -36,6 +40,8 @@ const Signup = () => {
     termsAccepted: false,
   });
 
+  const { loading, error, success } = useSelector((state) => state.create);
+
   useEffect(() => {
     changeTitle("Quadx - Create Account");
   }, [changeTitle]);
@@ -58,8 +64,20 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
+    console.log(formData);
+    dispatch(createAccount(formData));
   };
+
+  useEffect(() => {
+    let timeout;
+    if (success) {
+      setTimeout(() => {
+        timeout = 5000;
+        navigate("/signin");
+      }, timeout);
+    }
+    () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <Section>
@@ -399,7 +417,7 @@ const Signup = () => {
             <Button
               type={"submit"}
               handleClick={handleSubmit}
-              title={"create account"}
+              title={loading ? "creating account..." : "create account"}
             />
           )}
         </div>

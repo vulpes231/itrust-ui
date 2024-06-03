@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={` ${styles.colors.lightBg} h-[60px] w-full flex items-center text-slate-400 shadow-sm shadow-slate-50 fixed top-0 z-10 lg:h-[55px] lg:px-20`}
+      className={` ${styles.colors.lightBg} h-[60px] w-full flex items-center text-slate-400 fixed top-0 z-10 lg:h-[55px] lg:px-20`}
     >
       <nav className={`flex justify-between px-4 py-2 items-center w-full`}>
         <div className="flex items-center gap-6">
@@ -28,10 +28,7 @@ const Navbar = () => {
             <MdMenu />
           </span>
           <Link to={"/"} className="flex items-center gap-1 text-slate-600">
-            {/* <img src={logo} alt="" width={25} /> */}
-
             <Md14Mp />
-
             <h1 className="font-semibold text-lg lg:text-xl  font-[Montserrat]">
               Quadx
             </h1>
