@@ -31,11 +31,11 @@ const Authnav = () => {
   }, [success, dispatch]);
 
   return (
-    <header className="w-full p-4 bg-white shadow fixed top-0 left-0">
+    <header className="w-full p-4 bg-white shadow-sm fixed top-0 left-0">
       <nav className="flex items-center justify-between">
         <span className="flex items-center gap-4 cursor-pointer">
           <Menu handleLogout={handleLogout} />
-          <h1 className="font-semibold flex items-center gap-2 text-lg text-slate-500">
+          <h1 className="font-semibold flex items-center gap-2 text-md text-slate-700">
             <MdCloudSync className="" /> Quadx.io
           </h1>
         </span>
