@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { devserver, liveserver } from "../constants";
 
 const initialState = {
   loading: false,
@@ -10,7 +11,7 @@ const initialState = {
 export const createAccount = createAsyncThunk(
   "create/createAccount",
   async (FormData) => {
-    const url = "";
+    const url = `${liveserver}/signup`;
     try {
       const response = await axios.post(url, FormData, {
         headers: {
@@ -21,7 +22,7 @@ export const createAccount = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response) {
-        const errorMsg = error.response.message.data;
+        const errorMsg = error.response.data.message;
         throw new Error(errorMsg);
       } else {
         throw error;

@@ -10,18 +10,28 @@ const initialState = {
   username: null,
 };
 
-export const loginUser = createAsyncThunk(
-  "login/loginUser",
-  async (FormData) => {
-    console.log(FormData);
-    const url = `${liveserver}/signin`;
+export const logoutUser = createAsyncThunk(
+  "logout/logoutUser",
+  async (_, { getState }) => {
+    const url = `${liveserver}/logout`;
+    const accessTokenString = sessionStorage.getItem("accessToken");
+    const accessToken = accessTokenString
+      ? JSON.parse(accessTokenString)
+      : null;
+
+    // console.log(accessToken);
     try {
-      const response = await axios.post(url, FormData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data);
+      const response = await axios.post(
+        url,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -34,39 +44,34 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const loginSlice = createSlice({
-  name: "login",
+const logoutSlice = createSlice({
+  name: "logout",
   initialState,
   reducers: {
     reset(state) {
       state.loading = false;
-      state.accessToken = null;
+
       state.error = false;
       state.success = false;
-      state.username = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, (state) => {
+      .addCase(logoutUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.loading = false;
         state.error = false;
         state.success = true;
-        state.accessToken = action.payload.userObj.accessToken;
-        state.username = action.payload.userObj.username;
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
         state.success = false;
-        state.accessToken = null;
-        state.username = null;
       });
   },
 });
 
-export const { reset } = loginSlice.actions;
-export default loginSlice.reducer;
+export const { reset } = logoutSlice.actions;
+export default logoutSlice.reducer;

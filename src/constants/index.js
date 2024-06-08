@@ -25,3 +25,6 @@ export const navLinks = [
     path: "",
   },
 ];
+
+export const liveserver = "https://quadx.onrender.com";
+export const devserver = "http://localhost:3300";

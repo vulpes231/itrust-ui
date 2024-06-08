@@ -1,4 +1,3 @@
-// Signin.js
 import React, { useEffect, useContext, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import Section from "../components/Section";
@@ -12,21 +11,24 @@ import { styles } from "../constants/styles";
 import Label from "../components/Label";
 import { MdLock } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { Toast } from "../components";
 
-// Button
 const initialState = {
   username: "",
   password: "",
 };
+
 const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { changeTitle } = useContext(TitleContext);
   const [formData, setFormData] = useState(initialState);
+
   const { success, error, loading, accessToken } = useSelector(
     (state) => state.login
   );
 
+  // console.log(accessToken);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -37,8 +39,7 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // dispatch(loginUser(formData));
+    dispatch(loginUser(formData));
   };
 
   useEffect(() => {
@@ -46,15 +47,15 @@ const Signin = () => {
   }, [changeTitle]);
 
   useEffect(() => {
-    // let timeout
-    if (success) {
-      sessionStorage.setItem("accessToken", accessToken);
-
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+    // console.log(accessToken);
+    if (accessToken) {
+      const tokenString = JSON.stringify(accessToken);
+      sessionStorage.setItem("accessToken", tokenString);
+      sessionStorage.setItem("username", formData.username);
+      console.log(tokenString);
+      window.location.href = "/dash";
     }
-  }, [dispatch, navigate, success, accessToken]);
+  }, [accessToken]);
 
   return (
     <Section>
@@ -65,7 +66,7 @@ const Signin = () => {
         </small>
       </div>
       <form
-        action=""
+        onSubmit={handleSubmit}
         className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[350px] md:mx-auto"
       >
         <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
@@ -93,7 +94,7 @@ const Signin = () => {
               </Link>
             </span>
             <Input
-              type={"text"}
+              type={"password"} // Change to password type
               placeHolder={"Enter password"}
               value={formData.password}
               handleChange={handleChange}
@@ -112,8 +113,7 @@ const Signin = () => {
           </span>
           <Button
             type={"submit"}
-            handleClick={handleSubmit}
-            title={loading ? "signing in..." : "sign in"}
+            title={loading ? "Signing in..." : "Sign in"} // Corrected sign in text
             customClass={"font-bold"}
           />
         </div>
@@ -127,6 +127,7 @@ const Signin = () => {
           sign up
         </Link>
       </p>
+      {success && <Toast message={"Login successful"} success={true} />}
     </Section>
   );
 };

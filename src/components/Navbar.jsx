@@ -1,8 +1,7 @@
 // Navbar.js
 import React, { useContext } from "react";
-import { logo } from "../assets";
 import { Link } from "react-router-dom";
-import { Md14Mp, MdMenu, MdSunny } from "react-icons/md";
+import { MdCloudSync, MdMenu, MdSunny } from "react-icons/md";
 import { styles } from "../constants/styles";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
@@ -28,13 +27,12 @@ const Navbar = () => {
             <MdMenu />
           </span>
           <Link to={"/"} className="flex items-center gap-1 text-slate-600">
-            <Md14Mp />
-            <h1 className="font-semibold text-lg lg:text-xl  font-[Montserrat]">
-              Quadx
+            <h1 className="font-bold flex items-center gap-1 text-lg">
+              <MdCloudSync /> quadx.io
             </h1>
           </Link>
         </div>
-        <ul className="hidden lg:flex gap-10 text-sm font-normal text-[#333]">
+        <ul className="hidden lg:flex gap-10 text-xs font-normal text-[#333]">
           {myLinks}
         </ul>
         <div className="flex items-center gap-4 ">
