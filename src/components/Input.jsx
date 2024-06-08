@@ -15,7 +15,7 @@ const Input = ({
       placeholder={placeHolder}
       value={value}
       onChange={handleChange}
-      className={`w-full border ${customClass} p-2 outline-[#2563EB] font-normal placeholder:text-xs placeholder:font-thin`}
+      className={`z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-slate-200 focus:shadow-none focus:outline-none py-2 px-4 border`}
       autoComplete="off"
     />
   );

@@ -13,3 +13,9 @@
   -webkit-text-fill-color: transparent; /* For Safari and Chrome */
   -moz-text-fill-color: transparent; /* For Firefox (older versions, though not commonly supported) */
 }
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}

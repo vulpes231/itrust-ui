@@ -64,83 +64,97 @@ const Signin = () => {
 
   return (
     <Section>
-      <div className="flex flex-col gap-1 items-center text-[#333] mt-8">
-        <h3 className="capitalize font-semibold text-lg">welcome back!</h3>
-        <small className="font-light text-slate-500 capitalize">
-          sign in to your account.
-        </small>
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[350px] md:mx-auto bg-[#fff] rounded-md"
-      >
-        <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
-          <Formspan>
-            <Label title={"username"} />
-            <Input
-              type={"text"}
-              placeHolder={"Enter username"}
-              value={formData.username}
-              handleChange={handleChange}
-              name={"username"}
-            />
-            <FaUser
-              className={`${styles.colors.darkText} absolute top-[31px] right-2 text-xs `}
-            />
-          </Formspan>
-
-          <Formspan>
-            <span className="flex justify-between mb-1">
-              <Label title={"password"} />
-              <Link
-                className={`${styles.colors.primaryTextColor} text-xs font-thin `}
-              >
-                Forgot password?
-              </Link>
-            </span>
-            <Input
-              type={showPass ? "text" : "password"} // Change to password type
-              placeHolder={"Enter password"}
-              value={formData.password}
-              handleChange={handleChange}
-              name={"password"}
-            />
-            <span
-              className={`${styles.colors.darkText} absolute top-[34px] right-2 text-xs cursor-pointer`}
-              onClick={handleShowPass}
-            >
-              {showPass ? <FaEye /> : <MdLock />}
-            </span>
-          </Formspan>
-          <span className="flex gap-1 items-center text-xs font-thin">
-            <input type="checkbox" name="" id="" />
-            <small>remember me</small>
-          </span>
-          <span
-            className={
-              error
-                ? "flex text-red-500 text-xs capitalize bg-red-500 bg-opacity-10 p-2 rounded-md"
-                : "hidden"
-            }
+      <div className="container px-3">
+        <div className="flex justify-center -mx-3">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full xs:w-4/5 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 px-3"
           >
-            {error}
-          </span>
-          <Button
-            type={"submit"}
-            title={loading ? "Signing in..." : "Sign in"} // Corrected sign in text
-            customClass={"font-bold"}
-          />
+            <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 w-full p-6 pt-5">
+              <div className="mb-2">
+                <h3 className="text-xl font-bold text-slate-700 dark:text-white mb-1">
+                  Login
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  With valid credentials
+                </p>
+              </div>
+              <div className="py-2">
+                <label
+                  htmlFor="emial-address"
+                  className="inline-flex font-bold text-sm text-slate-600 dark:text-slate-200 cursor-pointer mb-2"
+                >
+                  Email Address
+                </label>
+                <div className="relative flex isolate w-full">
+                  <input
+                    className="z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-slate-200 focus:shadow-none focus:outline-none py-2 px-4 border"
+                    type="text"
+                    placeholder="example@email.com"
+                    id="emial-address"
+                    value={formData.username}
+                    onChange={handleChange}
+                    name={"username"}
+                  />
+                </div>
+              </div>
+              <div className="py-2">
+                <label
+                  htmlFor="password"
+                  className="inline-flex font-bold text-sm text-slate-600 dark:text-slate-200 cursor-pointer mb-2 justify-between w-full items-center"
+                >
+                  Password
+                  <a
+                    className="text-xs text-blue-500 hover:text-blue-700"
+                    href="#"
+                  >
+                    Forgot
+                  </a>
+                </label>
+                <div className="relative flex isolate w-full">
+                  <input
+                    className="z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-slate-200 focus:shadow-none focus:outline-none py-2 px-4 border"
+                    type="password"
+                    // id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    name={"password"}
+                  />
+                </div>
+              </div>
+              {/* <span className="flex gap-1 items-center text-xs font-thin">
+                <input type="checkbox" name="" id="" />
+                <small>remember me</small>
+              </span> */}
+              <span
+                className={
+                  error
+                    ? "flex text-red-500 text-xs capitalize bg-red-500 bg-opacity-10 p-2 rounded-md"
+                    : "hidden"
+                }
+              >
+                {error}
+              </span>
+
+              <div className="pt-3">
+                <button className="inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 w-full rounded-md bg-blue-600 text-white hover:bg-blue-800">
+                  {loading ? "Signing in..." : "Sign in"}
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-      <small className="text-center text-xs text-slate-500 font-thin">
-        Don't have an account?{" "}
-        <Link
-          to={"/signup"}
-          className={`${styles.colors.primaryTextColor} capitalize font-bold`}
-        >
-          sign up
-        </Link>
-      </small>
+        {/* <small className="text-center text-xs text-slate-500 font-thin bg-red-500 w-full">
+          Don't have an account?{" "}
+          <Link
+            to={"/signup"}
+            className={`${styles.colors.primaryTextColor} capitalize font-bold`}
+          >
+            sign up
+          </Link>
+        </small> */}
+      </div>
+
       {success && <Toast message={"Login successful"} success={true} />}
     </Section>
   );

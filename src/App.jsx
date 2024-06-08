@@ -10,14 +10,16 @@ const App = () => {
 
   return (
     <TitleProvider>
-      {accessToken ? <Authnav /> : <Navbar />}
-      <Routes>
-        <Route path="/" element={<Content />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dash" element={<Dashboard />} />
-      </Routes>
-      <Footer />
+      <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full pt-16 undefined">
+        {accessToken ? <Authnav /> : <Navbar />}
+        <Routes>
+          <Route path="/" element={<Content />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dash" element={<Dashboard />} />
+        </Routes>
+        <Footer />
+      </div>
     </TitleProvider>
   );
 };
