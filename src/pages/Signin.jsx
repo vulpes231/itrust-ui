@@ -10,7 +10,7 @@ import { loginUser } from "../features/loginSlice";
 import { styles } from "../constants/styles";
 import Label from "../components/Label";
 import { MdLock } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
+import { FaEye, FaUser } from "react-icons/fa";
 import { Toast } from "../components";
 
 const initialState = {
@@ -23,6 +23,7 @@ const Signin = () => {
   const navigate = useNavigate();
   const { changeTitle } = useContext(TitleContext);
   const [formData, setFormData] = useState(initialState);
+  const [showPass, setShowPass] = useState(false);
 
   const { success, error, loading, accessToken } = useSelector(
     (state) => state.login
@@ -35,6 +36,10 @@ const Signin = () => {
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const handleShowPass = () => {
+    setShowPass((prev) => !prev);
   };
 
   const handleSubmit = (e) => {
@@ -59,7 +64,7 @@ const Signin = () => {
 
   return (
     <Section>
-      <div className="flex flex-col gap-1 items-center text-[#333]">
+      <div className="flex flex-col gap-1 items-center text-[#333] mt-8">
         <h3 className="capitalize font-semibold text-lg">welcome back!</h3>
         <small className="font-light text-slate-500 capitalize">
           sign in to your account.
@@ -67,7 +72,7 @@ const Signin = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[350px] md:mx-auto"
+        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[350px] md:mx-auto bg-[#fff] rounded-md"
       >
         <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
           <Formspan>
@@ -80,7 +85,7 @@ const Signin = () => {
               name={"username"}
             />
             <FaUser
-              className={`${styles.colors.primaryTextColor} absolute top-[31px] right-2 text-xs `}
+              className={`${styles.colors.darkText} absolute top-[31px] right-2 text-xs `}
             />
           </Formspan>
 
@@ -94,21 +99,30 @@ const Signin = () => {
               </Link>
             </span>
             <Input
-              type={"password"} // Change to password type
+              type={showPass ? "text" : "password"} // Change to password type
               placeHolder={"Enter password"}
               value={formData.password}
               handleChange={handleChange}
               name={"password"}
             />
-            <MdLock
-              className={`${styles.colors.primaryTextColor} absolute top-[34px] right-2 text-xs `}
-            />
+            <span
+              className={`${styles.colors.darkText} absolute top-[34px] right-2 text-xs cursor-pointer`}
+              onClick={handleShowPass}
+            >
+              {showPass ? <FaEye /> : <MdLock />}
+            </span>
           </Formspan>
           <span className="flex gap-1 items-center text-xs font-thin">
             <input type="checkbox" name="" id="" />
             <small>remember me</small>
           </span>
-          <span className={error ? "flex text-red-500" : "hidden"}>
+          <span
+            className={
+              error
+                ? "flex text-red-500 text-xs capitalize bg-red-500 bg-opacity-10 p-2 rounded-md"
+                : "hidden"
+            }
+          >
             {error}
           </span>
           <Button
@@ -118,15 +132,15 @@ const Signin = () => {
           />
         </div>
       </form>
-      <p className="text-center text-xs text-slate-500 font-thin">
+      <small className="text-center text-xs text-slate-500 font-thin">
         Don't have an account?{" "}
         <Link
           to={"/signup"}
-          className={`${styles.colors.primaryTextColor} capitalize `}
+          className={`${styles.colors.primaryTextColor} capitalize font-bold`}
         >
           sign up
         </Link>
-      </p>
+      </small>
       {success && <Toast message={"Login successful"} success={true} />}
     </Section>
   );

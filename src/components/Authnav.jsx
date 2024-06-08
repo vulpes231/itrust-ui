@@ -9,10 +9,11 @@ import {
   MdSettings,
   MdSunny,
 } from "react-icons/md";
-import { profile } from "../assets";
+
 import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
 import { FaUser } from "react-icons/fa";
+import Navmenu from "./Navmenu";
 
 const Authnav = () => {
   const dispatch = useDispatch();
@@ -48,9 +49,7 @@ const Authnav = () => {
         </ul>
         <span className="flex gap-4 items-center text-[#333] lg:gap-6">
           <MdSunny className="cursor-pointer text-slate-300 lg:text-lg" />
-          <div className="border-2 p-[2.5px] rounded-full cursor-pointer">
-            <img src={profile} alt="" width={30} />
-          </div>
+          <Navmenu handleLogout={handleLogout} />
         </span>
       </nav>
     </header>

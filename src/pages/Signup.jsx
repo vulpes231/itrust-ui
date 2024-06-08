@@ -89,7 +89,7 @@ const Signup = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[380px] md:mx-auto"
+        className="w-full border p-6 text-[#333] flex flex-col gap-6 md:w-[380px] md:mx-auto bg-[#fff] rounded-md"
       >
         <div className="flex flex-col gap-4 items-center p-2">
           <div className="w-full flex items-center justify-center gap-5">

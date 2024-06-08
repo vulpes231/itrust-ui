@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
-
 import { TitleContext } from "../contexts/TitleContext";
 import { styles } from "../constants/styles";
 import { Account } from "../components";
+
 const Dashboard = () => {
   const { changeTitle } = useContext(TitleContext);
-
   const username = sessionStorage.getItem("username");
   const accessTokenString = sessionStorage.getItem("accessToken");
   const accessToken = accessTokenString ? JSON.parse(accessTokenString) : null;
@@ -31,7 +30,7 @@ const Dashboard = () => {
         <button
           className={`py-2 px-6 ${styles.colors.primaryBgColor} text-[#fff] border-none capitalize rounded-lg font-medium`}
         >
-          deposit
+          trade
         </button>
       </div>
       <>

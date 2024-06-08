@@ -4,3 +4,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-gradient {
+  background: linear-gradient(to right, #4a90e2, #9013fe);
+  -webkit-background-clip: text; /* For Safari and Chrome */
+  -moz-background-clip: text; /* For Firefox (older versions, though not commonly supported) */
+  background-clip: text; /* Standard property */
+  -webkit-text-fill-color: transparent; /* For Safari and Chrome */
+  -moz-text-fill-color: transparent; /* For Firefox (older versions, though not commonly supported) */
+}
