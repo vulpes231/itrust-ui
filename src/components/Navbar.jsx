@@ -1,13 +1,13 @@
 // Navbar.js
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MdCloudSync, MdMenu, MdSunny } from "react-icons/md";
-import { styles } from "../constants/styles";
+import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
 
 const Navbar = () => {
   const { title } = useContext(TitleContext);
+  const [darkMode, setDarkMode] = useState(false);
 
   const myLinks = navLinks.map((link) => {
     return (
@@ -17,6 +17,18 @@ const Navbar = () => {
     );
   });
 
+  const handleModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
+  useEffect(() => {
+    // Apply dark mode class to the body
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
   return (
     <header
       className={`isolate fixed top-0 start-0 w-full py-4 xl:py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 z-[1020] px-3`}
@@ -32,11 +44,11 @@ const Navbar = () => {
             </div>
             <Link to={"/"} className="flex-shrink-0">
               <div className="flex items-center">
-                <h1 className="h-6 flex items-center dark:hidden">
-                  <MdCloudSync /> Quadx.io
+                <h1 className="h-6 text-xl  font-bold flex items-center dark:hidden">
+                  Quadx.io
                 </h1>
-                <h1 className="h-6 hidden text-[#fff] dark:flex items-center gap-1">
-                  <MdCloudSync /> Quadx.io
+                <h1 className="h-6 text-xl font-bold hidden text-[#fff] dark:flex items-center">
+                  Quadx.io
                 </h1>
               </div>
             </Link>
@@ -49,11 +61,12 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-x-3 lg:gap-x-5">
-          <span className="inline-flex relative">
+          <span onClick={handleModeToggle} className="inline-flex relative">
             <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800">
-              <MdSunny />
+              {darkMode ? <MdNightlightRound /> : <MdSunny />}
             </button>
           </span>
+
           <span>
             {title === "Quadx - Login" ? (
               <Link
