@@ -2,17 +2,19 @@ import React, { useContext, useEffect } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import { styles } from "../constants/styles";
 import { Account } from "../components";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { changeTitle } = useContext(TitleContext);
   const username = sessionStorage.getItem("username");
   const accessTokenString = sessionStorage.getItem("accessToken");
   const accessToken = accessTokenString ? JSON.parse(accessTokenString) : null;
-
+  const navigate = useNavigate();
   useEffect(() => {
     changeTitle("Quadx - Dashboard");
     if (!accessToken) {
-      window.location.href = "/signin";
+      // window.location.href = "/signin";
+      navigate("/signin");
     }
   }, [accessToken]);
 

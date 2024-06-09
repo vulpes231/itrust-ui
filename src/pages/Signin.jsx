@@ -1,17 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import Section from "../components/Section";
-import Formspan from "../components/Formspan";
-import Input from "../components/Input";
-import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../features/loginSlice";
-import { styles } from "../constants/styles";
-import Label from "../components/Label";
-import { MdLock } from "react-icons/md";
-import { FaEye, FaUser } from "react-icons/fa";
-import { Toast } from "../components";
+// import { Toast } from "../components";
 
 const initialState = {
   username: "",
@@ -23,23 +16,17 @@ const Signin = () => {
   const navigate = useNavigate();
   const { changeTitle } = useContext(TitleContext);
   const [formData, setFormData] = useState(initialState);
-  const [showPass, setShowPass] = useState(false);
 
   const { success, error, loading, accessToken } = useSelector(
     (state) => state.login
   );
 
-  // console.log(accessToken);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
-  };
-
-  const handleShowPass = () => {
-    setShowPass((prev) => !prev);
   };
 
   const handleSubmit = (e) => {
@@ -52,13 +39,13 @@ const Signin = () => {
   }, [changeTitle]);
 
   useEffect(() => {
-    // console.log(accessToken);
     if (accessToken) {
       const tokenString = JSON.stringify(accessToken);
       sessionStorage.setItem("accessToken", tokenString);
       sessionStorage.setItem("username", formData.username);
       console.log(tokenString);
-      window.location.href = "/dash";
+
+      navigate("/dash");
     }
   }, [accessToken]);
 
@@ -81,7 +68,7 @@ const Signin = () => {
               </div>
               <div className="py-2">
                 <label
-                  htmlFor="emial-address"
+                  htmlFor="email-address"
                   className="inline-flex font-bold text-sm text-slate-600 dark:text-slate-200 cursor-pointer mb-2"
                 >
                   Email Address
@@ -91,10 +78,10 @@ const Signin = () => {
                     className="z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-slate-200 focus:shadow-none focus:outline-none py-2 px-4 border"
                     type="text"
                     placeholder="example@email.com"
-                    id="emial-address"
                     value={formData.username}
                     onChange={handleChange}
                     name={"username"}
+                    autoComplete="off"
                   />
                 </div>
               </div>
@@ -115,17 +102,14 @@ const Signin = () => {
                   <input
                     className="z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-slate-200 focus:shadow-none focus:outline-none py-2 px-4 border"
                     type="password"
-                    // id="password"
                     value={formData.password}
                     onChange={handleChange}
                     name={"password"}
+                    autoComplete="off"
                   />
                 </div>
               </div>
-              {/* <span className="flex gap-1 items-center text-xs font-thin">
-                <input type="checkbox" name="" id="" />
-                <small>remember me</small>
-              </span> */}
+
               <span
                 className={
                   error
@@ -144,18 +128,9 @@ const Signin = () => {
             </div>
           </form>
         </div>
-        {/* <small className="text-center text-xs text-slate-500 font-thin bg-red-500 w-full">
-          Don't have an account?{" "}
-          <Link
-            to={"/signup"}
-            className={`${styles.colors.primaryTextColor} capitalize font-bold`}
-          >
-            sign up
-          </Link>
-        </small> */}
       </div>
 
-      {success && <Toast message={"Login successful"} success={true} />}
+      {/* {success && <Toast message={"Login successful"} success={true} />} */}
     </Section>
   );
 };
