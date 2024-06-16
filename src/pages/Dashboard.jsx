@@ -3,6 +3,8 @@ import { TitleContext } from "../contexts/TitleContext";
 import { styles } from "../constants/styles";
 import { Account } from "../components";
 import { useNavigate } from "react-router-dom";
+import Slider from "../components/dash/Slider";
+import Section from "../components/Section";
 
 const Dashboard = () => {
   const { changeTitle } = useContext(TitleContext);
@@ -19,26 +21,35 @@ const Dashboard = () => {
   }, [accessToken]);
 
   return (
-    <section className="mt-16 p-6 min-h-screen bg-slate-200 bg-opacity-30 font-[Montserrat]">
-      <div className="flex justify-between items-center mt-5 text-slate-500">
-        <span className="flex flex-col gap-3">
-          <h3 className="font-bold text-lg text-slate-700">Overview</h3>
-          <small className="text-[10px] capitalize font-medium flex items-center gap-3">
-            <span>Home </span>
-            <span>{`>`}</span>
-            <span>{username}</span>
-          </small>
-        </span>
-        <button
-          className={`py-2 px-6 ${styles.colors.primaryBgColor} text-[#fff] border-none capitalize rounded-lg font-medium`}
-        >
-          trade
-        </button>
+    <Section>
+      <div className="container px-3 font-[Montserrat] space-y-4">
+        <div className="mb-7 flex justify-between items-center -mx-3">
+          <div className="px-3">
+            <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
+              Overview
+            </h2>
+            <ul className="inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-300 gap-2">
+              <li>Home </li>
+              <li className="inline-flex items-center mt-0.5">{`>`}</li>
+              <li>{username}</li>
+            </ul>
+          </div>
+          <div className="px-3">
+            <button
+              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md bg-blue-600 text-white hover:bg-blue-800`}
+            >
+              Deposit
+            </button>
+          </div>
+        </div>
+        <>
+          <Account username={username} />
+        </>
+        <>
+          <Slider />
+        </>
       </div>
-      <>
-        <Account username={username} />
-      </>
-    </section>
+    </Section>
   );
 };
 

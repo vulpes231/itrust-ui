@@ -1,13 +1,12 @@
 // Navbar.js
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
 
-const Navbar = () => {
+const Navbar = ({ handleModeToggle, darkMode }) => {
   const { title } = useContext(TitleContext);
-  const [darkMode, setDarkMode] = useState(false);
 
   const myLinks = navLinks.map((link) => {
     return (
@@ -17,18 +16,6 @@ const Navbar = () => {
     );
   });
 
-  const handleModeToggle = () => {
-    setDarkMode(!darkMode);
-  };
-
-  useEffect(() => {
-    // Apply dark mode class to the body
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
   return (
     <header
       className={`isolate fixed top-0 start-0 w-full py-4 xl:py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 z-[1020] px-3`}
@@ -36,24 +23,23 @@ const Navbar = () => {
       <div className="container px-3"></div>
       <nav className={`flex items-center w-100 justify-between`}>
         <div className="flex items-center gap-x-2">
-          <div className="flex items-center gap-x-2">
-            <div className="xl:hidden -ms-1.">
-              <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200">
-                <MdMenu />
-              </button>
-            </div>
-            <Link to={"/"} className="flex-shrink-0">
-              <div className="flex items-center">
-                <h1 className="h-6 text-xl  font-bold flex items-center dark:hidden">
-                  Quadx.io
-                </h1>
-                <h1 className="h-6 text-xl font-bold hidden text-[#fff] dark:flex items-center">
-                  Quadx.io
-                </h1>
-              </div>
-            </Link>
+          <div className="xl:hidden -ms-1.">
+            <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200">
+              <MdMenu />
+            </button>
           </div>
+          <Link to={"/"} className="flex-shrink-0">
+            <div className="flex items-center">
+              <h1 className="h-6 text-xl  font-bold flex items-center dark:hidden">
+                Quadx.io
+              </h1>
+              <h1 className="h-6 text-xl font-bold hidden text-[#fff] dark:flex items-center">
+                Quadx.io
+              </h1>
+            </div>
+          </Link>
         </div>
+
         <div className="flex flex-col py-4 xl:py-0 w-64 xl:w-auto fixed xl:transition-none xl:static start-0 top-0 border-e dark:border-slate-800 xl:border-e-0 bg-white dark:bg-slate-950 z-[1020] h-screen xl:h-auto flex-shrink-0 xl:translate-x-0 transition-all -translate-x-full">
           <ul className="flex flex-col xl:flex-row xl:items-center gap-x-6 px-4 menu-base">
             {myLinks}

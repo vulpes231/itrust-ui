@@ -24,17 +24,20 @@ const Menu = ({ handleLogout }) => {
 
   return (
     <div>
-      <span onClick={handleToggle} className="lg:hidden text-lg text-[#333]">
+      <button
+        onClick={handleToggle}
+        className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200"
+      >
         <MdMenu />
-      </span>
+      </button>
       <div
         className={
           toggle
-            ? "absolute top-0 left-0 w-full bg-black bg-opacity-5 h-screen"
+            ? "flex flex-col py-4 xl:py-0 w-64 xl:w-auto fixed xl:transition-none xl:static start-0 top-0 border-e border-slate-200 dark:border-slate-800 xl:border-e-0 bg-white dark:bg-slate-950 z-[1020] h-screen xl:h-auto flex-shrink-0 xl:translate-x-0 transition-all"
             : "hidden"
         }
       >
-        <ul className="bg-white w-[75%] md:w-[60%] h-screen flex flex-col gap-6 py-6 px-8 lg:hidden">
+        <ul className="flex flex-col xl:flex-row xl:items-center gap-x-6 px-4 menu-base">
           <span
             onClick={closeMenu}
             className="flex justify-end text-xl cursor-pointer"
@@ -42,17 +45,19 @@ const Menu = ({ handleLogout }) => {
             <MdClose />
           </span>
 
-          <Sidebarlink title={"home"} icon={<MdHome />} />
-          <Sidebarlink title={"portfolio"} icon={<MdPolymer />} />
+          <Sidebarlink title={"account"} icon={<MdHome />} />
+          <Sidebarlink title={"wallet"} icon={<MdPolymer />} />
           <Sidebarlink title={"cashier"} icon={<MdMoney />} />
-          <Sidebarlink title={"profile"} icon={<FaUser />} />
-          <Sidebarlink title={"settings"} icon={<MdSettings />} />
+          <Sidebarlink title={"trading"} icon={<FaUser />} />
+          <Sidebarlink title={"profile"} icon={<MdSettings />} />
           <li
             onClick={handleLogout}
-            className="flex items-center capitalize gap-3 mt-16"
+            className="elative menu-item group [&amp;>*]:text-blue-600 [&amp;>*]:dark:text-blue-600 active current mt-16"
           >
-            <MdLogout />
-            logout
+            <span className="flex items-center gap-2 font-medium text-sm hover:text-blue-600 hover:dark:text-blue-600 has-toggle menu-link py-2 xl:py-3 text-slate-700 dark:text-slate-100 [&amp;.active]:dark:text-blue-600 group-hover:text-blue-600 active capitalize cursor-pointer">
+              <MdLogout />
+              logout
+            </span>
           </li>
         </ul>
       </div>

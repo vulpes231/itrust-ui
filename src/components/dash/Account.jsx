@@ -1,39 +1,46 @@
 import React from "react";
 import Box from "./Box";
 import Balance from "./Balance";
-import Coin from "./Coin";
-import { btc, tether, eth } from "../../assets";
+// import Coin from "./Coin";
+// import { btc, tether, eth } from "../../assets";
 
 const Account = ({ username }) => {
   return (
-    <div className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-3">
-      <Box customClass={"bg-slate-700 text-[#fff]"}>
-        <h2 className="font-bold text-xl text-gradient">Welcome</h2>
-        <h4 className="capitalize font-semibold">{username}</h4>
-        <div className="flex gap-10 ">
-          <Balance title={"overall balance"} value={"0.00"} />
-          <Balance title={"trading balance"} value={"0.00"} />
+    <div className="flex flex-wrap -m-3">
+      <Box>
+        <div className="bg-slate-800 rounded-md border border-slate-800 p-5 h-full">
+          <div className="flex flex-col isolate relative h-full">
+            <div className=" absolute end-0 top-0"></div>
+            <div className="mb-auto">
+              <h6 className="font-bold text-xl w-max bg-gradient-to-r from-blue-300 to-pink-500 text-transparent bg-clip-text">
+                Welcome
+              </h6>
+              <div className="font-bold text-sm text-white mt-2 capitalize">
+                Mr. {username}
+              </div>
+              <div></div>
+            </div>
+            <div className="flex gap-x-6 mt-4">
+              <div className="">
+                <div className="text-xs text-slate-300 mt-1 capitalize">
+                  overall balance
+                </div>
+                <div className="text-base font-bold text-slate-100 mt-1">
+                  48,610
+                </div>
+              </div>
+              <div className="">
+                <div className="text-xs text-slate-300 mt-1 capitalize">
+                  trading balance
+                </div>
+                <div className="text-base font-bold text-slate-100 mt-1">
+                  1987
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </Box>
-      <Box customClass="bg-white">
-        <h2 className="font-bold text-xl">Assets</h2>
-
-        <div className="flex gap-10 ">
-          <span>
-            <Coin img={btc} />
-            <Balance title={"bitcoin"} value={"0.00"} />
-          </span>
-          <span>
-            <Coin img={eth} />
-            <Balance title={"ethereum"} value={"0.00"} />
-          </span>
-          <span>
-            <Coin img={tether} />
-            <Balance title={"tether"} value={"0.00"} />
-          </span>
-        </div>
-      </Box>
-      <Box customClass="bg-white"></Box>
     </div>
   );
 };

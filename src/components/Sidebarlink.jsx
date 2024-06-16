@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 const Sidebarlink = ({ title, icon }) => {
   return (
-    <li className="flex items-center gap-3 lg:gap-2 capitalize hover:text-[#2563EB] cursor-pointer">
-      <span>{icon}</span>
-      <Link>{title}</Link>
+    <li className="elative menu-item group [&amp;>*]:text-blue-600 [&amp;>*]:dark:text-blue-600 active current">
+      <span className="flex items-center gap-2 font-medium text-sm hover:text-blue-600 hover:dark:text-blue-600 has-toggle menu-link py-2 xl:py-3 text-slate-700 dark:text-slate-100 [&amp;.active]:dark:text-blue-600 group-hover:text-blue-600 active capitalize">
+        <span>{icon}</span>
+        <Link className="">{title}</Link>
+      </span>
     </li>
   );
 };
