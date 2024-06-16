@@ -1,17 +1,32 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import { styles } from "../constants/styles";
 import { Account } from "../components";
 import { useNavigate } from "react-router-dom";
 import Slider from "../components/dash/Slider";
 import Section from "../components/Section";
+import Currencies from "../components/dash/Currencies";
+
+import { btc, doge, eth, ltc, tether } from "../assets";
+
+const coins = [
+  { id: "bitcoin", name: "Bitcoin", icon: btc, abbr: "BTC" },
+  { id: "ethereum", name: "Ethereum", icon: eth, abbr: "ETH" },
+  { id: "tether", name: "Tether", icon: tether, abbr: "USDT" },
+  { id: "dogecoin", name: "Dogecoin", icon: doge, abbr: "DOGE" },
+  { id: "litecoin", name: "Litecoin", icon: ltc, abbr: "LTC" },
+];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { changeTitle } = useContext(TitleContext);
+  const [coinData, setCoinData] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const username = sessionStorage.getItem("username");
   const accessTokenString = sessionStorage.getItem("accessToken");
   const accessToken = accessTokenString ? JSON.parse(accessTokenString) : null;
-  const navigate = useNavigate();
+
   useEffect(() => {
     changeTitle("Quadx - Dashboard");
     if (!accessToken) {
@@ -19,6 +34,37 @@ const Dashboard = () => {
       navigate("/signin");
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${coins
+          .map((coin) => coin.id)
+          .join(",")}&vs_currencies=usd&include_24hr_change=true`
+      );
+      const data = await response.json();
+      const formattedData = coins.map((coin) => ({
+        id: coin.id,
+        name: coin.name,
+        price: data[coin.id].usd,
+        change: data[coin.id].usd_24h_change,
+        isPositive: data[coin.id].usd_24h_change > 0,
+        icon: coin.icon,
+        abbr: coin.abbr,
+      }));
+      setCoinData(formattedData);
+    };
+
+    fetchData();
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === coins.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 6000); // Update every minute
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Section>
@@ -46,7 +92,10 @@ const Dashboard = () => {
           <Account username={username} />
         </>
         <>
-          <Slider />
+          <Slider coinData={coinData} currentIndex={currentIndex} />
+        </>
+        <>
+          <Currencies coinData={coinData} />
         </>
       </div>
     </Section>

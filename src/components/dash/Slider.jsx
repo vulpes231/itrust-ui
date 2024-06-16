@@ -1,59 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
-import { btc, doge, eth, ltc, tether } from "../../assets";
 
-const coins = [
-  { id: "bitcoin", name: "Bitcoin", icon: btc, abbr: "BTC" },
-  { id: "ethereum", name: "Ethereum", icon: eth, abbr: "ETH" },
-  { id: "tether", name: "Tether", icon: tether, abbr: "USDT" },
-  { id: "dogecoin", name: "Dogecoin", icon: doge, abbr: "DOGE" },
-  { id: "litecoin", name: "Litecoin", icon: ltc, abbr: "LTC" },
-];
-
-const Slider = () => {
-  const [coinData, setCoinData] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // console.log(coinData);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${coins
-          .map((coin) => coin.id)
-          .join(",")}&vs_currencies=usd&include_24hr_change=true`
-      );
-      const data = await response.json();
-      const formattedData = coins.map((coin) => ({
-        id: coin.id,
-        name: coin.name,
-        price: data[coin.id].usd,
-        change: data[coin.id].usd_24h_change,
-        isPositive: data[coin.id].usd_24h_change > 0,
-        icon: coin.icon,
-        abbr: coin.abbr,
-      }));
-      setCoinData(formattedData);
-    };
-
-    fetchData();
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === coins.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 6000); // Update every minute
-
-    return () => clearInterval(interval);
-  }, []);
-
+const Slider = ({ coinData, currentIndex }) => {
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-x-4">
-      {coinData.map((coin, index) => (
+    <div className="grid sm:grid-cols-2 md:grid-cols-5  place-items-center gap-5 text-slate-950 dark:text-slate-200">
+      {coinData?.map((coin, index) => (
         <div
           key={coin.id}
-          className={`mb-4 ${
+          className={`${
             index !== currentIndex
-              ? "hidden lg:flex bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 flex-col gap-5 w-full "
-              : "bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 flex flex-col gap-5 w-full"
+              ? "hidden lg:flex bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full gap-5 flex-col"
+              : "bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 space-y-5 w-full"
           }`}
         >
           <span className="flex items-center gap-3 capitalize font-semibold text-lg">
