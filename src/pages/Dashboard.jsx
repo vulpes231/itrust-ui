@@ -8,6 +8,7 @@ import Section from "../components/Section";
 import Currencies from "../components/dash/Currencies";
 
 import { btc, doge, eth, ltc, tether } from "../assets";
+import { getAccessToken } from "../constants";
 
 const coins = [
   { id: "bitcoin", name: "Bitcoin", icon: btc, abbr: "BTC" },
@@ -24,8 +25,9 @@ const Dashboard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const username = sessionStorage.getItem("username");
-  const accessTokenString = sessionStorage.getItem("accessToken");
-  const accessToken = accessTokenString ? JSON.parse(accessTokenString) : null;
+  const accessToken = getAccessToken();
+
+  // console.log(accessToken);
 
   useEffect(() => {
     changeTitle("Quadx - Dashboard");

@@ -1,34 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { logoutUser } from "../features/logoutSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
-  MdCloudSync,
   MdHome,
   MdOutlineCurrencyExchange,
   MdPolymer,
   MdSunny,
   MdNightlightRound,
 } from "react-icons/md";
+
 import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
 import { FaMoneyCheck, FaUser } from "react-icons/fa";
 import Navmenu from "./Navmenu";
+import { useNavigate } from "react-router-dom";
+import Logoutmodal from "./dash/Logoutmodal";
 
 const Authnav = ({ handleModeToggle, darkMode }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error, success, loading } = useSelector((state) => state.logout);
 
   const handleLogout = (e) => {
     e.preventDefault();
+
     dispatch(logoutUser());
+    console.log("Dispatched");
   };
+
+  console.log("success", success);
 
   useEffect(() => {
     if (success) {
+      console.log("Clearing cookies");
+      document.cookie.split(";").forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+      });
+      sessionStorage.removeItem("accessToken");
       sessionStorage.clear();
+      console.log("remmoved token");
+      navigate("/signin");
       window.location.reload();
     }
-  }, [success, dispatch]);
+  }, [success]);
 
   return (
     <header className="isolate fixed top-0 start-0 w-full py-4 xl:py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 z-[1020] px-3">
@@ -65,6 +82,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             </li>
           </ul>
         </nav>
+        {loading && <Logoutmodal />}
       </div>
     </header>
   );

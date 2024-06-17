@@ -6,43 +6,42 @@ const initialState = {
   loading: false,
   error: false,
   success: false,
-  accessToken: null,
-  username: null,
 };
 
-export const logoutUser = createAsyncThunk(
-  "logout/logoutUser",
-  async (_, { getState }) => {
-    const url = `${liveserver}/logout`;
-    const accessTokenString = sessionStorage.getItem("accessToken");
-    const accessToken = accessTokenString
-      ? JSON.parse(accessTokenString)
-      : null;
+export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
+  let accessToken;
+  const storedAccessToken = sessionStorage.getItem("accessToken");
+  accessToken = storedAccessToken ? JSON.parse(storedAccessToken) : null;
 
-    // console.log(accessToken);
-    try {
-      const response = await axios.post(
-        url,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      // console.log(response.data);
-      return response.data;
-    } catch (error) {
-      if (error.response) {
-        const errorMsg = error.response.data.message;
-        throw new Error(errorMsg);
-      } else {
-        throw error;
+  if (!accessToken) {
+    throw new Error("No access token found");
+  }
+  // console.log(accessToken);
+  const url = `${liveserver}/logout`;
+  try {
+    const response = await axios.post(
+      url,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
       }
+    );
+
+    sessionStorage.removeItem("accessToken");
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      const errorMsg = error.response.data.message;
+      throw new Error(errorMsg);
+    } else {
+      throw error;
     }
   }
-);
+});
 
 const logoutSlice = createSlice({
   name: "logout",
@@ -50,7 +49,6 @@ const logoutSlice = createSlice({
   reducers: {
     reset(state) {
       state.loading = false;
-
       state.error = false;
       state.success = false;
     },

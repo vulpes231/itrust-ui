@@ -3,11 +3,13 @@ import { Navbar, Content, Footer, Authnav } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { Dashboard, Signin, Signup } from "./pages";
 import { TitleProvider } from "./contexts/TitleContext";
-
+import { useSelector } from "react-redux";
+// useSelector
 const App = () => {
-  const accessTokenString = sessionStorage.getItem("accessToken");
-  const accessToken = accessTokenString ? JSON.parse(accessTokenString) : null;
   const [darkMode, setDarkMode] = useState(false);
+
+  const [token, setToken] = useState(false);
+  const { accessToken } = useSelector((state) => state.login);
 
   const handleModeToggle = () => {
     setDarkMode(!darkMode);
@@ -22,10 +24,21 @@ const App = () => {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
+    if (accessToken) {
+      setToken(accessToken); // Set token to true if accessToken exists
+    } else {
+      setToken(false); // Ensure token is false if accessToken does not exist
+    }
+  }, []);
+
+  console.log("atoken", sessionStorage.getItem("accessToken"));
+
   return (
     <TitleProvider>
       <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full pt-16 undefined">
-        {accessToken ? (
+        {accessToken || token ? (
           <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
         ) : (
           <Navbar darkMode={darkMode} handleModeToggle={handleModeToggle} />

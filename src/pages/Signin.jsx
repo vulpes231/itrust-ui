@@ -43,7 +43,7 @@ const Signin = () => {
       const tokenString = JSON.stringify(accessToken);
       sessionStorage.setItem("accessToken", tokenString);
       sessionStorage.setItem("username", formData.username);
-      console.log(tokenString);
+      // console.log(tokenString);
 
       navigate("/dash");
     }

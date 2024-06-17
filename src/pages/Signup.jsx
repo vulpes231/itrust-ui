@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import Section from "../components/Section";
-// import { MdContactPage, MdPersonAddAlt, MdVerifiedUser } from "react-icons/md";
+import Select from "react-select";
 import Formspan from "../components/Formspan";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const Signup = () => {
   const { changeTitle } = useContext(TitleContext);
 
   const [page, setPage] = useState(1);
+  const [countries, setCountries] = useState([]);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -42,9 +43,29 @@ const Signup = () => {
 
   const { loading, error, success } = useSelector((state) => state.create);
 
+  // const handleChange = selectedOption => {
+  //   onChange(selectedOption);
+  // };
+
   useEffect(() => {
     changeTitle("Quadx - Create Account");
   }, [changeTitle]);
+
+  useEffect(() => {
+    // Fetch countries data from a source (e.g., REST API)
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => response.json())
+      .then((data) => {
+        // Extract country names and codes
+        const options = data.map((country) => ({
+          value: country.name.common,
+          label: country.name.common,
+          code: country.cca2, // optional: you might need this for states
+        }));
+        setCountries(options);
+      })
+      .catch((error) => console.error("Error fetching countries:", error));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -96,47 +117,7 @@ const Signup = () => {
                   With valid information
                 </p>
               </div>
-              {/* <div className=" mb-2 w-full flex items-center justify-center gap-5 dark:text-slate-200">
-                <span
-                  className={
-                    page === 1
-                      ? "bg-[#2563EB] bg-opacity-10 p-2 rounded-full text-[#2563EB] flex items-center justify-center"
-                      : "bg-transparent"
-                  }
-                >
-                  <MdPersonAddAlt />
-                </span>
-                <span
-                  className={
-                    page === 2
-                      ? "bg-[#2563EB] bg-opacity-10 p-2 rounded-full text-[#2563EB] flex items-center justify-center"
-                      : "bg-transparent"
-                  }
-                >
-                  <MdContactPage />
-                </span>
-                <span
-                  className={
-                    page === 3
-                      ? "bg-[#2563EB] bg-opacity-10 p-2 rounded-full text-[#2563EB] flex items-center justify-center"
-                      : "bg-transparent"
-                  }
-                >
-                  <MdVerifiedUser />
-                </span>
-              </div> */}
-              {/* <div className="py-2">
-                <h3 className="text-sm font-normal">
-                  {page === 1
-                    ? "Personal details"
-                    : page === 2
-                    ? "Contact Information"
-                    : "Verify your identity"}
-                </h3>
-                <small className="font-extralight text-slate-500 text-xs ">
-                  Fill all information below.
-                </small>
-              </div> */}
+
               {page === 1 && (
                 <div className="py-2">
                   <Formspan>
@@ -224,17 +205,16 @@ const Signup = () => {
                       placeHolder={"123 Example Street"}
                     />
                   </Formspan>
+
                   <Formspan>
                     <Label title={"country"} />
-                    <select
-                      className=" border p-2 outline-[#2563EB] text-xs font-thin"
-                      name="country"
-                      value={formData.country}
+                    <Select
+                      options={countries}
                       onChange={handleChange}
-                    >
-                      <option value="">select country</option>
-                      {/* Add country options */}
-                    </select>
+                      value={formData.country}
+                      placeholder="Select your country"
+                      className="z-50"
+                    />
                   </Formspan>
                   <Formspan>
                     <Label title={"state"} />
