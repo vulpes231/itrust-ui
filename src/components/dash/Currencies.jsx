@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import Tradeform from "./Tradeform";
 const Currencies = ({ coinData }) => {
   return (
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
@@ -91,45 +92,13 @@ const Currencies = ({ coinData }) => {
                   </tr>
                 );
               })}
-              {/* <tr>
-                <td className="px-4 py-4 whitespace-nowrap text-xs font-medium ">
-                  Bitcoin
-                </td>
-                <td className="px-4 py-4 whitespace-nowrap text-xs ">66,000</td>
-                <td className="px-4 py-4 whitespace-nowrap text-xs text-green-500">
-                  0.20%
-                </td>
-                <td className="px-4 py-4 whitespace-nowrap text-xs ">0.00</td>
-                <td className="px-4 py-4 whitespace-nowrap text-xs ">0.0000</td>
-                <td className="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Trade
-                  </button>
-                </td>
-              </tr> */}
-              {/* Additional rows can be added here */}
             </tbody>
           </table>
         </div>
       </div>
       {/* trading */}
       <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full">
-        <form action="" className="flex flex-col">
-          <span className="flex justify-between items-center">
-            <h4>Trading</h4>
-            <span>
-              <button>buy</button>
-              <button>sell</button>
-            </span>
-          </span>
-          <span className="flex justify-between items-center">
-            <h4>Buy coin</h4>
-            <h4>USD Balance: $0.00</h4>
-          </span>
-          {/* buy form */}
-          <div></div>
-          {/* sell form */}
-        </form>
+        <Tradeform coinData={coinData} />
       </div>
     </section>
   );

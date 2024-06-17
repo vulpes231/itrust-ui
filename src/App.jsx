@@ -33,7 +33,7 @@ const App = () => {
     }
   }, []);
 
-  console.log("atoken", sessionStorage.getItem("accessToken"));
+  // console.log("atoken", sessionStorage.getItem("accessToken"));
 
   return (
     <TitleProvider>
