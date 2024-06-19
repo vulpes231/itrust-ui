@@ -7,7 +7,7 @@ const Currencies = ({ coinData }) => {
       {/* my currencies */}
       <div className="lg:col-span-2  bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full space-y-5 overflow-hidden">
         <span className="flex justify-between items-center">
-          <h4>My currencies</h4>
+          <h2 className="text-xl font-bold">My currencies</h2>
           <span className="flex items-center text-xs font-normal gap-2">
             <button className="bg-gray-200 dark:bg-slate-200 p-2  text-slate-900 dark:text-slate-900">
               24H

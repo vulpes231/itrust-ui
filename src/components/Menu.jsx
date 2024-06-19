@@ -8,6 +8,11 @@ import {
   MdPolymer,
   MdSettings,
 } from "react-icons/md";
+
+import { LuBot, LuArchive } from "react-icons/lu";
+import { IoWalletOutline } from "react-icons/io5";
+import { LiaBusinessTimeSolid } from "react-icons/lia";
+import { GoHome } from "react-icons/go";
 import { FaUser } from "react-icons/fa";
 import Sidebarlink from "./Sidebarlink";
 
@@ -26,7 +31,7 @@ const Menu = ({ handleLogout }) => {
     <div>
       <button
         onClick={handleToggle}
-        className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200"
+        className="sm:inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200 hidden"
       >
         <MdMenu />
       </button>
@@ -45,11 +50,36 @@ const Menu = ({ handleLogout }) => {
             <MdClose />
           </span>
 
-          <Sidebarlink title={"account"} icon={<MdHome />} />
-          <Sidebarlink title={"wallet"} icon={<MdPolymer />} />
-          <Sidebarlink title={"cashier"} icon={<MdMoney />} />
-          <Sidebarlink title={"trading"} icon={<FaUser />} />
-          <Sidebarlink title={"profile"} icon={<MdSettings />} />
+          <Sidebarlink
+            title={"account"}
+            icon={<GoHome />}
+            path={"/dash"}
+            closeMenu={closeMenu}
+          />
+          <Sidebarlink
+            title={"portfolio"}
+            icon={<LiaBusinessTimeSolid />}
+            path={"/portfolio"}
+            closeMenu={closeMenu}
+          />
+          <Sidebarlink
+            title={"wallet"}
+            icon={<IoWalletOutline />}
+            path={"/wallet"}
+            closeMenu={closeMenu}
+          />
+          <Sidebarlink
+            title={"trading bots"}
+            icon={<LuBot />}
+            path={"/tradingbot"}
+            closeMenu={closeMenu}
+          />
+          <Sidebarlink
+            title={"history"}
+            icon={<LuArchive />}
+            path={"/history"}
+            closeMenu={closeMenu}
+          />
           <li
             onClick={handleLogout}
             className="elative menu-item group [&amp;>*]:text-blue-600 [&amp;>*]:dark:text-blue-600 active current mt-16"

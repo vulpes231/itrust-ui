@@ -3,7 +3,7 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 
 const Slider = ({ coinData, currentIndex }) => {
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-5  place-items-center gap-5 text-slate-950 dark:text-slate-200">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-5  place-items-center gap-5 text-slate-950 dark:text-slate-200">
       {coinData?.map((coin, index) => (
         <div
           key={coin.id}

@@ -9,6 +9,7 @@ import Currencies from "../components/dash/Currencies";
 
 import { btc, doge, eth, ltc, tether } from "../assets";
 import { getAccessToken } from "../constants";
+import RecentActivity from "../components/dash/Recentactivity";
 
 const coins = [
   { id: "bitcoin", name: "Bitcoin", icon: btc, abbr: "BTC" },
@@ -99,6 +100,9 @@ const Dashboard = () => {
         <>
           <Currencies coinData={coinData} />
         </>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3">
+          <RecentActivity />
+        </div>
       </div>
     </Section>
   );

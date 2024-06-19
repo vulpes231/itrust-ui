@@ -4,6 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import { Dashboard, Signin, Signup } from "./pages";
 import { TitleProvider } from "./contexts/TitleContext";
 import { useSelector } from "react-redux";
+import Transactions from "./pages/Transactions";
+import Tradingbot from "./pages/Tradingbot";
+import Wallet from "./pages/Wallet";
+import Porfolio from "./pages/Porfolio";
 // useSelector
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,13 +31,11 @@ const App = () => {
   useEffect(() => {
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
     if (accessToken) {
-      setToken(accessToken); // Set token to true if accessToken exists
+      setToken(accessToken);
     } else {
-      setToken(false); // Ensure token is false if accessToken does not exist
+      setToken(false);
     }
   }, []);
-
-  // console.log("atoken", sessionStorage.getItem("accessToken"));
 
   return (
     <TitleProvider>
@@ -48,6 +50,10 @@ const App = () => {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />
+          <Route path="/portfolio" element={<Porfolio />} />
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/tradingbot" element={<Tradingbot />} />
+          <Route path="/history" element={<Transactions />} />
         </Routes>
         <Footer />
       </div>

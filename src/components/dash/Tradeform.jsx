@@ -73,7 +73,7 @@ const Tradeform = ({ coinData }) => {
   return (
     <form action="" className="flex flex-col text-xs gap-4 capitalize">
       <span className="flex justify-between items-center py-2">
-        <h4 className="font-semibold">Trading</h4>
+        <h2 className="text-xl font-bold">Trading</h2>
         <div className="flex gap-2 ">
           <button className="capitalize">buy</button>
           <button className="capitalize">sell</button>

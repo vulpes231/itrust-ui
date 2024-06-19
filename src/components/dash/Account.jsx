@@ -26,7 +26,7 @@ const Account = ({ username }) => {
                   overall balance
                 </div>
                 <div className="text-base font-bold text-slate-100 mt-1">
-                  48,610
+                  $48,610
                 </div>
               </div>
               <div className="">
@@ -34,7 +34,7 @@ const Account = ({ username }) => {
                   trading balance
                 </div>
                 <div className="text-base font-bold text-slate-100 mt-1">
-                  1987
+                  $1987
                 </div>
               </div>
             </div>

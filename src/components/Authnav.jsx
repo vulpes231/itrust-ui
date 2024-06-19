@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import { logoutUser } from "../features/logoutSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  MdHome,
-  MdOutlineCurrencyExchange,
-  MdPolymer,
-  MdSunny,
-  MdNightlightRound,
-} from "react-icons/md";
+import { LuBot, LuArchive } from "react-icons/lu";
+import { IoWalletOutline } from "react-icons/io5";
+import { LiaBusinessTimeSolid } from "react-icons/lia";
+import { GoHome } from "react-icons/go";
+
+import { MdSunny, MdNightlightRound } from "react-icons/md";
 
 import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
-import { FaMoneyCheck, FaUser } from "react-icons/fa";
 import Navmenu from "./Navmenu";
 import { useNavigate } from "react-router-dom";
 import Logoutmodal from "./dash/Logoutmodal";
+import Mobilelink from "./Mobilelink";
 
 const Authnav = ({ handleModeToggle, darkMode }) => {
   const dispatch = useDispatch();
@@ -28,9 +27,6 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
     dispatch(logoutUser());
     console.log("Dispatched");
   };
-
-  console.log("success", success);
-
   useEffect(() => {
     if (success) {
       console.log("Clearing cookies");
@@ -41,7 +37,6 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
       });
       sessionStorage.removeItem("accessToken");
       sessionStorage.clear();
-      console.log("remmoved token");
       navigate("/signin");
       window.location.reload();
     }
@@ -59,14 +54,27 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             <h1 className="flex-shrink-0">Quadx.io</h1>
           </div>
           <ul className="hidden lg:flex items-center gap-10 text-xs font-thin text-[#333]">
-            <Sidebarlink title={"account"} icon={<MdHome />} />
-            <Sidebarlink title={"wallet"} icon={<MdPolymer />} />
-            <Sidebarlink title={"cashier"} icon={<FaMoneyCheck />} />
+            <Sidebarlink title={"account"} icon={<GoHome />} path={"/dash"} />
             <Sidebarlink
-              title={"trading"}
-              icon={<MdOutlineCurrencyExchange />}
+              title={"portfolio"}
+              icon={<LiaBusinessTimeSolid />}
+              path={"/portfolio"}
             />
-            <Sidebarlink title={"profile"} icon={<FaUser />} />
+            <Sidebarlink
+              title={"wallet"}
+              icon={<IoWalletOutline />}
+              path={"/wallet"}
+            />
+            <Sidebarlink
+              title={"trading bots"}
+              icon={<LuBot />}
+              path={"/tradingbot"}
+            />
+            <Sidebarlink
+              title={"history"}
+              icon={<LuArchive />}
+              path={"/history"}
+            />
           </ul>
           <ul className="flex items-center gap-x-3 lg:gap-x-5">
             <li className="inline-flex relative">
@@ -83,6 +91,32 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
           </ul>
         </nav>
         {loading && <Logoutmodal />}
+      </div>
+      {/* mobile menu */}
+      <div className="fixed bottom-0 left-0 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 sm:hidden w-full py-4 px-5">
+        <ul className="flex items-center justify-between">
+          <Mobilelink title={"account"} icon={<GoHome />} path={"/dash"} />
+          <Mobilelink
+            title={"portfolio"}
+            icon={<LiaBusinessTimeSolid />}
+            path={"/portfolio"}
+          />
+          <Mobilelink
+            title={"wallet"}
+            icon={<IoWalletOutline />}
+            path={"/wallet"}
+          />
+          <Mobilelink
+            title={"trading bots"}
+            icon={<LuBot />}
+            path={"/tradingbot"}
+          />
+          <Mobilelink
+            title={"history"}
+            icon={<LuArchive />}
+            path={"/history"}
+          />
+        </ul>
       </div>
     </header>
   );
