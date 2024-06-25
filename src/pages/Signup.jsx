@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import Section from "../components/Section";
-import Select from "react-select";
 import Formspan from "../components/Formspan";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
@@ -43,10 +42,6 @@ const Signup = () => {
 
   const { loading, error, success } = useSelector((state) => state.create);
 
-  // const handleChange = selectedOption => {
-  //   onChange(selectedOption);
-  // };
-
   useEffect(() => {
     changeTitle("Quadx - Create Account");
   }, [changeTitle]);
@@ -62,6 +57,10 @@ const Signup = () => {
           label: country.name.common,
           code: country.cca2, // optional: you might need this for states
         }));
+
+        // Sort countries alphabetically by name
+        options.sort((a, b) => a.label.localeCompare(b.label));
+
         setCountries(options);
       })
       .catch((error) => console.error("Error fetching countries:", error));
@@ -208,25 +207,28 @@ const Signup = () => {
 
                   <Formspan>
                     <Label title={"country"} />
-                    <Select
-                      options={countries}
-                      onChange={handleChange}
+
+                    <select
+                      name="country"
                       value={formData.country}
-                      placeholder="Select your country"
-                      className="z-50"
-                    />
+                      onChange={handleChange}
+                      className="p-2  w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 border"
+                    >
+                      <option value="">choose country</option>
+                      {countries.map((cty) => {
+                        return <option key={cty.code}>{cty.value}</option>;
+                      })}
+                    </select>
                   </Formspan>
                   <Formspan>
                     <Label title={"state"} />
-                    <select
-                      className=" border p-2 outline-[#2563EB] text-xs font-thin"
+                    <Input
+                      type={"text"}
                       name="state"
                       value={formData.state}
-                      onChange={handleChange}
-                    >
-                      <option value="">select state</option>
-                      {/* Add state options */}
-                    </select>
+                      handleChange={handleChange}
+                      placeHolder={"Enter state"}
+                    />
                   </Formspan>
                   <Formspan>
                     <Label title={"city"} />
