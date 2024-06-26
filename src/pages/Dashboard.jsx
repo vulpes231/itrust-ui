@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
-import { styles } from "../constants/styles";
 import { Account } from "../components";
 import { useNavigate } from "react-router-dom";
 import Slider from "../components/dash/Slider";

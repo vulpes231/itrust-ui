@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { devserver, liveserver } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 const initialState = {
   getAccountLoading: false,
@@ -12,14 +12,45 @@ const initialState = {
   withdrawError: false,
   withdrawSuccess: false,
   withdrawLoading: false,
+  getBalLoading: false,
+  getBalError: false,
+  userBalance: false,
 };
 
-export const getUserAccounts = createAsyncThunk(
-  "wallet/getUserAccounts",
+export const getUserBalance = createAsyncThunk(
+  "wallet/getUserBalance",
   async () => {
-    let accessToken;
-    const storedAccessToken = sessionStorage.getItem("accessToken");
-    accessToken = storedAccessToken ? JSON.parse(storedAccessToken) : null;
+    const accessToken = getAccessToken();
+
+    if (!accessToken) {
+      throw new Error("No access token found");
+    }
+
+    try {
+      const url = `${devserver}/account/balance`;
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        const errMsg = error.response.data.message;
+        throw new Error(errMsg);
+      } else {
+        throw error;
+      }
+    }
+  }
+);
+
+export const getUserAccount = createAsyncThunk(
+  "wallet/getUserAccount",
+  async () => {
+    const accessToken = getAccessToken();
 
     if (!accessToken) {
       throw new Error("No access token found");
@@ -33,7 +64,7 @@ export const getUserAccounts = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -47,9 +78,7 @@ export const getUserAccounts = createAsyncThunk(
 );
 
 export const deposit = createAsyncThunk("wallet/deposit", async (formData) => {
-  let accessToken;
-  const storedAccessToken = sessionStorage.getItem("accessToken");
-  accessToken = storedAccessToken ? JSON.parse(storedAccessToken) : null;
+  const accessToken = getAccessToken();
 
   if (!accessToken) {
     throw new Error("No access token found");
@@ -63,7 +92,7 @@ export const deposit = createAsyncThunk("wallet/deposit", async (formData) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -78,9 +107,7 @@ export const deposit = createAsyncThunk("wallet/deposit", async (formData) => {
 export const withdraw = createAsyncThunk(
   "wallet/withdraw",
   async (formData) => {
-    let accessToken;
-    const storedAccessToken = sessionStorage.getItem("accessToken");
-    accessToken = storedAccessToken ? JSON.parse(storedAccessToken) : null;
+    const accessToken = getAccessToken();
 
     if (!accessToken) {
       throw new Error("No access token found");
@@ -94,7 +121,7 @@ export const withdraw = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -126,18 +153,23 @@ const walletSlice = createSlice({
       state.withdrawLoading = false;
       state.withdrawSuccess = false;
     },
+    resetBalance(state) {
+      state.getBalLoading = false;
+      state.getBalError = false;
+      state.userBalance = false;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUserAccounts.pending, (state) => {
+      .addCase(getUserAccount.pending, (state) => {
         state.getAccountLoading = true;
       })
-      .addCase(getUserAccounts.fulfilled, (state, action) => {
+      .addCase(getUserAccount.fulfilled, (state, action) => {
         state.getAccountLoading = false;
         state.getAccountError = false;
         state.userAccounts = action.payload;
       })
-      .addCase(getUserAccounts.rejected, (state, action) => {
+      .addCase(getUserAccount.rejected, (state, action) => {
         state.getAccountLoading = false;
         state.getAccountError = action.error.message;
         state.userAccounts = [];
@@ -170,6 +202,20 @@ const walletSlice = createSlice({
         state.withdrawLoading = false;
         state.withdrawSuccess = false;
         state.withdrawError = action.error.message;
+      });
+    builder
+      .addCase(getUserBalance.pending, (state) => {
+        state.getBalLoading = true;
+      })
+      .addCase(getUserBalance.fulfilled, (state, action) => {
+        state.getBalLoading = false;
+        state.getBalError = false;
+        state.userBalance = action.payload;
+      })
+      .addCase(getUserBalance.rejected, (state, action) => {
+        state.getBalLoading = false;
+        state.getBalError = action.error.message;
+        state.userBalance = false;
       });
   },
 });
