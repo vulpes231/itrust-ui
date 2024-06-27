@@ -39,6 +39,7 @@ const Deposit = ({ coinData }) => {
   const createDeposit = (e) => {
     e.preventDefault();
     dispatch(deposit(formData));
+    console.log(formData);
   };
 
   useEffect(() => {
