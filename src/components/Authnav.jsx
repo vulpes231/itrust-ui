@@ -15,6 +15,7 @@ import Navmenu from "./Navmenu";
 import { useNavigate } from "react-router-dom";
 import Logoutmodal from "./dash/Logoutmodal";
 import Mobilelink from "./Mobilelink";
+import { full } from "../assets";
 
 const Authnav = ({ handleModeToggle, darkMode }) => {
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
               <Menu handleLogout={handleLogout} />
             </div>
 
-            <h1 className="flex-shrink-0">Quadx.io</h1>
+            <figure className="dark:bg-slate-200 py-1 px-1.5 rounded-xl">
+              <img src={full} alt="logo-image" width={50} />
+            </figure>
           </div>
           <ul className="hidden lg:flex items-center gap-10 text-xs font-thin text-[#333]">
             <Sidebarlink title={"account"} icon={<GoHome />} path={"/dash"} />

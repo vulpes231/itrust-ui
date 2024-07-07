@@ -6,5 +6,8 @@ import tether from "./tet.png";
 import profile from "./profile.png";
 import ltc from "./ltc.png";
 import doge from "./doge.png";
+import light from "./light.png";
+import dark from "./dark.png";
+import full from "./full.png";
 
-export { logo, hero, profile, btc, eth, tether, ltc, doge };
+export { logo, hero, profile, btc, eth, tether, ltc, doge, light, dark, full };

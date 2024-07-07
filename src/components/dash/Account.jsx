@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "./Box";
 import Balance from "./Balance";
-// import Coin from "./Coin";
-// import { btc, tether, eth } from "../../assets";
+import { getAccessToken } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAccount, getUserBalance } from "../../features/walletSlice";
 
 const Account = ({ username }) => {
+  const dispatch = useDispatch();
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  const accessToken = getAccessToken();
+
+  const {
+    userAccounts,
+    getAccountLoading,
+    getAccountError,
+    getBalLoading,
+    getBalError,
+    userBalance,
+  } = useSelector((state) => state.wallet);
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUserAccount());
+      dispatch(getUserBalance());
+    }
+  }, [accessToken, dispatch]);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const btc = parseFloat(userBalance.btcBalance);
+      const eth = parseFloat(userBalance.ethBalance);
+      const usdt = parseFloat(userBalance.usdtBalance);
+      const total = btc + eth + usdt;
+      setTotalBalance(total.toFixed(2));
+    };
+
+    calculateTotal();
+  }, [userBalance]);
   return (
     <div className="flex flex-wrap -m-3">
       <Box>
@@ -26,7 +59,7 @@ const Account = ({ username }) => {
                   overall balance
                 </div>
                 <div className="text-base font-bold text-slate-100 mt-1">
-                  $48,610
+                  ${totalBalance}
                 </div>
               </div>
               <div className="">
@@ -34,7 +67,7 @@ const Account = ({ username }) => {
                   trading balance
                 </div>
                 <div className="text-base font-bold text-slate-100 mt-1">
-                  $1987
+                  ${userAccounts?.account?.tradingBalance}
                 </div>
               </div>
             </div>
