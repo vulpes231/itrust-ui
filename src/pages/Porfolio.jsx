@@ -12,6 +12,8 @@ import {
   Userchart,
 } from "../components";
 import { useNavigate } from "react-router-dom";
+import { styles } from "../constants/styles";
+import Bots from "../components/dash/Bots";
 
 const Porfolio = () => {
   const dispatch = useDispatch();
@@ -62,7 +64,7 @@ const Porfolio = () => {
           </div>
           <div className="px-3">
             <button
-              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md bg-purple-600 text-white hover:bg-purple-800`}
+              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
             >
               Deposit
             </button>
@@ -85,9 +87,14 @@ const Porfolio = () => {
             <Slider coinData={coinData} currentIndex={currentIndex} />
           </>
           {/* history */}
-          <>
-            <Tradinghistory />
-          </>
+          <div className="grid sm:grid-cols-3 gap-6">
+            <div className="col-span-2">
+              <Tradinghistory />
+            </div>
+            <div>
+              <Bots title={"Active BOTS"} name={"active"} />
+            </div>
+          </div>
         </div>
       </div>
     </Section>

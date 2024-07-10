@@ -53,7 +53,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             </div>
 
             <figure className="dark:bg-slate-200 py-1 px-1.5 rounded-xl">
-              <img src={full} alt="logo-image" width={50} />
+              <img src={full} alt="logo-image" width={80} />
             </figure>
           </div>
           <ul className="hidden lg:flex items-center gap-10 text-xs font-thin text-[#333]">

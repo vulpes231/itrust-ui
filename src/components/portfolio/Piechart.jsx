@@ -11,7 +11,7 @@ const amount = [100, 50, 20];
 
 const PieChart = () => {
   return (
-    <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 space-y-5">
+    <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 space-y-5 border border-slate-200 dark:border-slate-800 rounded-lg">
       <div className="flex justify-between items-center">
         <h3 className="capitalize font-medium text-lg">crypto portfolio</h3>
         <select className="flex items-center gap-2 text-xs font-medium bg-transparent border p-1 rounded-lg">

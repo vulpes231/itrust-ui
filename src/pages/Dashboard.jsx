@@ -9,6 +9,7 @@ import Currencies from "../components/dash/Currencies";
 import { coins, getAccessToken } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoinData } from "../features/coinSlice";
+import { styles } from "../constants/styles";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const Dashboard = () => {
           </div>
           <div className="px-3">
             <button
-              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md bg-purple-600 text-white hover:bg-purple-800`}
+              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
             >
               Deposit
             </button>

@@ -1,11 +1,11 @@
 import React from "react";
 import Dashbots from "./Dashbots";
-const Bots = () => {
+const Bots = ({ title, name }) => {
   return (
     <div className="overflox-auto">
       <div className="flex flex-col gap-6">
-        <h3 className="bg-orange-50 text-center mx-8 p-3 rounded shadow font-medium text-sm">
-          Available BOTS
+        <h3 className="bg-orange-50 dark:bg-slate-950 dark:text-slate-200 text-center mx-8 p-3 rounded shadow font-medium text-sm">
+          {title}
         </h3>
         <Dashbots
           botName={"smart swan"}
@@ -14,6 +14,7 @@ const Bots = () => {
           interest={"37"}
           aum={"257"}
           rating={"4.8"}
+          btnName={name}
         />
 
         <Dashbots
@@ -23,6 +24,7 @@ const Bots = () => {
           interest={"37"}
           aum={"297"}
           rating={"4.5"}
+          btnName={name}
         />
         <Dashbots
           botName={"manta network finance"}
@@ -31,6 +33,7 @@ const Bots = () => {
           interest={"37"}
           aum={"257"}
           rating={"4.2"}
+          btnName={name}
         />
       </div>
     </div>

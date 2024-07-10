@@ -2,7 +2,8 @@ import React from "react";
 import { PiHandCoins } from "react-icons/pi";
 import { IoWalletOutline } from "react-icons/io5";
 import { FaChartLine } from "react-icons/fa6";
-
+import { styles } from "../../constants/styles";
+// styles
 const Balances = () => {
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -11,7 +12,9 @@ const Balances = () => {
           <h6 className="font-medium w-max bg-gradient-to-r from-blue-300 to-pink-500 text-transparent bg-clip-text">
             Trading balance
           </h6>
-          <IoWalletOutline className="text-2xl text-purple-500" />
+          <IoWalletOutline
+            className={`${styles.colors.primaryTextColor} text-2xl text-purple-500`}
+          />
         </span>
         <p className="font-semibold text-lg">$0.00</p>
         <p className="capitalize font-normal text-xs">crypto holdings: $0.00</p>
@@ -20,7 +23,9 @@ const Balances = () => {
       <div className="bg-white rounded-md border border-slate-200 p-5 h-full text-slate-950 flex flex-col gap-2">
         <span className="flex justify-between">
           <h6 className="font-medium text-sm">Today's profit</h6>
-          <PiHandCoins className="text-2xl text-purple-500" />
+          <PiHandCoins
+            className={`${styles.colors.primaryTextColor} text-2xl text-purple-500`}
+          />
         </span>
         <p className="font-semibold text-lg">$0.00</p>
         <span className="capitalize font-normal text-xs p-1 rounded-md flex">
@@ -33,7 +38,9 @@ const Balances = () => {
       <div className="bg-white rounded-md border border-slate-200 p-5 h-full text-slate-950 flex flex-col gap-2">
         <span className="flex justify-between">
           <h6 className="font-medium text-sm">Average daily earnings</h6>
-          <FaChartLine className="text-2xl text-purple-500" />
+          <FaChartLine
+            className={`${styles.colors.primaryTextColor} text-2xl text-purple-500`}
+          />
         </span>
         <p className="font-semibold text-lg">$0.00</p>
         <span className="capitalize font-normal text-xs p-1 rounded-md flex">

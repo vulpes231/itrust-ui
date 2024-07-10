@@ -2,6 +2,7 @@ import React from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import Bots from "./Bots";
 import RecentActivity from "./Recentactivity";
+import { styles } from "../../constants/styles";
 const Currencies = ({ coinData }) => {
   return (
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
@@ -87,7 +88,9 @@ const Currencies = ({ coinData }) => {
                         0.0000
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                        <button
+                          className={`${styles.hover.lightBg} ${styles.colors.primaryBgColor} text-white font-bold py-2 px-4 rounded`}
+                        >
                           Trade
                         </button>
                       </td>
@@ -106,7 +109,7 @@ const Currencies = ({ coinData }) => {
 
       {/* trading */}
       <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full overflow-auto">
-        <Bots />
+        <Bots title={"Available BOTS"} name={"add bot"} />
       </div>
     </section>
   );

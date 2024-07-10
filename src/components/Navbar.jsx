@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
+import { full } from "../assets";
+import { styles } from "../constants/styles";
 
 const Navbar = ({ handleModeToggle, darkMode }) => {
   const { title } = useContext(TitleContext);
@@ -28,16 +30,9 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
               <MdMenu />
             </button>
           </div>
-          <Link to={"/"} className="flex-shrink-0">
-            <div className="flex items-center">
-              <h1 className="h-6 text-xl  font-bold flex items-center dark:hidden">
-                Quadx.io
-              </h1>
-              <h1 className="h-6 text-xl font-bold hidden text-[#fff] dark:flex items-center">
-                Quadx.io
-              </h1>
-            </div>
-          </Link>
+          <figure className="dark:bg-slate-200 py-1 px-1.5 rounded-xl">
+            <img src={full} alt="logo-image" width={80} />
+          </figure>
         </div>
 
         <div className="flex flex-col py-4 xl:py-0 w-64 xl:w-auto fixed xl:transition-none xl:static start-0 top-0 border-e dark:border-slate-800 xl:border-e-0 bg-white dark:bg-slate-950 z-[1020] h-screen xl:h-auto flex-shrink-0 xl:translate-x-0 transition-all -translate-x-full">
@@ -56,14 +51,14 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
           <span>
             {title === "Quadx - Login" ? (
               <Link
-                className={`inline-flex font-medium text-sm bg-blue-600 text-white hover:bg-blue-800 transition-all px-5 py-2 rounded-full`}
+                className={`inline-flex font-medium text-sm ${styles.colors.primaryBgColor} text-white ${styles.hover.lightBg} transition-all px-5 py-2 rounded-full`}
                 to={"/signup"}
               >
                 Sign up
               </Link>
             ) : (
               <Link
-                className={`inline-flex font-medium text-sm bg-blue-600 text-white hover:bg-blue-800 transition-all px-5 py-2 rounded-full`}
+                className={`inline-flex font-medium text-sm ${styles.colors.primaryBgColor} text-white ${styles.hover.lightBg}  transition-all px-5 py-2 rounded-full`}
                 to={"/signin"}
               >
                 Sign in

@@ -1,8 +1,17 @@
 import React from "react";
 import { MdStar } from "react-icons/md";
-const Dashbots = ({ botName, botShort, rating, interest, aum, winRate }) => {
+import { styles } from "../../constants/styles";
+const Dashbots = ({
+  botName,
+  botShort,
+  rating,
+  interest,
+  aum,
+  winRate,
+  btnName,
+}) => {
   return (
-    <div className="flex flex-col mx-8 rounded shadow  text-xs text-slate-400 dark:text-slate-200">
+    <div className="flex flex-col mx-8 rounded shadow  text-xs text-slate-400 dark:text-slate-200 bg-white dark:bg-slate-950">
       <article className="flex justify-between items-center p-4">
         <div className="bg-slate-200 w-10 h-10 shadow rounded-lg">
           <img src="" alt="" />
@@ -35,8 +44,10 @@ const Dashbots = ({ botName, botShort, rating, interest, aum, winRate }) => {
       </article>
       <hr />
       <div className="capitalize flex items-end justify-end p-2">
-        <button className="bg-purple-500 p-2 text-white rounded-md inline-flex capitalize text-xs font-[Montserrat]">
-          add bot
+        <button
+          className={`${styles.colors.primaryBgColor} ${styles.hover.lightBg} p-2 text-white rounded-md inline-flex capitalize text-xs font-[Montserrat]`}
+        >
+          {btnName}
         </button>
       </div>
     </div>
