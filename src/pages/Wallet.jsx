@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAccount, getUserBalance } from "../features/walletSlice";
-import { getAccessToken } from "../constants";
+import { getAccessToken, getSingleCoinPrice } from "../constants";
 import { FaMoneyBill } from "react-icons/fa";
 import { MdCheck } from "react-icons/md";
 import Datatable from "../components/wallet/Datatable";
 import { Deposit, Swap, Withdrawal } from "../components";
 import { btc, doge, eth, ltc, tether } from "../assets";
+import { getCoinData } from "../features/coinSlice";
 
 const headers = [
   { id: "date", name: "date" },
@@ -36,16 +37,26 @@ const Wallet = () => {
     userBalance,
   } = useSelector((state) => state.wallet);
 
-  const [coinData, setCoinData] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
   const [activeSection, setActiveSection] = useState("wallet");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { coinData } = useSelector((state) => state.coin);
 
   const handleActiveSection = (section) => {
     setActiveSection(section);
   };
 
   const username = sessionStorage.getItem("username");
+
+  const btcPrice = getSingleCoinPrice("btc", coinData);
+  const ethPrice = getSingleCoinPrice("eth", coinData);
+  const usdtPrice = getSingleCoinPrice("usdt", coinData);
+
+  const prices = {
+    btc: btcPrice.price,
+    eth: ethPrice.price,
+    usdt: usdtPrice.price,
+  };
 
   useEffect(() => {
     document.title = "Quadx - Wallet";
@@ -55,6 +66,7 @@ const Wallet = () => {
     if (accessToken) {
       dispatch(getUserAccount());
       dispatch(getUserBalance());
+      dispatch(getCoinData());
     }
   }, [accessToken, dispatch]);
 
@@ -71,23 +83,6 @@ const Wallet = () => {
   }, [userBalance]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${coins
-          .map((coin) => coin.id)
-          .join(",")}&vs_currencies=usd&include_24hr_change=true`
-      );
-      const data = await response.json();
-      const formattedData = coins.map((coin) => ({
-        id: coin.id,
-        name: coin.name,
-        price: data[coin.id].usd,
-      }));
-      setCoinData(formattedData);
-    };
-
-    fetchData();
-
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === coins.length - 1 ? 0 : prevIndex + 1
@@ -152,7 +147,9 @@ const Wallet = () => {
                     </div>
                   </span>
                   <span className="flex flex-col items-end">
-                    <span className=" uppercase text-sm">{`0.0000 ${asset.shortName}`}</span>
+                    <span className=" uppercase text-sm">{`${(
+                      parseFloat(asset.balance) / prices[asset.shortName]
+                    ).toFixed(4)} ${asset.shortName}`}</span>
                     <span className="font-normal text-xs">
                       ${asset.balance}
                     </span>

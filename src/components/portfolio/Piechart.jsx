@@ -4,12 +4,25 @@ import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Piechart } from "..";
 import { btc, eth, tether } from "../../assets";
+import { getSingleCoinPrice } from "../../constants";
 
-const coins = ["BTC", "USDT", "ETH"];
+const PieChart = ({ userBalance, coinData }) => {
+  const coins = ["BTC", "ETH", "USDT"];
 
-const amount = [100, 50, 20];
+  const amount = [
+    userBalance.btcBalance,
+    userBalance.ethBalance,
+    userBalance.usdtBalance,
+  ];
 
-const PieChart = () => {
+  const btcPrice = getSingleCoinPrice("btc", coinData);
+  const ethPrice = getSingleCoinPrice("eth", coinData);
+  const usdtPrice = getSingleCoinPrice("usdt", coinData);
+
+  const bp = btcPrice.price;
+  const ep = ethPrice.price;
+  const up = usdtPrice.price;
+
   return (
     <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 space-y-5 border border-slate-200 dark:border-slate-800 rounded-lg">
       <div className="flex justify-between items-center">
@@ -45,8 +58,8 @@ const PieChart = () => {
             </span>
           </div>
           <div className=" text-end">
-            <h4>0.002634764 BTC</h4>
-            <small>$12,095</small>
+            <h4>{(userBalance.btcBalance / bp).toFixed(4)} BTC</h4>
+            <small>${userBalance.btcBalance}</small>
           </div>
         </div>
         <div className="flex justify-between text-xs">
@@ -60,8 +73,8 @@ const PieChart = () => {
             </span>
           </div>
           <div className="text-end">
-            <h4>0.500000 ETH</h4>
-            <small>$800</small>
+            <h4>{(userBalance.ethBalance / ep).toFixed(4)} ETH</h4>
+            <small>${userBalance.ethBalance}</small>
           </div>
         </div>
         <div className="flex justify-between text-xs">
@@ -75,8 +88,8 @@ const PieChart = () => {
             </span>
           </div>
           <div className=" text-end">
-            <h4>100.00 USDT</h4>
-            <small>$100</small>
+            <h4>{(userBalance.usdtBalance / up).toFixed(2)} USDT</h4>
+            <small>${userBalance.usdtBalance}</small>
           </div>
         </div>
       </div>

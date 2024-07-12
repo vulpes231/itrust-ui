@@ -4,7 +4,7 @@ import { IoWalletOutline } from "react-icons/io5";
 import { FaChartLine } from "react-icons/fa6";
 import { styles } from "../../constants/styles";
 // styles
-const Balances = () => {
+const Balances = ({ totalBalance, userAccount }) => {
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
       <div className="bg-slate-800 rounded-md border border-slate-800 p-5 h-full text-slate-200 flex flex-col gap-2">
@@ -16,8 +16,12 @@ const Balances = () => {
             className={`${styles.colors.primaryTextColor} text-2xl text-purple-500`}
           />
         </span>
-        <p className="font-semibold text-lg">$0.00</p>
-        <p className="capitalize font-normal text-xs">crypto holdings: $0.00</p>
+        <p className="font-semibold text-lg">
+          ${userAccount.account.tradingBalance}
+        </p>
+        <p className="capitalize font-normal text-xs">
+          crypto holdings: ${totalBalance}
+        </p>
       </div>
 
       <div className="bg-white rounded-md border border-slate-200 p-5 h-full text-slate-950 flex flex-col gap-2">

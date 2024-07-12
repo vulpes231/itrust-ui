@@ -43,3 +43,7 @@ export const coins = [
   { id: "dogecoin", name: "Dogecoin", icon: doge, abbr: "DOGE" },
   { id: "litecoin", name: "Litecoin", icon: ltc, abbr: "LTC" },
 ];
+
+export const getSingleCoinPrice = (coinName, coinData) => {
+  return coinData.find((coin) => coin.abbr === coinName.toUpperCase());
+};

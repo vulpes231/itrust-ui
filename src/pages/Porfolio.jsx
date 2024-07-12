@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { styles } from "../constants/styles";
 import Bots from "../components/dash/Bots";
+import { getUserAccount, getUserBalance } from "../features/walletSlice";
 
 const Porfolio = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,21 @@ const Porfolio = () => {
   const accessToken = getAccessToken();
   const { changeTitle } = useContext(TitleContext);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
   const username = sessionStorage.getItem("username");
 
   const { coinData } = useSelector((state) => state.coin);
+
+  const {
+    userAccounts,
+    getAccountLoading,
+    getAccountError,
+    getBalLoading,
+    getBalError,
+    userBalance,
+  } = useSelector((state) => state.wallet);
+
+  // console.log(userAccounts);
 
   useEffect(() => {
     changeTitle("Quadx - Porfolio");
@@ -36,8 +49,22 @@ const Porfolio = () => {
   useEffect(() => {
     if (accessToken) {
       dispatch(getCoinData());
+      dispatch(getUserAccount());
+      dispatch(getUserBalance());
     }
   }, []);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const btc = parseFloat(userBalance.btcBalance);
+      const eth = parseFloat(userBalance.ethBalance);
+      const usdt = parseFloat(userBalance.usdtBalance);
+      const total = btc + eth + usdt;
+      setTotalBalance(total.toFixed(2));
+    };
+
+    calculateTotal();
+  }, [userBalance]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,7 +77,7 @@ const Porfolio = () => {
   }, []);
   return (
     <Section>
-      <div className="container px-3 font-[Montserrat] space-y-4">
+      <div className="container px-3 font-[Montserrat] space-y-4 ">
         <div className="mb-7 flex justify-between items-center -mx-3">
           <div className="px-3">
             <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
@@ -71,15 +98,18 @@ const Porfolio = () => {
           </div>
         </div>
         {/* content */}
-        <div className="grid gap-4">
+        <div className="grid gap-4 ">
           {/* assets */}
           <div className="grid lg:grid-cols-3 gap-6">
-            <div className="col-span-2 flex flex-col gap-4">
-              <Balances />
+            <div className="lg:col-span-2 flex flex-col gap-4 ">
+              <Balances
+                totalBalance={totalBalance}
+                userAccount={userAccounts}
+              />
               <Userchart />
             </div>
             <>
-              <Piechart />
+              <Piechart userBalance={userBalance} coinData={coinData} />
             </>
           </div>
           {/* slider */}
@@ -87,8 +117,8 @@ const Porfolio = () => {
             <Slider coinData={coinData} currentIndex={currentIndex} />
           </>
           {/* history */}
-          <div className="grid sm:grid-cols-3 gap-6">
-            <div className="col-span-2">
+          <div className="grid sm:grid-cols-3 gap-6 ">
+            <div className="sm:col-span-2 overflow-auto">
               <Tradinghistory />
             </div>
             <div>
