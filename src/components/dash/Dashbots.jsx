@@ -9,13 +9,14 @@ const Dashbots = ({
   aum,
   winRate,
   btnName,
+  botImg,
 }) => {
   return (
     <div className="flex flex-col mx-8 rounded shadow  text-xs text-slate-400 dark:text-slate-200 bg-white dark:bg-slate-950">
       <article className="flex justify-between items-center p-4">
-        <div className="bg-slate-200 w-10 h-10 shadow rounded-lg">
-          <img src="" alt="" />
-        </div>
+        <figure className="bg-slate-200 w-10 h-10 shadow rounded-lg flex items-center justify-center">
+          <img src={botImg} alt="" className="w-[25px]" />
+        </figure>
         <span className="capitalize">
           <h3 className="text-slate-950 dark:text-slate-200 font-medium">
             {botName}

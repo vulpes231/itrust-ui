@@ -9,5 +9,23 @@ import doge from "./doge.png";
 import light from "./light.png";
 import dark from "./dark.png";
 import full from "./full.png";
+import swan from "./swan.png";
+import swanny from "./swanny.png";
+import mant from "./mant.png";
 
-export { logo, hero, profile, btc, eth, tether, ltc, doge, light, dark, full };
+export {
+  logo,
+  hero,
+  profile,
+  btc,
+  eth,
+  tether,
+  ltc,
+  doge,
+  light,
+  dark,
+  full,
+  swan,
+  swanny,
+  mant,
+};

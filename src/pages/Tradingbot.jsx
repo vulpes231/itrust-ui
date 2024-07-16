@@ -4,10 +4,17 @@ import { getAccessToken } from "../constants";
 import { Analytics, Section } from "../components";
 import { styles } from "../constants/styles";
 import Bots from "../components/dash/Bots";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAllBots, getUserBots } from "../features/botSlice";
 
 const Tradingbot = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = getAccessToken();
   const { changeTitle } = useContext(TitleContext);
+
+  const { userBots, bots } = useSelector((state) => state.bot);
 
   const username = sessionStorage.getItem("username");
 
@@ -16,6 +23,9 @@ const Tradingbot = () => {
 
     if (!accessToken) {
       navigate("/signin");
+    } else {
+      dispatch(getAllBots());
+      dispatch(getUserBots());
     }
   }, [accessToken]);
 
@@ -47,8 +57,8 @@ const Tradingbot = () => {
         </>
         <div className="grid md:grid-cols-3 gap-6 ">
           <div className="grid sm:grid-cols-2 col-span-2">
-            <Bots title={"Active BOTS"} name={"active"} />
-            <Bots title={"Available BOTS"} name={"add bot"} />
+            <Bots title={"Active BOTS"} name={"active"} botData={userBots} />
+            <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
           </div>
           <div className="flex flex-col gap-4">
             <h5 className="bg-white dark:bg-slate-950 dark:text-slate-200 p-2 capitalize text-center text-xs">

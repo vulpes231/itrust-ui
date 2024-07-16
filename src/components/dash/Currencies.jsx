@@ -3,7 +3,10 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import Bots from "./Bots";
 import RecentActivity from "./Recentactivity";
 import { styles } from "../../constants/styles";
+import { useSelector } from "react-redux";
 const Currencies = ({ coinData }) => {
+  const { bots } = useSelector((state) => state.bot);
+
   return (
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
       {/* my currencies */}
@@ -108,8 +111,8 @@ const Currencies = ({ coinData }) => {
       </div>
 
       {/* trading */}
-      <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full overflow-auto">
-        <Bots title={"Available BOTS"} name={"add bot"} />
+      <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 py-5 w-full overflow-auto">
+        <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
       </div>
     </section>
   );
