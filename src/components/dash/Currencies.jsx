@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import Bots from "./Bots";
 import RecentActivity from "./Recentactivity";
 import { styles } from "../../constants/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBots } from "../../features/botSlice";
+import { getAccessToken } from "../../constants";
+
 const Currencies = ({ coinData }) => {
+  const dispatch = useDispatch();
   const { bots } = useSelector((state) => state.bot);
+
+  const accessToken = getAccessToken();
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getAllBots());
+    }
+  }, [accessToken, dispatch]);
 
   return (
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
@@ -105,7 +116,7 @@ const Currencies = ({ coinData }) => {
           </div>
         </div>
         {/* recent */}
-        <div className="grid lg:grid-cols-2">
+        <div className="grid lg:grid-cols-2 overflow-auto">
           <RecentActivity />
         </div>
       </div>

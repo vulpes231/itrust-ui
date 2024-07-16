@@ -16,6 +16,7 @@ import Balances from "./portfolio/Balances";
 import Piechart from "./portfolio/Piechart";
 import Userchart from "./portfolio/Userchart";
 import Analytics from "./trading/Analytics";
+import History from "./history/History";
 
 export {
   Navbar,
@@ -36,4 +37,5 @@ export {
   Piechart,
   Userchart,
   Analytics,
+  History,
 };

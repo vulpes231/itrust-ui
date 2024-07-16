@@ -1,5 +1,5 @@
 import axios from "axios";
-import { devserver, getAccessToken } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
-  const url = `${devserver}/bot`;
+  const url = `${liveserver}/bot`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {
@@ -35,7 +35,7 @@ export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
 });
 
 export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
-  const url = `${devserver}/bot/userbots`;
+  const url = `${liveserver}/bot/userbots`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {

@@ -66,13 +66,13 @@ const RecentActivity = () => {
   }, [accessToken]);
 
   return (
-    <div className="h-64 bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800  overflow-hidden text-slate-950 dark:text-slate-200">
+    <div className="h-64 bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800  overflow-auto text-slate-950 dark:text-slate-200">
       <div className="flex justify-between items-center p-4 capitalize">
         <h2 className="text-xl font-bold">recent activity</h2>
         <small>sort by: current week</small>
       </div>
       <hr />
-      <div className="overflow-y-scroll h-full p-4 ">
+      <div className=" h-full p-4 ">
         <div className="px-4 py-2 space-y-4">{myTrnx}</div>
       </div>
     </div>

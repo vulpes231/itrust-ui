@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import { getAccessToken } from "../constants";
-import { Section } from "../components";
+import { History, Section } from "../components";
 import { styles } from "../constants/styles";
 
 const Transactions = () => {
@@ -39,6 +39,9 @@ const Transactions = () => {
           </div>
         </div>
         {/* content */}
+        <div>
+          <History />
+        </div>
       </div>
     </Section>
   );
