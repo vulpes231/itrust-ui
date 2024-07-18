@@ -41,6 +41,7 @@ const Wallet = () => {
   const [activeSection, setActiveSection] = useState("wallet");
   const [currentIndex, setCurrentIndex] = useState(0);
   const { coinData } = useSelector((state) => state.coin);
+  const [activeCoin, setActiveCoin] = useState(false);
 
   const handleActiveSection = (section) => {
     setActiveSection(section);
@@ -53,9 +54,9 @@ const Wallet = () => {
   const usdtPrice = getSingleCoinPrice("usdt", coinData);
 
   const prices = {
-    btc: btcPrice.price,
-    eth: ethPrice.price,
-    usdt: usdtPrice.price,
+    btc: btcPrice?.price || 0,
+    eth: ethPrice?.price || 0,
+    usdt: usdtPrice?.price || 0,
   };
 
   useEffect(() => {
@@ -92,13 +93,13 @@ const Wallet = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (getAccountLoading) {
-    return (
-      <div className="min-h-screen mt-10 p-6">
-        <small>Loading...</small>
-      </div>
-    );
-  }
+  // if (getAccountLoading) {
+  //   return (
+  //     <div className="min-h-screen mt-10 p-6">
+  //       <small>Loading...</small>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -115,13 +116,18 @@ const Wallet = () => {
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
           {/* aside */}
-          <div className="flex flex-col gap-4 ">
+          <div className="flex flex-col gap-2 ">
             {userAccounts?.account?.assets?.map((asset, index) => (
-              <div
-                key={index}
-                className=" border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 p-6 rounded-xl text-xs font-medium "
-              >
-                <div className="flex justify-between items-center">
+              <div key={index} className="text-xs font-medium ">
+                {/* coins */}
+                <div
+                  onClick={() => setActiveCoin(asset.coinName)}
+                  className={`flex justify-between items-center cursor-pointer p-6 rounded-sm ${
+                    activeCoin === asset.coinName
+                      ? "bg-[#805af5] text-white"
+                      : "bg-white"
+                  }`}
+                >
                   <span className="font-semibold flex gap-1 items-center capitalize">
                     <img
                       src={
@@ -167,13 +173,13 @@ const Wallet = () => {
               </div>
               <div className="flex flex-col ">
                 <span className="flex justify-between px-5  lg:px-10">
-                  <h4 className="capitalize text-xs flex gap-2 items-center text-blue-500">
+                  <h4 className="capitalize text-xs flex gap-2 items-center text-[#805af5]">
                     <FaMoneyBill /> total balance
                   </h4>
                   <p className=" text-sm font-bold">${totalBalance}</p>
                 </span>
                 <span className="flex justify-between px-5  lg:px-10">
-                  <h4 className="text-blue-500 capitalize text-xs flex gap-2 items-center">
+                  <h4 className="text-[#805af5] capitalize text-xs flex gap-2 items-center">
                     {" "}
                     <MdCheck />
                     safe deposit margin
@@ -186,7 +192,7 @@ const Wallet = () => {
               <div className="flex justify-between md:px-20">
                 <button
                   onClick={() => handleActiveSection("deposit")}
-                  className="bg-blue-500 hover:bg-blue-700 rounded-md capitalize font-medium text-white py-2 px-4 md:px-10"
+                  className="bg-[#805af5] hover:bg-[#cd99ff] rounded-md capitalize font-medium text-white py-2 px-4 md:px-10"
                 >
                   deposit
                 </button>
@@ -210,7 +216,11 @@ const Wallet = () => {
                 {activeSection === "wallet" ? (
                   <Datatable headers={headers} />
                 ) : activeSection === "deposit" ? (
-                  <Deposit coinData={coinData} />
+                  <Deposit
+                    coinData={coinData}
+                    type={activeCoin}
+                    userAccount={userAccounts}
+                  />
                 ) : activeSection === "swap" ? (
                   <Swap />
                 ) : activeSection === "withdraw" ? (

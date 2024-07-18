@@ -122,7 +122,7 @@ const Currencies = ({ coinData }) => {
       </div>
 
       {/* trading */}
-      <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 py-5 w-full overflow-auto">
+      <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-5 w-full overflow-auto">
         <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
       </div>
     </section>

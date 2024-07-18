@@ -55,10 +55,11 @@ const Tradingbot = () => {
         <>
           <Analytics />
         </>
-        <div className="grid md:grid-cols-3 gap-6 ">
-          <div className="grid sm:grid-cols-2 col-span-2">
-            <Bots title={"Active BOTS"} name={"active"} botData={userBots} />
+        <div className="grid md:grid-cols-4 gap-6 p-6">
+          <div className="grid sm:grid-cols-3 col-span-3 gap-4">
             <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
+            <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
+            <Bots title={"Active BOTS"} name={"active"} botData={userBots} />
           </div>
           <div className="flex flex-col gap-4">
             <h5 className="bg-white dark:bg-slate-950 dark:text-slate-200 p-2 capitalize text-center text-xs">

@@ -31,7 +31,7 @@ const Bots = ({ title, name, botData }) => {
   return (
     <div className="overflox-auto">
       <div className="flex flex-col gap-6">
-        <h3 className="bg-orange-50 dark:bg-slate-950 dark:text-slate-200 text-center mx-8 p-3 rounded shadow font-medium text-sm">
+        <h3 className="bg-orange-50 dark:bg-slate-950 dark:text-slate-200 text-center p-3 rounded shadow font-medium text-sm">
           {title}
         </h3>
         {availableBots}

@@ -18,7 +18,7 @@ const Trnx = () => {
         }`}
       >
         <td className="px-2 py-3 text-center whitespace-nowrap">{trn.date}</td>
-        <td className="px-2 py-3 text-center whitespace-nowrap">
+        <td className="px-2 py-3 text-center whitespace-nowrap flex items-center justify-center">
           {trn.walletType.includes("bitcoin") ? (
             <span className="flex gap-2 items-center">
               <img src={btc} alt="" className="w-[25px]" />

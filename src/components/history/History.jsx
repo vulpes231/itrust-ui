@@ -12,8 +12,8 @@ const History = () => {
           onClick={() => setActive("transaction")}
           className={`${
             active === "transaction"
-              ? `bg-blue-500 text-white`
-              : `bg-white text-blue-500`
+              ? `bg-[#805af5] text-white`
+              : `bg-white text-[#805af5]`
           } w-[150px] py-2 rounded-md`}
         >
           Transaction
@@ -22,8 +22,8 @@ const History = () => {
           onClick={() => setActive("trade")}
           className={`${
             active === "trade"
-              ? `bg-blue-500 text-white`
-              : `bg-white text-blue-500`
+              ? `bg-[#805af5] text-white`
+              : `bg-white text-[#805af5]`
           } w-[150px] py-2 rounded-md`}
         >
           Trade

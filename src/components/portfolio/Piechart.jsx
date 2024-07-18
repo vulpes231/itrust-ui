@@ -19,9 +19,9 @@ const PieChart = ({ userBalance, coinData }) => {
   const ethPrice = getSingleCoinPrice("eth", coinData);
   const usdtPrice = getSingleCoinPrice("usdt", coinData);
 
-  const bp = btcPrice.price;
-  const ep = ethPrice.price;
-  const up = usdtPrice.price;
+  const bp = btcPrice?.price || 0;
+  const ep = ethPrice?.price || 0;
+  const up = usdtPrice?.price || 0;
 
   return (
     <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 space-y-5 border border-slate-200 dark:border-slate-800 rounded-lg">
