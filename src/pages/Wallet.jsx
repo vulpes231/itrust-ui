@@ -222,9 +222,14 @@ const Wallet = () => {
                     userAccount={userAccounts}
                   />
                 ) : activeSection === "swap" ? (
-                  <Swap />
+                  <Swap
+                    coinData={coinData}
+                    type={activeCoin}
+                    userAccount={userAccounts}
+                    userBalance={userBalance}
+                  />
                 ) : activeSection === "withdraw" ? (
-                  <Withdrawal />
+                  <Withdrawal coinData={coinData} type={activeCoin} />
                 ) : null}
               </div>
             </div>

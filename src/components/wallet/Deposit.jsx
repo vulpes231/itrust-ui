@@ -124,7 +124,7 @@ const Deposit = ({ coinData, type, userAccount }) => {
               </div>
             </div>
             {type && (
-              <div className="flex items-center">
+              <div className="flex items-center text-gray-500 font-medium">
                 <label>Amount:</label>
                 <span className="ml-2 capitalize">
                   {calculateCoinAmount()}{" "}
