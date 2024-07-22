@@ -22,22 +22,22 @@ const Currencies = ({ coinData }) => {
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
       {/* my currencies */}
       <div className="lg:col-span-2  w-full space-y-5 overflow-hidden">
-        <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 text-slate-950 dark:text-slate-200">
-          <span className="flex justify-between items-center">
-            <h2 className="text-xl font-bold">My currencies</h2>
+        <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 text-slate-950 dark:text-slate-200 space-y-6">
+          <span className="flex justify-between items-center capitalize">
+            <h2 className="text-sm lg:text-lg font-medium">my currencies</h2>
             <span className="flex items-center text-xs font-normal gap-2">
-              <button className="bg-gray-200 dark:bg-slate-200 p-2  text-slate-900 dark:text-slate-900">
+              <button className="bg-[#805af5] hover:bg-[#cd99ff] text-white px-4 py-2 cursor-pointer  rounded-3xl">
                 24H
               </button>
-              <button className="bg-gray-200 dark:bg-slate-200 p-2 text-slate-900 dark:text-slate-900">
+              <button className="bg-[#805af5] hover:bg-[#cd99ff] text-white px-4 py-2 cursor-pointer rounded-3xl">
                 Get report
               </button>
             </span>
           </span>
-          <div className="overflow-x-scroll lg:overflow-hidden">
+          <div className="overflow-auto lg:overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
-                <tr className="">
+                <tr className="bg-gray-100">
                   <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-medium  uppercase tracking-tight">
                     Coin Name
                   </th>

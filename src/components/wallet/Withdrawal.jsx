@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { withdraw } from "../../features/walletSlice";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   amount: "",
   address: "",
 };
 
-const Withdrawal = ({ coinData, type }) => {
+const Withdrawal = ({ coinData, type, activeSection, setActiveSection }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
+
+  const { withdrawError, withdrawSuccess, withdrawLoading } = useSelector(
+    (state) => state.wallet
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,13 +41,29 @@ const Withdrawal = ({ coinData, type }) => {
 
   const createWithdrawal = (e) => {
     e.preventDefault();
-
-    // dispatch(withdraw(formData));
-    console.log(formData);
+    const data = {
+      walletType: type,
+      amount: formData.amount,
+      to: formData.address,
+    };
+    dispatch(withdraw(data));
+    console.log(data);
   };
 
+  useEffect(() => {
+    let timeout;
+    if (withdrawSuccess) {
+      timeout = 1000;
+      setTimeout(() => {
+        window.location.reload();
+        setActiveSection("withdraw");
+      }, timeout);
+    }
+    return () => clearTimeout(timeout);
+  }, [withdrawSuccess]);
+
   return (
-    <div className="flex gap-5 flex-col p-6">
+    <div className="flex gap-5 flex-col lg:p-6">
       <h5 className="capitalize text-center">request withdrawal</h5>
 
       <div className="flex flex-col gap-4">
@@ -50,7 +73,6 @@ const Withdrawal = ({ coinData, type }) => {
         <div className="w-full lg:px-24 text-xs flex flex-col gap-4">
           <div>
             <label htmlFor="" className="capitalize">
-              {" "}
               {type} Address
             </label>
             <div className="flex items-center">
@@ -98,11 +120,19 @@ const Withdrawal = ({ coinData, type }) => {
               </span>
             </div>
           )}
+          {withdrawError && (
+            <p className="text-xs font-medium text-red-500">{withdrawError}</p>
+          )}
+          {withdrawSuccess && (
+            <p className="text-xs font-medium text-green-500">
+              Withdrawal requested.
+            </p>
+          )}
           <button
             onClick={createWithdrawal}
             className="bg-[#805af5] text-white py-2 capitalize w-full mt-4"
           >
-            request
+            {!withdrawLoading ? "request" : "requesting..."}
           </button>
         </div>
       </div>

@@ -4,11 +4,21 @@ import { getUsertrnxs } from "../../features/transactionSlice";
 import { getAccessToken, getSingleCoinPrice } from "../../constants";
 import { btc, eth, tether } from "../../assets";
 
-const Trnx = () => {
+const Trans = ({ activeSection }) => {
   const dispatch = useDispatch();
   const { userTrnxs } = useSelector((state) => state.transaction);
   const { coinData } = useSelector((state) => state.coin);
   const accessToken = getAccessToken();
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUsertrnxs());
+    }
+  }, [dispatch, accessToken]);
+
+  const filteredTrns = userTrnxs?.trnx?.filter((trn) =>
+    trn.trnxType.includes(activeSection)
+  );
 
   const btcPrice = getSingleCoinPrice("btc", coinData);
   const ethPrice = getSingleCoinPrice("eth", coinData);
@@ -20,12 +30,12 @@ const Trnx = () => {
     tether: usdtPrice?.price,
   };
 
-  const myTrns = userTrnxs?.trnx?.map((trn, index) => {
+  const myTrns = filteredTrns?.map((trn, index) => {
     return (
       <tr
         key={trn._id}
         className={`capitalize text-xs font-light ${
-          index % 2 ? `bg-gray-100` : `bg-white`
+          index % 2 ? "bg-gray-100" : "bg-white"
         }`}
       >
         <td className="px-2 py-3 text-center whitespace-nowrap">{trn.date}</td>
@@ -57,12 +67,12 @@ const Trnx = () => {
             <p
               className={`${
                 trn.trnxType.includes("deposit")
-                  ? `text-green-500`
+                  ? "text-green-500"
                   : trn.trnxType.includes("withdrawal")
-                  ? `text-red-500`
+                  ? "text-red-500"
                   : trn.trnxType.includes("swap")
-                  ? `text-blue-500`
-                  : null
+                  ? "text-blue-500"
+                  : ""
               } font-medium`}
             >
               ${trn.amount}
@@ -81,12 +91,12 @@ const Trnx = () => {
         </td>
         <td className="px-2 py-3 text-center ">
           <span
-            className={` px-4 py-1 text-xs font-medium  rounded-xl ${
+            className={` px-4 py-1 text-xs font-medium rounded-xl ${
               trn.status.includes("completed")
-                ? `bg-green-100 text-green-500`
+                ? "bg-green-100 text-green-500"
                 : trn.status.includes("pending")
-                ? `bg-yellow-100 text-yellow-500`
-                : `bg-red-100 text-red-500`
+                ? "bg-yellow-100 text-yellow-500"
+                : "bg-red-100 text-red-500"
             }`}
           >
             {trn.status}
@@ -95,16 +105,11 @@ const Trnx = () => {
       </tr>
     );
   });
-  useEffect(() => {
-    if (accessToken) {
-      dispatch(getUsertrnxs());
-    }
-  }, [dispatch, accessToken]);
 
   return (
     <div className="flex flex-col gap-4 bg-white">
       <div className="flex justify-between items-center capitalize py-2 px-5">
-        <h3 className="text-lg font-medium">all transactions</h3>
+        <h3 className="text-sm lg:text-lg font-medium">Recent transactions</h3>
         <span className="flex gap-2 items-center">
           <small>sort by</small>
           <select name="" className="p-1 capitalize text-xs bg-transparent">
@@ -131,4 +136,4 @@ const Trnx = () => {
   );
 };
 
-export default Trnx;
+export default Trans;

@@ -12,7 +12,9 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
 
-  // console.log(type);
+  const { swapError, swapSuccess, swapLoading } = useSelector(
+    (state) => state.wallet
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

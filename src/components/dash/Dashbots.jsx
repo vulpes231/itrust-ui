@@ -46,7 +46,7 @@ const Dashbots = ({
       <hr />
       <div className="capitalize flex items-end justify-end p-2">
         <button
-          className={`${styles.colors.primaryBgColor} ${styles.hover.lightBg} p-2 text-white rounded-md inline-flex capitalize text-xs font-[Montserrat]`}
+          className={`${styles.colors.primaryBgColor} ${styles.hover.lightBg} px-4 py-2 text-white rounded-3xl inline-flex capitalize text-xs font-[Montserrat]`}
         >
           {btnName}
         </button>

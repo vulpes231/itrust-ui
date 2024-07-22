@@ -15,6 +15,9 @@ const initialState = {
   getBalLoading: false,
   getBalError: false,
   userBalance: false,
+  swapLoading: false,
+  swapError: false,
+  swapped: false,
 };
 
 export const getUserBalance = createAsyncThunk(
@@ -96,7 +99,7 @@ export const deposit = createAsyncThunk("wallet/deposit", async (formData) => {
     return response.data;
   } catch (error) {
     if (error.response) {
-      const errMsg = error.response.message.data;
+      const errMsg = error.response.data.message;
       throw new Error(errMsg);
     } else {
       throw error;
@@ -114,7 +117,7 @@ export const withdraw = createAsyncThunk(
     }
 
     try {
-      const url = `${liveserver}/account/withdrawal`;
+      const url = `${devserver}/account/withdrawal`;
       const response = await axios.post(url, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +128,7 @@ export const withdraw = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response) {
-        const errMsg = error.response.message.data;
+        const errMsg = error.response.data.message;
         throw new Error(errMsg);
       } else {
         throw error;
@@ -133,6 +136,32 @@ export const withdraw = createAsyncThunk(
     }
   }
 );
+export const swap = createAsyncThunk("wallet/swap", async (formData) => {
+  const accessToken = getAccessToken();
+
+  if (!accessToken) {
+    throw new Error("No access token found");
+  }
+
+  try {
+    const url = `${liveserver}/account/swap`;
+    const response = await axios.post(url, formData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      const errMsg = error.response.data.message;
+      throw new Error(errMsg);
+    } else {
+      throw error;
+    }
+  }
+});
 
 const walletSlice = createSlice({
   name: "wallet",
@@ -157,6 +186,11 @@ const walletSlice = createSlice({
       state.getBalLoading = false;
       state.getBalError = false;
       state.userBalance = false;
+    },
+    resetSwap(state) {
+      state.swapLoading = false;
+      state.swapError = false;
+      state.swapped = false;
     },
   },
   extraReducers: (builder) => {
@@ -216,6 +250,21 @@ const walletSlice = createSlice({
         state.getBalLoading = false;
         state.getBalError = action.error.message;
         state.userBalance = false;
+      });
+
+    builder
+      .addCase(swap.pending, (state) => {
+        state.swapLoading = true;
+      })
+      .addCase(swap.fulfilled, (state) => {
+        state.swapLoading = false;
+        state.swapped = true;
+        state.swapError = false;
+      })
+      .addCase(swap.rejected, (state, action) => {
+        state.swapLoading = false;
+        state.swapped = false;
+        state.swapError = action.error.message;
       });
   },
 });

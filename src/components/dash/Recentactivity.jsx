@@ -42,9 +42,21 @@ const RecentActivity = () => {
         </span>
 
         <span className="text-end text-gray-500">
-          <h4 className="text-green-500">{trans.amount} USD</h4>
+          <h4
+            className={`${
+              trans.trnxType.includes("deposit")
+                ? "text-green-500"
+                : trans.trnxType.includes("withdrawal")
+                ? "text-red-500"
+                : trans.trnxType.includes("swap")
+                ? "text-blue-500"
+                : ""
+            } font-medium`}
+          >
+            {trans.amount} USD
+          </h4>
           <small>
-            {(parseFloat(trans.amount) / prices[trans.walletType]).toFixed(4)}{" "}
+            {(parseFloat(trans.amount) / prices[trans.walletType]).toFixed(2)}{" "}
             {trans.walletType.includes("bitcoin")
               ? "BTC"
               : trans.walletType.includes("ethereum")
@@ -68,7 +80,9 @@ const RecentActivity = () => {
   return (
     <div className="h-64 bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800  overflow-auto text-slate-950 dark:text-slate-200">
       <div className="flex justify-between items-center p-4 capitalize">
-        <h2 className="text-xl font-bold">recent activity</h2>
+        <h2 className="text-sm lg:text-lg font-medium whitespace-nowrap">
+          recent activity
+        </h2>
         <small>sort by: current week</small>
       </div>
       <hr />

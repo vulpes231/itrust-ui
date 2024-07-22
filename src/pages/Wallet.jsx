@@ -8,10 +8,14 @@ import Datatable from "../components/wallet/Datatable";
 import { Deposit, Swap, Withdrawal } from "../components";
 import { btc, doge, eth, ltc, tether } from "../assets";
 import { getCoinData } from "../features/coinSlice";
+import Trnx from "../components/history/Trnx";
+import Trans from "../components/wallet/Trans";
 
 const headers = [
   { id: "date", name: "date" },
   { id: "coin", name: "coin" },
+  { id: "_id", name: "transactionID" },
+  { id: "type", name: "type" },
   { id: "amount", name: "amount" },
   { id: "status", name: "status" },
 ];
@@ -38,7 +42,7 @@ const Wallet = () => {
   } = useSelector((state) => state.wallet);
 
   const [totalBalance, setTotalBalance] = useState(0);
-  const [activeSection, setActiveSection] = useState("wallet");
+  const [activeSection, setActiveSection] = useState("deposit");
   const [currentIndex, setCurrentIndex] = useState(0);
   const { coinData } = useSelector((state) => state.coin);
   const [activeCoin, setActiveCoin] = useState(false);
@@ -102,7 +106,7 @@ const Wallet = () => {
   // }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen">
       <div className="container px-3 font-[Montserrat] space-y-4 mt-10">
         <div className="">
           <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
@@ -166,7 +170,7 @@ const Wallet = () => {
             ))}
           </div>
           {/* content */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 overflow-auto">
             <div className="p-6 pb-10  border-b border-slate-200 dark:border-slate-800 dark:text-slate-200 bg-white dark:bg-slate-950 rounded-xl flex flex-col gap-6 w-full">
               <div>
                 <h3 className="font-medium ">Balances</h3>
@@ -189,22 +193,35 @@ const Wallet = () => {
                   </p>
                 </span>
               </div>
+
               <div className="flex justify-between md:px-20">
                 <button
                   onClick={() => handleActiveSection("deposit")}
-                  className="bg-[#805af5] hover:bg-[#cd99ff] rounded-md capitalize font-medium text-white py-2 px-4 md:px-10"
+                  className={`${
+                    activeSection === "wallet" || activeSection === "deposit"
+                      ? "bg-[#805af5] hover:bg-[#cd99ff] text-white"
+                      : "border border-[#805af5] bg-transparent text-[#805af5]"
+                  } rounded-md capitalize font-medium py-2 px-4 md:px-10`}
                 >
                   deposit
                 </button>
                 <button
                   onClick={() => handleActiveSection("swap")}
-                  className="bg-gray-500 hover:bg-gray-700 rounded-md capitalize font-medium text-white py-2 px-4 md:px-10"
+                  className={`${
+                    activeSection === "swap"
+                      ? "bg-[#805af5] hover:bg-[#cd99ff] text-white"
+                      : "border border-[#805af5] bg-transparent text-[#805af5]"
+                  } rounded-md capitalize font-medium py-2 px-4 md:px-10`}
                 >
                   swap
                 </button>
                 <button
-                  onClick={() => handleActiveSection("withdraw")}
-                  className="bg-red-500 hover:bg-red-700 rounded-md capitalize font-medium text-white py-2 px-4 md:px-10"
+                  onClick={() => handleActiveSection("withdrawal")}
+                  className={`${
+                    activeSection === "withdrawal"
+                      ? "bg-[#805af5] hover:bg-[#cd99ff] text-white"
+                      : "border border-[#805af5] bg-transparent text-[#805af5]"
+                  } rounded-md capitalize font-medium py-2 px-4 md:px-10`}
                 >
                   withdraw
                 </button>
@@ -212,10 +229,8 @@ const Wallet = () => {
             </div>
             {/* seperate */}
             <div className="p-6 col-span-2 border-b border-slate-200 dark:border-slate-800 dark:text-slate-200 bg-white dark:bg-slate-950 rounded-xl flex flex-col gap-6 my-6 ">
-              <div className="">
-                {activeSection === "wallet" ? (
-                  <Datatable headers={headers} />
-                ) : activeSection === "deposit" ? (
+              <div>
+                {activeSection === "deposit" ? (
                   <Deposit
                     coinData={coinData}
                     type={activeCoin}
@@ -228,10 +243,18 @@ const Wallet = () => {
                     userAccount={userAccounts}
                     userBalance={userBalance}
                   />
-                ) : activeSection === "withdraw" ? (
-                  <Withdrawal coinData={coinData} type={activeCoin} />
+                ) : activeSection === "withdrawal" ? (
+                  <Withdrawal
+                    coinData={coinData}
+                    type={activeCoin}
+                    activeSection={activeSection}
+                    setActiveSection={handleActiveSection}
+                  />
                 ) : null}
               </div>
+            </div>
+            <div>
+              <Trans activeSection={activeSection} />
             </div>
           </div>
         </div>
