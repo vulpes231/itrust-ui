@@ -1,9 +1,9 @@
 import React from "react";
-import Dashbots from "./Dashbots";
+import Dashbots from "../dash/Dashbots";
 import { mant, swan, swanny } from "../../assets";
-import { styles } from "../../constants/styles";
+import { MdTimer } from "react-icons/md";
 
-const Bots = ({ title, name, botData, handleClick }) => {
+const Activebot = ({ title, name, botData, handleClick }) => {
   const availableBots = botData?.map((bot) => {
     return (
       <div key={bot._id}>
@@ -25,7 +25,9 @@ const Bots = ({ title, name, botData, handleClick }) => {
               : null
           }
           handleClick={handleClick}
-          customBg={` ${styles.colors.primaryBgColor} `}
+          customBg={"bg-green-500 hover:bg-green-700"}
+          expiry={`${bot.remainingDays} days`}
+          icon={<MdTimer />}
         />
       </div>
     );
@@ -49,4 +51,4 @@ const Bots = ({ title, name, botData, handleClick }) => {
   );
 };
 
-export default Bots;
+export default Activebot;

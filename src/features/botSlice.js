@@ -10,10 +10,13 @@ const initialState = {
   getUserBotLoading: false,
   getUserBotError: false,
   userBots: [],
+  activateError: false,
+  activateLoading: false,
+  activated: false,
 };
 
 export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
-  const url = `${liveserver}/bot`;
+  const url = `${devserver}/bot`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {
@@ -35,7 +38,7 @@ export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
 });
 
 export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
-  const url = `${liveserver}/bot/userbots`;
+  const url = `${devserver}/bot/userbots`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {
@@ -44,7 +47,7 @@ export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -55,6 +58,31 @@ export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
     }
   }
 });
+
+export const activateNewBot = createAsyncThunk(
+  "bot/activateNewBot",
+  async (formData) => {
+    const url = `${devserver}/bot`;
+    try {
+      const accessToken = getAccessToken();
+      const response = await axios.put(url, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        const errMsg = error.response.data.message;
+        throw new Error(errMsg);
+      } else {
+        throw error;
+      }
+    }
+  }
+);
 
 const botSlice = createSlice({
   name: "bot",
@@ -69,6 +97,11 @@ const botSlice = createSlice({
       state.getUserBotLoading = false;
       state.getUserBotError = false;
       state.userBots = [];
+    },
+    resetActivate(state) {
+      state.activateError = false;
+      state.activateLoading = false;
+      state.activated = false;
     },
   },
   extraReducers: (builder) => {
@@ -100,6 +133,20 @@ const botSlice = createSlice({
         state.getUserBotLoading = false;
         state.getUserBotError = action.error.message;
         state.userBots = [];
+      });
+    builder
+      .addCase(activateNewBot.pending, (state) => {
+        state.activateLoading = true;
+      })
+      .addCase(activateNewBot.fulfilled, (state, action) => {
+        state.activateLoading = false;
+        state.activateError = false;
+        state.activated = true;
+      })
+      .addCase(activateNewBot.rejected, (state, action) => {
+        state.activateLoading = false;
+        state.activateError = action.error.message;
+        state.activated = false;
       });
   },
 });

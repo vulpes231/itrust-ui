@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { TitleContext } from "../contexts/TitleContext";
 import { getAccessToken } from "../constants";
 import { Analytics, Section } from "../components";
@@ -7,14 +7,32 @@ import Bots from "../components/dash/Bots";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllBots, getUserBots } from "../features/botSlice";
+import { getUserAccount } from "../features/walletSlice";
+import Botform from "../components/trading/Botform";
+import Activebot from "../components/trading/Activebots";
 
 const Tradingbot = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = getAccessToken();
   const { changeTitle } = useContext(TitleContext);
+  const [showBorder, setShowBorder] = useState(false);
 
   const { userBots, bots } = useSelector((state) => state.bot);
+  const { userAccounts, getAccountLoading, getAccountError } = useSelector(
+    (state) => state.wallet
+  );
+
+  const formRef = useRef(null);
+
+  const handleBotClick = (e) => {
+    e.preventDefault();
+    console.log("bot clicked");
+    if (formRef.current) {
+      // console.log(formRef.current);
+      setShowBorder(true);
+    }
+  };
 
   const username = sessionStorage.getItem("username");
 
@@ -26,8 +44,20 @@ const Tradingbot = () => {
     } else {
       dispatch(getAllBots());
       dispatch(getUserBots());
+      dispatch(getUserAccount());
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    let timeout;
+    if (showBorder) {
+      timeout = 10000;
+      setTimeout(() => {
+        setShowBorder(false);
+      }, timeout);
+      return () => clearTimeout(timeout);
+    }
+  }, [showBorder]);
 
   return (
     <Section>
@@ -55,44 +85,36 @@ const Tradingbot = () => {
         <>
           <Analytics />
         </>
-        <div className="grid md:grid-cols-4 gap-6 p-6">
+        <div className="grid md:grid-cols-4 gap-6 ">
           <div className="grid sm:grid-cols-3 col-span-3 gap-4">
-            <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
-            <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
-            <Bots title={"Active BOTS"} name={"active"} botData={userBots} />
+            <Bots
+              title={"Available BOTS"}
+              name={"add bot"}
+              botData={bots}
+              handleClick={handleBotClick}
+            />
+            <Bots
+              title={"Available BOTS"}
+              name={"add bot"}
+              botData={bots}
+              handleClick={handleBotClick}
+            />
+            <Activebot
+              title={"Active BOTS"}
+              name={"active"}
+              botData={userBots}
+            />
           </div>
-          <div className="flex flex-col gap-4">
-            <h5 className="bg-white dark:bg-slate-950 dark:text-slate-200 p-2 capitalize text-center text-xs">
-              add bots
-            </h5>
-            <form action="" className="flex flex-col gap-4 text-xs ">
-              <div className="flex justify-between gap-2">
-                <div className="w-full">
-                  <label htmlFor="">Account</label>
-                  <select
-                    name=""
-                    id=""
-                    className="bg-white p-2 dark:bg-slate-950 dark:text-slate-200 w-full"
-                  >
-                    <option value="balance">account balance</option>
-                  </select>
-                </div>
-                <div className="w-full">
-                  <label htmlFor="" className="font-medium">
-                    Coin
-                  </label>
-                  <select
-                    name=""
-                    id=""
-                    className="bg-white p-2 dark:bg-slate-950 dark:text-slate-200 w-full uppercase"
-                  >
-                    <option value="btc">btc</option>
-                    <option value="eth">eth</option>
-                    <option value="usdt">usdt</option>
-                  </select>
-                </div>
-              </div>
-            </form>
+          <div className="flex flex-col gap-4 ">
+            <h3 className="bg-white dark:bg-slate-950 dark:text-slate-200 text-center p-3 rounded shadow font-medium text-sm capitalize">
+              add bot
+            </h3>
+            <Botform
+              userAccounts={userAccounts}
+              bots={bots}
+              myRef={formRef}
+              activeBorder={showBorder}
+            />
           </div>
         </div>
       </div>

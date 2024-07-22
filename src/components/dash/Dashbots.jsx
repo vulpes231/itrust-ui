@@ -1,6 +1,7 @@
 import React from "react";
 import { MdStar } from "react-icons/md";
 import { styles } from "../../constants/styles";
+
 const Dashbots = ({
   botName,
   botShort,
@@ -10,6 +11,10 @@ const Dashbots = ({
   winRate,
   btnName,
   botImg,
+  handleClick,
+  customBg,
+  icon,
+  expiry,
 }) => {
   return (
     <div className="flex flex-col  rounded shadow  text-xs text-slate-400 dark:text-slate-200 bg-white dark:bg-slate-950">
@@ -36,7 +41,7 @@ const Dashbots = ({
           <small>AUM (USDT)</small>
           <h3 className="font-medium">{aum}M</h3>
         </span>
-        <span className="">
+        <span className="text-center">
           <small>win rate</small>
           <h3 className="bg-green-100 text-green-500 py-0.5 px-1 rounded-md">
             {winRate}%
@@ -44,9 +49,14 @@ const Dashbots = ({
         </span>
       </article>
       <hr />
-      <div className="capitalize flex items-end justify-end p-2">
+      <div className="capitalize flex justify-between items-center p-2">
+        <div className="flex gap-1 items-center">
+          {icon}
+          {expiry}
+        </div>
         <button
-          className={`${styles.colors.primaryBgColor} ${styles.hover.lightBg} px-4 py-2 text-white rounded-3xl inline-flex capitalize text-xs font-[Montserrat]`}
+          onClick={handleClick}
+          className={`${customBg} ${styles.hover.lightBg} px-4 py-2 text-white rounded-3xl inline-flex capitalize text-xs font-[Montserrat]`}
         >
           {btnName}
         </button>

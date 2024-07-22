@@ -6,9 +6,11 @@ import { styles } from "../../constants/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBots } from "../../features/botSlice";
 import { getAccessToken } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 const Currencies = ({ coinData }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { bots } = useSelector((state) => state.bot);
 
   const accessToken = getAccessToken();
@@ -17,6 +19,10 @@ const Currencies = ({ coinData }) => {
       dispatch(getAllBots());
     }
   }, [accessToken, dispatch]);
+
+  const handleClick = () => {
+    navigate("/tradingbot");
+  };
 
   return (
     <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
@@ -123,7 +129,12 @@ const Currencies = ({ coinData }) => {
 
       {/* trading */}
       <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-5 w-full overflow-auto">
-        <Bots title={"Available BOTS"} name={"add bot"} botData={bots} />
+        <Bots
+          title={"Available BOTS"}
+          name={"add bot"}
+          botData={bots}
+          handleClick={handleClick}
+        />
       </div>
     </section>
   );

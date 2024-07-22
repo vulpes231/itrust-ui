@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk(
   "login/loginUser",
   async (FormData) => {
     console.log(FormData);
-    const url = `${liveserver}/signin`;
+    const url = `${devserver}/signin`;
     try {
       const response = await axios.post(url, FormData, {
         headers: {

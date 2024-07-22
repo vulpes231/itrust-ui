@@ -17,7 +17,7 @@ export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
     throw new Error("No access token found");
   }
   // console.log(accessToken);
-  const url = `${liveserver}/logout`;
+  const url = `${devserver}/logout`;
   try {
     const response = await axios.post(
       url,
@@ -31,6 +31,7 @@ export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
     );
 
     sessionStorage.removeItem("accessToken");
+    sessionStorage.clear();
     // console.log(response.data);
     return response.data;
   } catch (error) {

@@ -30,7 +30,7 @@ export const getUserBalance = createAsyncThunk(
     }
 
     try {
-      const url = `${liveserver}/account/balance`;
+      const url = `${devserver}/account/balance`;
       const response = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const getUserAccount = createAsyncThunk(
     }
 
     try {
-      const url = `${liveserver}/account`;
+      const url = `${devserver}/account`;
       const response = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const deposit = createAsyncThunk("wallet/deposit", async (formData) => {
   }
 
   try {
-    const url = `${liveserver}/account/deposit`;
+    const url = `${devserver}/account/deposit`;
     const response = await axios.post(url, formData, {
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const withdraw = createAsyncThunk(
     }
 
     try {
-      const url = `${liveserver}/account/withdrawal`;
+      const url = `${devserver}/account/withdrawal`;
       const response = await axios.post(url, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export const swap = createAsyncThunk("wallet/swap", async (formData) => {
   }
 
   try {
-    const url = `${liveserver}/account/swap`;
+    const url = `${devserver}/account/swap`;
     const response = await axios.post(url, formData, {
       headers: {
         "Content-Type": "application/json",
