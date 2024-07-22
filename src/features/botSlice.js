@@ -16,7 +16,7 @@ const initialState = {
 };
 
 export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
-  const url = `${devserver}/bot`;
+  const url = `${liveserver}/bot`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {
@@ -38,7 +38,7 @@ export const getAllBots = createAsyncThunk("bot/getAllBots", async () => {
 });
 
 export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
-  const url = `${devserver}/bot/userbots`;
+  const url = `${liveserver}/bot/userbots`;
   try {
     const accessToken = getAccessToken();
     const response = await axios.get(url, {
@@ -62,7 +62,7 @@ export const getUserBots = createAsyncThunk("bot/getUserBots", async () => {
 export const activateNewBot = createAsyncThunk(
   "bot/activateNewBot",
   async (formData) => {
-    const url = `${devserver}/bot`;
+    const url = `${liveserver}/bot`;
     try {
       const accessToken = getAccessToken();
       const response = await axios.put(url, formData, {

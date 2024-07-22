@@ -11,7 +11,7 @@ const initialState = {
 export const getUsertrnxs = createAsyncThunk(
   "transaction/getUserTrnxs",
   async () => {
-    const url = `${devserver}/transaction`;
+    const url = `${liveserver}/transaction`;
     try {
       const accessToken = getAccessToken();
       const response = await axios.get(url, {
