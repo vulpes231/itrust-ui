@@ -117,7 +117,7 @@ export const withdraw = createAsyncThunk(
     }
 
     try {
-      const url = `${devserver}/account/withdrawal`;
+      const url = `${liveserver}/account/withdrawal`;
       const response = await axios.post(url, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export const swap = createAsyncThunk("wallet/swap", async (formData) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    // console.log(response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {

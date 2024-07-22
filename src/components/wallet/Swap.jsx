@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccessToken } from "../../constants";
+import { swap } from "../../features/walletSlice";
 
 const initialState = {
   amount: "",
@@ -12,7 +13,7 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
 
-  const { swapError, swapSuccess, swapLoading } = useSelector(
+  const { swapError, swapped, swapLoading } = useSelector(
     (state) => state.wallet
   );
 
@@ -23,17 +24,17 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
       [name]: value,
     }));
   };
+
   const createSwap = (e) => {
     e.preventDefault();
     console.log(formData);
+    dispatch(swap(formData));
   };
 
   const calculateCoinAmount = () => {
     const { amount } = formData;
     if (formData.from && amount) {
-      const selectedCoin = coinData.find(
-        (coin) => coin.abbr.toLowerCase() === formData.from
-      );
+      const selectedCoin = coinData.find((coin) => coin.id === formData.from);
       if (selectedCoin) {
         const price = selectedCoin.price;
         if (price) {
@@ -43,6 +44,17 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
     }
     return "";
   };
+
+  useEffect(() => {
+    let timeout;
+    if (swapped) {
+      timeout = 1000;
+      setTimeout(() => {
+        window.location.reload();
+      }, timeout);
+    }
+    return () => clearTimeout(timeout);
+  }, [swapped]);
 
   return (
     <div className="flex gap-5 flex-col p-6">
@@ -76,14 +88,14 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
                 value={formData.from}
                 onChange={handleInputChange}
               >
-                <option value="btc">Choose Wallet</option>
-                <option value="btc">
+                <option value="">Choose Wallet</option>
+                <option value="bitcoin">
                   btc: {parseFloat(userBalance?.btcBalance).toFixed(2)}
                 </option>
-                <option value="eth">
+                <option value="ethereum">
                   eth: {parseFloat(userBalance?.ethBalance).toFixed(2)}
                 </option>
-                <option value="usdt">
+                <option value="tether">
                   usdt: {parseFloat(userBalance?.usdtBalance).toFixed(2)}
                 </option>
               </select>
@@ -113,21 +125,29 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
               <label>Amount:</label>
               <span className="ml-2 capitalize">
                 {calculateCoinAmount()}{" "}
-                {formData.from.includes("btc")
+                {formData.from.includes("bitcoin")
                   ? "BTC"
-                  : formData.from.includes("eth")
+                  : formData.from.includes("ethereum")
                   ? "ETH"
-                  : formData.from.includes("usdt")
+                  : formData.from.includes("tether")
                   ? "USDT"
                   : null}
               </span>
             </div>
           )}
+          {swapError && (
+            <p className="text-xs font-medium text-red-500">{swapError}</p>
+          )}
+          {swapped && (
+            <p className="text-xs font-medium text-green-500">
+              Swap successful.
+            </p>
+          )}
           <button
             onClick={createSwap}
             className="bg-[#805af5] text-white py-2 capitalize w-full mt-4"
           >
-            swap
+            {!swapLoading ? "swap" : "perfoming swap..."}
           </button>
         </div>
       </div>

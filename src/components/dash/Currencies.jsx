@@ -103,7 +103,7 @@ const Currencies = ({ coinData }) => {
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-xs font-medium">
                         <button
-                          className={`${styles.hover.lightBg} ${styles.colors.primaryBgColor} text-white font-bold py-2 px-4 rounded`}
+                          className={`${styles.hover.lightBg} ${styles.colors.primaryBgColor} text-white font-bold py-2 px-4 rounded-3xl`}
                         >
                           Trade
                         </button>

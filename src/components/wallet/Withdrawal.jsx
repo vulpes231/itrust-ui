@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withdraw } from "../../features/walletSlice";
-import { useNavigate } from "react-router-dom";
 
 const initialState = {
   amount: "",
@@ -10,7 +9,6 @@ const initialState = {
 
 const Withdrawal = ({ coinData, type, activeSection, setActiveSection }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
 
   const { withdrawError, withdrawSuccess, withdrawLoading } = useSelector(

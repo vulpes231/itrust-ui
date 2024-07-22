@@ -45,7 +45,7 @@ const Wallet = () => {
   const [activeSection, setActiveSection] = useState("deposit");
   const [currentIndex, setCurrentIndex] = useState(0);
   const { coinData } = useSelector((state) => state.coin);
-  const [activeCoin, setActiveCoin] = useState(false);
+  const [activeCoin, setActiveCoin] = useState("bitcoin");
 
   const handleActiveSection = (section) => {
     setActiveSection(section);
@@ -159,7 +159,7 @@ const Wallet = () => {
                   <span className="flex flex-col items-end">
                     <span className=" uppercase text-sm">{`${(
                       parseFloat(asset.balance) / prices[asset.shortName]
-                    ).toFixed(4)} ${asset.shortName}`}</span>
+                    ).toFixed(2)} ${asset.shortName}`}</span>
                     <span className="font-normal text-xs">
                       ${asset.balance}
                     </span>
