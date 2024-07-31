@@ -2,28 +2,28 @@ import { btc, doge, eth, ltc, tether } from "../assets";
 
 export const navLinks = [
   {
-    id: "product",
-    name: "Product",
-    path: "",
-  },
-  {
-    id: "learn",
-    name: "Learn",
-    path: "",
-  },
-  {
-    id: "about",
-    name: "About",
+    id: "quadx",
+    name: "why QuadX",
     path: "",
   },
   {
     id: "features",
-    name: "Features",
+    name: "features",
     path: "",
   },
   {
-    id: "faq",
-    name: "FAQ",
+    id: "pricing",
+    name: "pricing",
+    path: "",
+  },
+  {
+    id: "learn",
+    name: "learn",
+    path: "",
+  },
+  {
+    id: "company",
+    name: "company",
     path: "",
   },
 ];

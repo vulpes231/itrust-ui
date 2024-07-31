@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-style {
+  font-family: Helvetica, sans-serif;
+}
+
 .text-gradient {
   background: linear-gradient(to right, #4a90e2, #9013fe);
   -webkit-background-clip: text; /* For Safari and Chrome */
@@ -12,6 +16,13 @@
   background-clip: text; /* Standard property */
   -webkit-text-fill-color: transparent; /* For Safari and Chrome */
   -moz-text-fill-color: transparent; /* For Firefox (older versions, though not commonly supported) */
+}
+
+.bg {
+  background-image: url("./bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .container {

@@ -1,7 +1,8 @@
 // Navbar.js
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
+import { IoIosArrowDown } from "react-icons/io";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
 import { full } from "../assets";
@@ -10,20 +11,34 @@ import { styles } from "../constants/styles";
 const Navbar = ({ handleModeToggle, darkMode }) => {
   const { title } = useContext(TitleContext);
 
+  const [activeLink, setActiveLink] = useState(false);
+
   const myLinks = navLinks.map((link) => {
     return (
-      <li key={link.id} className={`hover:text-[#2563EB]`}>
-        <Link>{link.name}</Link>
+      <li
+        key={link.id}
+        className={`capitalize flex gap-1 items-center ${
+          styles.hover.lightText
+        } ${
+          activeLink === link.id
+            ? `${styles.colors.primaryTextColor}`
+            : `text-white`
+        }`}
+        onClick={() => setActiveLink(link.id)}
+      >
+        <Link>{link.name}</Link>{" "}
+        <span>
+          <IoIosArrowDown />
+        </span>
       </li>
     );
   });
 
   return (
     <header
-      className={`isolate fixed top-0 start-0 w-full py-4 xl:py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 z-[1020] px-3`}
+      className={`fixed top-0 start-0 w-full py-4 lg:py-3 border-b border-slate-200 dark:border-slate-800 bg-[#fff] dark:bg-[#000] z-[1020] px-6`}
     >
-      <div className="container px-3"></div>
-      <nav className={`flex items-center w-100 justify-between`}>
+      <nav className={`flex items-center w-100 justify-between `}>
         <div className="flex items-center gap-x-2">
           <div className="xl:hidden -ms-1.">
             <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200">
@@ -35,11 +50,11 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
           </figure>
         </div>
 
-        <div className="flex flex-col py-4 xl:py-0 w-64 xl:w-auto fixed xl:transition-none xl:static start-0 top-0 border-e dark:border-slate-800 xl:border-e-0 bg-white dark:bg-slate-950 z-[1020] h-screen xl:h-auto flex-shrink-0 xl:translate-x-0 transition-all -translate-x-full">
-          <ul className="flex flex-col xl:flex-row xl:items-center gap-x-6 px-4 menu-base">
-            {myLinks}
-          </ul>
-        </div>
+        <ul
+          className={`flex flex-col xl:flex-row xl:items-center gap-8 py-2.5 px-6  dark:bg-[#fff] dark:bg-opacity-15 bg-[#333] rounded-3xl text-white font-medium text-sm font-style`}
+        >
+          {myLinks}
+        </ul>
 
         <div className="flex items-center gap-x-3 lg:gap-x-5">
           <span onClick={handleModeToggle} className="inline-flex relative">

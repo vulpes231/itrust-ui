@@ -39,7 +39,7 @@ const App = () => {
 
   return (
     <TitleProvider>
-      <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full pt-16 undefined">
+      <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full pt-16 ">
         {accessToken || token ? (
           <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
         ) : (
@@ -55,8 +55,8 @@ const App = () => {
           <Route path="/tradingbot" element={<Tradingbot />} />
           <Route path="/history" element={<Transactions />} />
         </Routes>
-        <Footer />
       </div>
+      <Footer />
     </TitleProvider>
   );
 };
