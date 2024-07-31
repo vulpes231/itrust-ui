@@ -67,7 +67,7 @@ const Account = ({ username }) => {
                   trading balance
                 </div>
                 <div className="text-base font-bold text-slate-100 mt-1">
-                  ${userAccounts?.account?.tradingBalance}
+                  ${userAccounts?.account?.tradingBalance.toFixed(2)}
                 </div>
               </div>
             </div>

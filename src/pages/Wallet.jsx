@@ -189,7 +189,7 @@ const Wallet = () => {
                     safe deposit margin
                   </h4>
                   <p className=" text-sm font-bold">
-                    ${userAccounts?.account?.tradingBalance}
+                    ${userAccounts?.account?.tradingBalance.toFixed(2)}
                   </p>
                 </span>
               </div>
