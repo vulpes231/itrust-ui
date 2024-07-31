@@ -8,6 +8,18 @@ import Button from "../components/Button";
 import Label from "../components/Label";
 import { useDispatch, useSelector } from "react-redux";
 import { createAccount } from "../features/signupSlice";
+import Modal from "../components/Modal";
+
+import { MdCheck } from "react-icons/md";
+
+const nationalities = [
+  { code: "us", name: "United States" },
+  { code: "ca", name: "Canada" },
+  { code: "gb", name: "United Kingdom" },
+  { code: "fr", name: "France" },
+  { code: "it", name: "Italy" },
+  { code: "nl", name: "Netherlands" },
+];
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -15,6 +27,7 @@ const Signup = () => {
   const { changeTitle } = useContext(TitleContext);
 
   const [page, setPage] = useState(1);
+  const [appError, setAppError] = useState(false);
   const [countries, setCountries] = useState([]);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -34,7 +47,7 @@ const Signup = () => {
     nationality: "",
     currency: "usd",
     investmentExperience: "",
-    employmentStatus: "",
+    occupation: "",
     brokerageFamily: "",
     referralCode: "",
     termsAccepted: false,
@@ -74,39 +87,54 @@ const Signup = () => {
     }));
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault();
     setPage((prevPage) => prevPage + 1);
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = (e) => {
+    e.preventDefault();
     setPage((prevPage) => prevPage - 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     dispatch(createAccount(formData));
   };
 
   useEffect(() => {
     let timeout;
     if (success) {
+      timeout = 3000;
       setTimeout(() => {
-        timeout = 5000;
         navigate("/signin");
       }, timeout);
     }
     () => clearTimeout(timeout);
-  }, [dispatch]);
+  }, [dispatch, success]);
+
+  useEffect(() => {
+    if (error) {
+      setAppError(error);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    let timeout;
+    if (appError) {
+      timeout = 4000;
+      setTimeout(() => {
+        setAppError(false);
+      }, timeout);
+    }
+    () => clearTimeout(timeout);
+  }, [appError]);
 
   return (
     <Section>
       <div className="container px-3">
         <div className="flex justify-center -mx-3">
-          <form
-            onSubmit={handleSubmit}
-            className="w-full xs:w-4/5 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 px-3"
-          >
+          <form className="w-full xs:w-4/5 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 px-3">
             <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 w-full p-6 pt-5">
               <div className="mb-2">
                 <h3 className="text-xl font-bold text-slate-700 dark:text-white mb-1">
@@ -284,7 +312,13 @@ const Signup = () => {
                       onChange={handleChange}
                     >
                       <option value="">select nationality</option>
-                      {/* Add nationality options */}
+                      {nationalities.map((na, index) => {
+                        return (
+                          <option key={index} value={na.name}>
+                            {na.name}
+                          </option>
+                        );
+                      })}
                     </select>
                   </Formspan>
                   <Formspan>
@@ -327,8 +361,8 @@ const Signup = () => {
 
                     <select
                       className="font-thin text-xs border p-2 outline-[#2563EB]"
-                      name="employmentStatus"
-                      value={formData.employmentStatus}
+                      name="occupation"
+                      value={formData.occupation}
                       onChange={handleChange}
                     >
                       <option value="unemployed">unemployed</option>
@@ -422,6 +456,20 @@ const Signup = () => {
               </div>
             </div>
           </form>
+          {success && (
+            <Modal
+              message={"Account created successfully."}
+              icon={<MdCheck />}
+              customClass={"text-green-500"}
+            />
+          )}
+          {appError && (
+            <Modal
+              message={appError}
+              icon={<MdCheck />}
+              customClass={"text-red-500"}
+            />
+          )}
         </div>
       </div>
     </Section>

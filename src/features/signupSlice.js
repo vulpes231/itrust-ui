@@ -18,7 +18,7 @@ export const createAccount = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -47,7 +47,7 @@ const createAccountSlice = createSlice({
       .addCase(createAccount.pending, (state) => {
         state.loading = true;
       })
-      .addCase(createAccount.fulfilled, (state, action) => {
+      .addCase(createAccount.fulfilled, (state) => {
         state.loading = false;
         state.error = false;
         state.success = true;
