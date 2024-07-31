@@ -82,8 +82,39 @@ const Hero = () => {
                 the right tools for <br /> every kind of market.
               </h5>
             </div>
-            <div className="lg:mx-20">
+            <div className="lg:mx-32 flex flex-col gap-6">
               <Roadmap />
+              <h5 className="capitalize text-xl lg:text-4xl font-semibold px-6 tracking-wide leading-3">
+                Level up your trading game with advanced ai <br /> crypto
+                trading tools that work on the biggest <br /> exchanges
+              </h5>
+
+              <p className="font-thin text-xs text-slate-500  px-6">
+                Winning trades is the goal, and QuadX is your all-in-one tool to
+                achieve it. Integrating with most any exchange, QuadX provides
+                you the <br /> functions you wish you had and doesn't make you
+                move your assets.
+              </p>
+
+              <button
+                className={`${styles.colors.primaryBgColor} text-white rounded-3xl mx-auto py-2.5 px-6 uppercase ${styles.hover.lightBg} text-sm shadow-xl`}
+              >
+                start free trial
+              </button>
+
+              <div className="p-6 rounded-xl bg-[#564DCA] bg-opacity-15 flex flex-col lg:justify-between lg:items-center lg:flex-row shadow-md">
+                <div>
+                  <h4 className="font-medium text-lg">
+                    Start Trading on QuadX Today
+                  </h4>
+                  <p className="font-thin text-xs text-slate-500">
+                    Get trial with full-access to all QuadX trading tools.
+                  </p>
+                </div>
+                <button className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl">
+                  start now
+                </button>
+              </div>
             </div>
           </div>
         </div>

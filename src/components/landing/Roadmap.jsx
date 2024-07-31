@@ -35,7 +35,9 @@ const Slide = ({ img, title, info }) => {
         <img src={img} alt="" className="w-[42px]" />
       </figure>
       <span className="font-normal  text-sm capitalize">{title}</span>
-      <span className="whitespace-wrap text-slate-500">{info}</span>
+      <span className="whitespace-wrap text-slate-500 font-thin text-xs">
+        {info}
+      </span>
     </div>
   );
 };
@@ -51,7 +53,7 @@ const Roadmap = () => {
       />
     );
   });
-  return <div className="grid lg:grid-cols-3 w-full gap-6">{mySlide}</div>;
+  return <div className="grid lg:grid-cols-3 w-full gap-2">{mySlide}</div>;
 };
 
 export default Roadmap;
