@@ -5,7 +5,7 @@ import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
-import { full } from "../assets";
+import { full, whitelogo } from "../assets";
 import { styles } from "../constants/styles";
 
 const Navbar = ({ handleModeToggle, darkMode }) => {
@@ -45,8 +45,12 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
               <MdMenu />
             </button>
           </div>
-          <figure className="dark:bg-slate-200 py-1 px-1.5 rounded-xl">
-            <img src={full} alt="logo-image" width={80} />
+          <figure className=" py-1 px-1.5 rounded-xl">
+            {darkMode ? (
+              <img src={whitelogo} alt="logo-image" width={80} />
+            ) : (
+              <img src={full} alt="logo-image" width={80} />
+            )}
           </figure>
         </div>
 

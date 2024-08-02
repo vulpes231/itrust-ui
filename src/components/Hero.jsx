@@ -140,9 +140,9 @@ const Hero = () => {
           {/* blog */}
           {/* <Blog /> */}
           {/* manage */}
-          {/* <Manage /> */}
+          <Manage />
           {/* Footer */}
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </div>
     </div>

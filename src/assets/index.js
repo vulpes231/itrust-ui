@@ -48,8 +48,10 @@ import five from "./five.png";
 import last from "./last.png";
 import pay from "./pay.png";
 import whitelogo from "./whitelogo.png";
+import bott from "./bott.png";
 
 export {
+  bott,
   pay,
   whitelogo,
   one,
