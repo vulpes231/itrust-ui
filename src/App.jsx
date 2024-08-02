@@ -39,7 +39,7 @@ const App = () => {
 
   return (
     <TitleProvider>
-      <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full pt-16 ">
+      <div className="flex flex-col min-h-screen max-w-full pt-16 ">
         {accessToken || token ? (
           <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
         ) : (
@@ -56,7 +56,7 @@ const App = () => {
           <Route path="/history" element={<Transactions />} />
         </Routes>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </TitleProvider>
   );
 };

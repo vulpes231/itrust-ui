@@ -51,7 +51,7 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
         </div>
 
         <ul
-          className={`flex flex-col xl:flex-row xl:items-center gap-8 py-2.5 px-6  dark:bg-[#fff] dark:bg-opacity-15 bg-[#333] rounded-3xl text-white font-medium text-sm font-style`}
+          className={`hidden lg:flex lg:items-center gap-8 py-2.5 px-6  dark:bg-[#fff] dark:bg-opacity-15 bg-[#333] rounded-3xl text-white font-medium text-sm font-style`}
         >
           {myLinks}
         </ul>

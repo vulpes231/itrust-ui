@@ -1,5 +1,17 @@
 import logo from "./logo.png";
 import hero from "./landingaset/hero.png";
+import bybit from "./coins/bybit.png";
+import binance from "./coins/binance.png";
+import ok from "./coins/ok.png";
+import bitfinex from "./coins/bitfinex.png";
+import coinb from "./coins/coinb.png";
+import bitget from "./coins/bitget.png";
+import stamp from "./coins/stamp.png";
+import codeio from "./coins/codeio.png";
+import kraken from "./coins/kraken.png";
+import gemini from "./coins/gemini.png";
+import htx from "./coins/htx.png";
+import kucoin from "./coins/kucoin.png";
 import hand from "./landingaset/hand.png";
 import sec from "./landingaset/sec.png";
 import trade from "./landingaset/trade.png";
@@ -21,6 +33,7 @@ import full from "./full.png";
 import swan from "./swan.png";
 import swanny from "./swanny.png";
 import mant from "./mant.png";
+import cicon from "./cicon.png";
 
 export {
   logo,
@@ -46,4 +59,17 @@ export {
   sec,
   trade,
   data,
+  bybit,
+  binance,
+  ok,
+  bitfinex,
+  coinb,
+  bitget,
+  stamp,
+  codeio,
+  kraken,
+  gemini,
+  htx,
+  kucoin,
+  cicon,
 };

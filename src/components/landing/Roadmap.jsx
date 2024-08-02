@@ -30,7 +30,7 @@ const sliderData = [
 
 const Slide = ({ img, title, info }) => {
   return (
-    <div className="flex flex-col gap-4 text-xs p-6 w-full rounded-x ">
+    <div className="flex flex-col gap-2 text-xs p-6 w-full rounded-x ">
       <figure className="grid place-content-center">
         <img src={img} alt="" className="w-[42px]" />
       </figure>
