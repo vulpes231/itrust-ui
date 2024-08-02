@@ -34,8 +34,36 @@ import swan from "./swan.png";
 import swanny from "./swanny.png";
 import mant from "./mant.png";
 import cicon from "./cicon.png";
+import cp from "./cp.png";
+import am from "./am.png";
+import pos from "./pos.png";
+import pros from "./pro.png";
+import strat from "./strat.png";
+import tops from "./tops.png";
+import one from "./one.png";
+import two from "./two.png";
+import three from "./three.png";
+import four from "./four.png";
+import five from "./five.png";
+import last from "./last.png";
+import pay from "./pay.png";
+import whitelogo from "./whitelogo.png";
 
 export {
+  pay,
+  whitelogo,
+  one,
+  last,
+  two,
+  three,
+  four,
+  five,
+  cp,
+  am,
+  pos,
+  pros,
+  strat,
+  tops,
   logo,
   hero,
   profile,

@@ -8,6 +8,10 @@ import Roadmap from "./landing/Roadmap";
 import Connect from "./landing/Connect";
 import Chooseq from "./landing/Chooseq";
 import Features from "./landing/Features";
+import Faq from "./landing/Faq";
+import Blog from "./landing/Blog";
+import Manage from "./landing/Manage";
+import Footer from "./Footer";
 
 const Hero = () => {
   return (
@@ -131,6 +135,14 @@ const Hero = () => {
           <Chooseq />
           {/* features */}
           <Features />
+          {/* faqs */}
+          <Faq />
+          {/* blog */}
+          {/* <Blog /> */}
+          {/* manage */}
+          {/* <Manage /> */}
+          {/* Footer */}
+          {/* <Footer /> */}
         </div>
       </div>
     </div>
