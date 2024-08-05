@@ -50,9 +50,11 @@ import pay from "./pay.png";
 import whitelogo from "./whitelogo.png";
 import bott from "./bott.png";
 import ftpg from "./ftpg.png";
+import tfeat from "./tfeat.png";
 
 export {
   bott,
+  tfeat,
   ftpg,
   pay,
   whitelogo,

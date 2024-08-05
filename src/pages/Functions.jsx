@@ -1,10 +1,15 @@
 import React from "react";
 import { Footer } from "../components";
 import { ftpg } from "../assets";
-import { Link } from "react-router-dom";
+
 import Getstartedbtn from "../components/Getstartedbtn";
 import Manual from "../components/functionalities/Manual";
 import Automated from "../components/functionalities/Automated";
+import Control from "../components/functionalities/Control";
+import Tradingfeat from "../components/functionalities/Tradingfeat";
+import Strategy from "../components/functionalities/Strategy";
+import Bottypes from "../components/functionalities/Bottypes";
+import Access from "../components/functionalities/Access";
 
 // ftpg
 const Functions = () => {
@@ -32,6 +37,17 @@ const Functions = () => {
       <Manual />
       {/* auto */}
       <Automated />
+      {/* port */}
+      <Control />
+      {/* feat */}
+      <Tradingfeat />
+      {/* start */}
+      <Strategy />
+      {/* Bot */}
+      <Bottypes />
+      {/* access */}
+      <Access />
+      {/* footer */}
       <Footer />
     </section>
   );

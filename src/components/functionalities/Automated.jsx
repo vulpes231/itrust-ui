@@ -46,7 +46,7 @@ other bot settings using QuadX software`,
 const Automated = () => {
   return (
     <div className=" dark:bg-[#000] dark:text-white text-xs font-medium">
-      <div className="flex flex-col gap-8 lg:mx-32 py-10">
+      <div className="flex flex-col gap-8 lg:mx-32 py-28">
         <div className="flex flex-col gap-2">
           <h6
             className={`${styles.colors.primaryTextColor} uppercase underline`}
