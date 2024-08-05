@@ -1,17 +1,20 @@
 // Navbar.js
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
 import { full, whitelogo } from "../assets";
 import { styles } from "../constants/styles";
+import Why from "./dropdowns/Why";
+import Learn from "./dropdowns/Learn";
 
 const Navbar = ({ handleModeToggle, darkMode }) => {
   const { title } = useContext(TitleContext);
 
   const [activeLink, setActiveLink] = useState(false);
+  const navigate = useNavigate();
 
   const myLinks = navLinks.map((link) => {
     return (
@@ -24,7 +27,12 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
             ? `${styles.colors.primaryTextColor}`
             : `text-white`
         }`}
-        onClick={() => setActiveLink(link.id)}
+        onClick={() => {
+          setActiveLink(link.id);
+          if (link.path !== undefined) {
+            navigate(link.path);
+          }
+        }}
       >
         <Link>{link.name}</Link>{" "}
         <span>
@@ -40,11 +48,10 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
     >
       <nav className={`flex items-center w-100 justify-between `}>
         <div className="flex items-center gap-x-2">
-          <div className="xl:hidden -ms-1.">
-            <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200">
-              <MdMenu />
-            </button>
-          </div>
+          <button className="w-8 h-8 md:hidden">
+            <MdMenu />
+          </button>
+
           <figure className=" py-1 px-1.5 rounded-xl">
             {darkMode ? (
               <img src={whitelogo} alt="logo-image" width={80} />
@@ -85,6 +92,11 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
             )}
           </span>
         </div>
+        {activeLink === "quadx" ? (
+          <Why activeLink={activeLink} />
+        ) : activeLink === "learn" ? (
+          <Learn activeLink={activeLink} />
+        ) : null}
       </nav>
     </header>
   );

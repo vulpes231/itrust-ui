@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Content, Footer, Authnav } from "./components";
 import { Route, Routes } from "react-router-dom";
-import { Dashboard, Signin, Signup } from "./pages";
+import {
+  Company,
+  Dashboard,
+  Functions,
+  Pricing,
+  Signin,
+  Signup,
+} from "./pages";
 import { TitleProvider } from "./contexts/TitleContext";
 import { useSelector } from "react-redux";
 import Transactions from "./pages/Transactions";
@@ -47,6 +54,9 @@ const App = () => {
         )}
         <Routes>
           <Route path="/" element={<Content />} />
+          <Route path="/features" element={<Functions />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/company" element={<Company />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />

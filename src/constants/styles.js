@@ -23,6 +23,8 @@ export const styles = {
     darkText: `hover:text-[#805af5]`,
     lightBg: `hover:bg-[#cd99ff]`,
     darkBg: `hover:bg-[#805af5]`,
+    lightBorder: `hover:border-2 hover:border-[#cd99ff]`,
+    darkBorder: ` hover:border-2 hover:border-[#805af5]`,
   },
   pad: {
     padSmall: "p-2",
