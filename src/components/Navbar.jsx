@@ -52,13 +52,13 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
             <MdMenu />
           </button>
 
-          <figure className=" py-1 px-1.5 rounded-xl">
+          <Link to={"/"} className=" py-1 px-1.5 rounded-xl">
             {darkMode ? (
               <img src={whitelogo} alt="logo-image" width={80} />
             ) : (
               <img src={full} alt="logo-image" width={80} />
             )}
-          </figure>
+          </Link>
         </div>
 
         <ul
