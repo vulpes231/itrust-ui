@@ -2,18 +2,28 @@ import React from "react";
 import { GiLightThornyTriskelion } from "react-icons/gi";
 import { GrLineChart } from "react-icons/gr";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
+import Lineicon from "../general/Lineicon";
 
-const Headericon = ({ icon, title, info }) => {
-  return (
-    <div className="flex items-center gap-3 capitalize">
-      <span className="text-2xl">{icon}</span>
-      <span className="flex flex-col gap-2">
-        <h5>{title}</h5>
-        <small className="text-slate-400">{info}</small>
-      </span>
-    </div>
-  );
-};
+const iconData = [
+  {
+    id: 1,
+    title: "beginner",
+    icon: <GiLightThornyTriskelion />,
+    info: "mitigate risk",
+  },
+  {
+    id: 2,
+    title: "pros",
+    icon: <GrLineChart />,
+    info: "combat volatility",
+  },
+  {
+    id: 3,
+    title: "easy",
+    icon: <SiAmazonsimpleemailservice />,
+    info: "in the cloud",
+  },
+];
 
 const texts = [
   {
@@ -37,23 +47,7 @@ const Companyinfo = () => {
     <div className=" dark:bg-slate-900 bg-slate-200 dark:text-white text-xs font-medium px-5">
       <div className="flex flex-col gap-10 py-20 lg:mx-32 ">
         <div className="flex flex-col gap-2 w-full">
-          <div className="hidden lg:flex items-center justify-center w-full gap-48">
-            <Headericon
-              icon={<GiLightThornyTriskelion />}
-              title={"beginner"}
-              info={"mitigate risk"}
-            />
-            <Headericon
-              icon={<GrLineChart />}
-              title={"pros"}
-              info={"combat volatility"}
-            />
-            <Headericon
-              icon={<SiAmazonsimpleemailservice />}
-              title={"easy"}
-              info={"in the cloud"}
-            />
-          </div>
+          <Lineicon iconData={iconData} />
           <hr className="border-[#333] border w-[70%] mx-auto" />
         </div>
         <div className="flex flex-col gap-6 lg:flex-row lg:px-10">

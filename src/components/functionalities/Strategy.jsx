@@ -12,7 +12,7 @@ const feats = [
 
 const Strategy = () => {
   return (
-    <div className=" dark:bg-slate-900 bg-slate-200 dark:text-white text-xs font-medium">
+    <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium">
       <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:mx-32 py-28">
         <figure className="w-full">
           <img src={tfeat} alt="" />

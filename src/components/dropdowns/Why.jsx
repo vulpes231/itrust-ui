@@ -5,22 +5,22 @@ const subLinks = [
   {
     id: 1,
     title: "automated trading",
-    path: "",
+    path: "/autotrade",
   },
   {
     id: 2,
     title: "dca bots",
-    path: "",
+    path: "/dca",
   },
   {
     id: 3,
     title: "copy bots",
-    path: "",
+    path: "/copy",
   },
   {
     id: 4,
     title: "ai trading",
-    path: "",
+    path: "/ai",
   },
   {
     id: 5,
@@ -40,6 +40,7 @@ const subLinks = [
 ];
 
 const Why = ({ activeLink }) => {
+  console.log(activeLink);
   return (
     <ul
       className={`flex flex-col p-6 gap-4 bg-white dark:bg-slate-900 dark:text-white absolute top-[60px] ${

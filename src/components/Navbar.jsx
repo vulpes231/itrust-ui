@@ -31,6 +31,7 @@ const Navbar = ({ handleModeToggle, darkMode }) => {
           setActiveLink(link.id);
           if (link.path !== undefined) {
             navigate(link.path);
+            setActiveLink(link.id);
           }
         }}
       >

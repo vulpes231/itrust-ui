@@ -51,7 +51,7 @@ const Bottypes = () => {
     );
   });
   return (
-    <div className=" dark:bg-[#000] dark:text-white text-xs font-medium">
+    <div className=" bg-[#000] text-white text-xs font-medium">
       <div className="overflow-auto flex flex-col gap-6 lg:mx-32 py-28">
         <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
           other features

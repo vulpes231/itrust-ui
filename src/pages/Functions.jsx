@@ -16,7 +16,7 @@ const Functions = () => {
   return (
     <section className="">
       {/* get started */}
-      <div className=" dark:bg-[#000] dark:text-white">
+      <div className=" bg-[#000] text-white">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:mx-32 py-10">
           <figure className="w-full flex items-center justify-center">
             <img src={ftpg} alt="" className="lg:w-[250px]" />

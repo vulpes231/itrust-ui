@@ -13,7 +13,7 @@ const feats = [
 
 const Tradingfeat = () => {
   return (
-    <div className=" dark:bg-[#000] dark:text-white text-xs font-medium">
+    <div className=" bg-[#000] text-white text-xs font-medium">
       <div className="flex flex-col gap-8 lg:mx-32 py-28">
         <div className="flex flex-col gap-2">
           <h3 className="text-xl lg:text-3xl font-bold capitalize">

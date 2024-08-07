@@ -1,8 +1,19 @@
+import Aitrading from "./Aitrading";
 import Company from "./Company";
+import Copybot from "./Copybot";
 import Dashboard from "./Dashboard";
 import Functions from "./Functions";
 import Pricing from "./Pricing";
 import Signin from "./Signin";
 import Signup from "./Signup";
 
-export { Signin, Signup, Dashboard, Functions, Company, Pricing };
+export {
+  Signin,
+  Signup,
+  Dashboard,
+  Functions,
+  Company,
+  Pricing,
+  Copybot,
+  Aitrading,
+};

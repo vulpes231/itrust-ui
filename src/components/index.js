@@ -17,8 +17,26 @@ import Piechart from "./portfolio/Piechart";
 import Userchart from "./portfolio/Userchart";
 import Analytics from "./trading/Analytics";
 import History from "./history/History";
+import DCA from "./dcabots/DCA";
+import Automated from "./functionalities/Automated";
+import Autotrade from "./automated/Autotrade";
+import Containerlight from "./general/Containerlight";
+import Containerdark from "./general/Containerdark";
+import Imagecontainer from "./general/Imagecontainer";
+import Title from "./general/Title";
+import Lineicon from "./general/Lineicon";
+import Innerflexrow from "./general/Innerflexrow";
 
 export {
+  Innerflexrow,
+  Containerlight,
+  Lineicon,
+  Containerdark,
+  Imagecontainer,
+  Title,
+  Automated,
+  Autotrade,
+  DCA,
   Navbar,
   Content,
   Footer,

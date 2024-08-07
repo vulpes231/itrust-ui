@@ -52,8 +52,28 @@ import bott from "./bott.png";
 import ftpg from "./ftpg.png";
 import tfeat from "./tfeat.png";
 import aside from "./aside.png";
+import dcasub from "./dcasub.png";
+import autosub from "./autosub.png";
+import grid from "./grid.png";
+import grid2 from "./grid2.png";
+import grid3 from "./grid3.png";
+import grid4 from "./grid4.png";
+import ava from "./ava.png";
+import ideal from "./ideal.png";
+import watch from "./watch.png";
+import phone from "./phone.png";
 
 export {
+  grid,
+  ava,
+  ideal,
+  watch,
+  phone,
+  grid4,
+  grid2,
+  grid3,
+  dcasub,
+  autosub,
   bott,
   aside,
   tfeat,

@@ -27,7 +27,7 @@ const ports = [
 
 const Control = () => {
   return (
-    <div className=" dark:bg-slate-900 bg-slate-200 dark:text-white text-xs font-medium">
+    <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium">
       <div className="flex flex-col gap-8 lg:mx-32 py-28">
         <div className="flex flex-col gap-2">
           <h6

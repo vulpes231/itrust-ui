@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Content, Footer, Authnav } from "./components";
+import { Navbar, Content, Footer, Authnav, DCA, Autotrade } from "./components";
 import { Route, Routes } from "react-router-dom";
 import {
+  Aitrading,
   Company,
+  Copybot,
   Dashboard,
   Functions,
   Pricing,
@@ -57,7 +59,11 @@ const App = () => {
           <Route path="/features" element={<Functions />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/company" element={<Company />} />
-          <Route path="/signin" element={<Signin />} />
+          <Route path="/dca" element={<DCA />} />
+          <Route path="/autotrade" element={<Autotrade />} />
+          <Route path="/copy" element={<Autotrade />} />
+          <Route path="/ai" element={<Copybot />} />
+          <Route path="/signin" element={<Aitrading />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />
           <Route path="/portfolio" element={<Porfolio />} />
