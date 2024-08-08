@@ -10,10 +10,9 @@ import { styles } from "../constants/styles";
 import Why from "./dropdowns/Why";
 import Learn from "./dropdowns/Learn";
 
-const Navbar = ({ handleModeToggle, darkMode }) => {
+const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
   const { title } = useContext(TitleContext);
 
-  const [activeLink, setActiveLink] = useState(false);
   const navigate = useNavigate();
 
   const myLinks = navLinks.map((link) => {

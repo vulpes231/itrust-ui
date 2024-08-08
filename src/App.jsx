@@ -22,6 +22,11 @@ import Protools from "./pages/Protools";
 // useSelector
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [activeLink, setActiveLink] = useState(false);
+
+  const removeActiveLink = () => {
+    setActiveLink(false);
+  };
 
   const [token, setToken] = useState(false);
   const { accessToken } = useSelector((state) => state.login);
@@ -54,19 +59,42 @@ const App = () => {
         {accessToken || token ? (
           <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
         ) : (
-          <Navbar darkMode={darkMode} handleModeToggle={handleModeToggle} />
+          <Navbar
+            darkMode={darkMode}
+            handleModeToggle={handleModeToggle}
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+          />
         )}
         <Routes>
           <Route path="/" element={<Content />} />
           <Route path="/features" element={<Functions />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/company" element={<Company />} />
-          <Route path="/dca" element={<DCA />} />
-          <Route path="/autotrade" element={<Autotrade />} />
-          <Route path="/copy" element={<Copybot />} />
-          <Route path="/ai" element={<Aitrading />} />
-          <Route path="/protool" element={<Protools />} />
-          <Route path="/getfunded" element={<Getfunded />} />
+          <Route
+            path="/dca"
+            element={<DCA setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/autotrade"
+            element={<Autotrade setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/copy"
+            element={<Copybot setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/ai"
+            element={<Aitrading setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/protool"
+            element={<Protools setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/getfunded"
+            element={<Getfunded setActiveLink={removeActiveLink} />}
+          />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />

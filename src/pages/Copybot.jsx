@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Containerdark from "../components/general/Containerdark";
 import { styles } from "../constants/styles";
 import Title from "../components/general/Title";
@@ -152,7 +152,10 @@ const Griddisplay = ({ img, title }) => {
   );
 };
 
-const Copybot = () => {
+const Copybot = ({ setActiveLink }) => {
+  useEffect(() => {
+    setActiveLink();
+  }, []);
   return (
     <section>
       <Containerdark>

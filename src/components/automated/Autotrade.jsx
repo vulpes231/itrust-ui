@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { aside, autosub, ava, ideal } from "../../assets";
 import Containerdark from "../general/Containerdark";
 import Imagecontainer from "../general/Imagecontainer";
@@ -35,7 +35,10 @@ const iconData = [
   },
 ];
 
-const Autotrade = () => {
+const Autotrade = ({ setActiveLink }) => {
+  useEffect(() => {
+    setActiveLink();
+  }, []);
   return (
     <section>
       <Containerdark>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Containerdark from "../components/general/Containerdark";
 import Containerlight from "../components/general/Containerlight";
 import Imagecontainer from "../components/general/Imagecontainer";
@@ -52,7 +52,10 @@ const iconData = [
   },
 ];
 
-const Protools = () => {
+const Protools = ({ setActiveLink }) => {
+  useEffect(() => {
+    setActiveLink();
+  }, []);
   return (
     <section>
       <Containerdark>

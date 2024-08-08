@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { aside, dcasub, grid, grid2, grid3, grid4 } from "../../assets";
 import Imagecontainer from "../general/Imagecontainer";
 import Containerdark from "../general/Containerdark";
@@ -44,7 +44,10 @@ const Griddisplay = ({ img, title }) => {
   );
 };
 
-const DCA = () => {
+const DCA = ({ setActiveLink }) => {
+  useEffect(() => {
+    setActiveLink();
+  }, []);
   return (
     <section className="bg-slate-50 dark:bg-slate-800">
       <Containerdark>
