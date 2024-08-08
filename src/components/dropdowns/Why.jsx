@@ -25,7 +25,7 @@ const subLinks = [
   {
     id: 5,
     title: "pro tools",
-    path: "",
+    path: "/protool",
   },
   {
     id: 6,
@@ -35,7 +35,7 @@ const subLinks = [
   {
     id: 7,
     title: "get funded",
-    path: "",
+    path: "/getfunded",
   },
 ];
 

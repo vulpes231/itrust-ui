@@ -3,7 +3,7 @@ import { aside } from "../../assets";
 
 const Aboutcompany = () => {
   return (
-    <div className=" dark:bg-[#000] dark:text-white text-xs font-medium px-5">
+    <div className=" bg-[#000] text-white text-xs font-medium px-5">
       <div className="flex flex-col lg:flex-row gap-6 py-10 lg:mx-32 ">
         <div className=" pl-16 w-full flex flex-col gap-6 justify-center place-items-center">
           <h3 className=" text-xl lg:text-3xl font-bold capitalize  w-full">

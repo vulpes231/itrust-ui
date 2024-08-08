@@ -18,7 +18,7 @@ We debate vigorously and change our minds when confronted with the right evidenc
 
 const Aboutpart = () => {
   return (
-    <div className=" dark:bg-[#000] dark:text-white text-xs font-medium px-5">
+    <div className=" bg-[#000] text-white text-xs font-medium px-5">
       <div className="flex flex-col gap-10 py-20 lg:mx-32 ">
         <div className="flex flex-col gap-6 lg:flex-row lg:px-10">
           {texts.map((txt) => {

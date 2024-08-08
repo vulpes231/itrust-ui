@@ -26,7 +26,7 @@ const visions = [
 
 const Vision = () => {
   return (
-    <div className=" dark:bg-slate-900 bg-slate-200 dark:text-white text-xs font-medium px-5">
+    <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium px-5">
       <div className="flex flex-col  gap-20 py-10 lg:mx-32 ">
         <div className="flex flex-col gap-3 items-center justify-center">
           <h3 className="text-xl lg:text-3xl font-bold capitalize">

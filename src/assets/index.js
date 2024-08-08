@@ -62,9 +62,41 @@ import ava from "./ava.png";
 import ideal from "./ideal.png";
 import watch from "./watch.png";
 import phone from "./phone.png";
+import clip from "./clip.png";
+import clipbg from "./clipbg.png";
+import clipcon from "./clipcon.png";
+import cliphone from "./cliphone.png";
+import ai1 from "./ai1.png";
+import ai2 from "./ai2.png";
+import ai3 from "./ai3.png";
+import ai4 from "./ai4.png";
+import pro1 from "./pro1.png";
+import pro2 from "./pro2.png";
+import pro3 from "./pro3.png";
+import pro4 from "./pro4.png";
+import fund1 from "./fund1.png";
+import fund2 from "./fund2.png";
+import fund3 from "./fund3.png";
+import fund4 from "./fund4.png";
 
 export {
   grid,
+  fund1,
+  fund2,
+  fund3,
+  fund4,
+  pro1,
+  pro2,
+  pro3,
+  pro4,
+  ai1,
+  ai2,
+  ai3,
+  ai4,
+  clip,
+  clipbg,
+  clipcon,
+  cliphone,
   ava,
   ideal,
   watch,

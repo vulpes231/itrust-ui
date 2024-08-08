@@ -17,6 +17,8 @@ import Transactions from "./pages/Transactions";
 import Tradingbot from "./pages/Tradingbot";
 import Wallet from "./pages/Wallet";
 import Porfolio from "./pages/Porfolio";
+import Getfunded from "./pages/Getfunded";
+import Protools from "./pages/Protools";
 // useSelector
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -61,9 +63,11 @@ const App = () => {
           <Route path="/company" element={<Company />} />
           <Route path="/dca" element={<DCA />} />
           <Route path="/autotrade" element={<Autotrade />} />
-          <Route path="/copy" element={<Autotrade />} />
-          <Route path="/ai" element={<Copybot />} />
-          <Route path="/signin" element={<Aitrading />} />
+          <Route path="/copy" element={<Copybot />} />
+          <Route path="/ai" element={<Aitrading />} />
+          <Route path="/protool" element={<Protools />} />
+          <Route path="/getfunded" element={<Getfunded />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />
           <Route path="/portfolio" element={<Porfolio />} />

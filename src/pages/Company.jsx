@@ -7,7 +7,7 @@ import Vision from "../components/company/Vision";
 // Footer
 const Company = () => {
   return (
-    <section className="bg-slate-50 dark:bg-slate-800">
+    <section>
       <Aboutcompany />
       <Companyinfo />
       <Aboutpart />

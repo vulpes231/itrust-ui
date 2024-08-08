@@ -44,7 +44,7 @@ const texts = [
 
 const Companyinfo = () => {
   return (
-    <div className=" dark:bg-slate-900 bg-slate-200 dark:text-white text-xs font-medium px-5">
+    <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium px-5">
       <div className="flex flex-col gap-10 py-20 lg:mx-32 ">
         <div className="flex flex-col gap-2 w-full">
           <Lineicon iconData={iconData} />
