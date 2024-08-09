@@ -11,6 +11,7 @@ import { GrLineChart } from "react-icons/gr";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
 import { Footer, Lineicon } from "../components";
 import { autosub, fund1, fund2, fund3, fund4 } from "../assets";
+import { Link } from "react-router-dom";
 
 const Title = ({ txt }) => {
   return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
@@ -68,12 +69,13 @@ const Getfunded = ({ setActiveLink }) => {
                 " Maximize Your Trading Success with Itrust Investment: Trade up to $1,000,000 on QuadX and earn up to 95% of the profits."
               }
             />
-            <button
-              className={`${styles.colors.primaryBgColor} text-white px-4 py-2.5 rounded-3xl border-none w-[30%] text-center flex items-center justify-center gap-1`}
+            <Link
+              to={"/signup"}
+              className={`${styles.colors.primaryBgColor} text-white px-4 py-2.5 rounded-3xl border-none w-[30%] flex items-center gap-1 capitalize`}
             >
               {" "}
-              <MdAppRegistration /> get started
-            </button>
+              <MdAppRegistration /> start trading
+            </Link>
           </div>
           <Imagecontainer imageWidth={"lg:w-[400px]"} img={fund1} />
         </Holder>

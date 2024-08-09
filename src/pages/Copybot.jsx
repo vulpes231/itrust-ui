@@ -21,6 +21,7 @@ import { GrLineChart } from "react-icons/gr";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
 import Bottypes from "../components/functionalities/Bottypes";
 import Access from "../components/functionalities/Access";
+import { Link } from "react-router-dom";
 
 const formatTextWithLineBreaks = (text) => {
   return text.split("\n").map((part, index) => (
@@ -244,7 +245,7 @@ const Copybot = ({ setActiveLink }) => {
           <div>
             <Title text={"2. Connect Your Exchange"} />
             <Small
-              text={`Your funds stay safe on your exchange. Connect QuadX with API keys or Wallet Connect. We offer “How to connect to” tutorials for all supported crypto exchanges.  The exchanges that are supported are Bybit, Binance, OKX, BitFinex, Coinbase, Bitget, Bitstamp, Gate.io, Kraken,. Gemini, HtX, Kucoin`}
+              text={`Your funds stay safe on your exchange. Connect QuadX with API keys or Wallet Connect. We offer “How to connect to” tutorials for all supported crypto exchanges.The exchanges that are supported are Bybit, Binance, OKX, BitFinex, Coinbase, Bitget, Bitstamp, Gate.io, Kraken,. Gemini, HtX, Kucoin`}
             />
           </div>
         </Holder>
@@ -253,7 +254,7 @@ const Copybot = ({ setActiveLink }) => {
         <Holder>
           <div className="flex flex-col items-center justify-center gap-6">
             <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
-              3. Easily keep track of your  Copy Bots` activity
+              3. Easily keep track of your Copy Bots` activity
             </h3>
             <Small
               text={
@@ -289,9 +290,12 @@ const Copybot = ({ setActiveLink }) => {
                 Get trial with full-access to all QuadX trading tools.
               </p>
             </div>
-            <button className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3">
+            <Link
+              to={"/signup"}
+              className="bg-white text-center text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3"
+            >
               start now
-            </button>
+            </Link>
           </div>
         </div>
       </Containerlight>

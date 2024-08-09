@@ -25,6 +25,11 @@
   background-repeat: no-repeat;
 }
 
+.text {
+  /* font-size: 1ch; */
+  word-wrap: break-word;
+}
+
 .container {
   width: 100%;
   margin-right: auto;

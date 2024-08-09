@@ -6,7 +6,9 @@ import {
   Company,
   Copybot,
   Dashboard,
+  Frequent,
   Functions,
+  Getstart,
   Pricing,
   Signin,
   Signup,
@@ -96,6 +98,14 @@ const App = () => {
           <Route
             path="/getfunded"
             element={<Getfunded setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/faq"
+            element={<Frequent setActiveLink={removeActiveLink} />}
+          />
+          <Route
+            path="/start"
+            element={<Getstart setActiveLink={removeActiveLink} />}
           />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />

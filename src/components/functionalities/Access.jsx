@@ -2,6 +2,7 @@ import React from "react";
 import { styles } from "../../constants/styles";
 import { MdStar } from "react-icons/md";
 import { btc } from "../../assets";
+import { Link } from "react-router-dom";
 btc;
 const bots = [
   {
@@ -102,11 +103,12 @@ const Access = () => {
                 <hr className="border-purple-500 dark:border-white" />
 
                 <div className="flex justify-end px-3 py-1.5">
-                  <button
+                  <Link
+                    to={"/signup"}
                     className={`${styles.colors.primaryBgColor} py-2 px-4 capitalize rounded-2xl inline-flex items-center text-white shadow-lg`}
                   >
                     get bot
-                  </button>
+                  </Link>
                 </div>
               </div>
             );

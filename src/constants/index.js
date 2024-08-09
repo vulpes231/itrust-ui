@@ -47,3 +47,31 @@ export const coins = [
 export const getSingleCoinPrice = (coinName, coinData) => {
   return coinData.find((coin) => coin.abbr === coinName.toUpperCase());
 };
+
+export const generalQuestions = [
+  { id: 1, title: "Does a crypto trading bot perform?", info: "" },
+  { id: 2, title: "How do bots trade crypto?", info: "" },
+  { id: 3, title: "Why should I use bots to trade crypto?", info: "" },
+  {
+    id: 4,
+    title: "How much does it cost to use a trading bot on an exchange?",
+    info: "",
+  },
+  { id: 5, title: "How much can you make with a crypto bot?", info: "" },
+  {
+    id: 6,
+    title: "Does automated trading work better than buying and holding?",
+    info: "",
+  },
+  { id: 7, title: "How do you set up a crypto bot?", info: "" },
+  {
+    id: 8,
+    title: "How much does it cost to use a bot trading software?",
+    info: "",
+  },
+  {
+    id: 9,
+    title: "Why cant I get a paid subscription plan on 3Commas?",
+    info: "",
+  },
+];

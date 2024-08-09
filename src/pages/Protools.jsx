@@ -11,6 +11,7 @@ import Bottypes from "../components/functionalities/Bottypes";
 import Access from "../components/functionalities/Access";
 import { styles } from "../constants/styles";
 import { MdAppRegistration } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Title = ({ txt }) => {
   return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
@@ -68,12 +69,13 @@ const Protools = ({ setActiveLink }) => {
                 " Advanced trading techniques made available for everyone. Utilise pro tools that were previously only available for professionals or developers."
               }
             />
-            <button
-              className={`${styles.colors.primaryBgColor} text-white px-4 py-2.5 rounded-3xl border-none w-[30%] text-center flex items-center justify-center gap-1`}
+            <Link
+              to={"/signup"}
+              className={`${styles.colors.primaryBgColor} capitalize text-white px-4 py-2.5 rounded-3xl border-none w-[25%] flex items-center gap-1`}
             >
               {" "}
               <MdAppRegistration /> get started
-            </button>
+            </Link>
           </div>
           <Imagecontainer imageWidth={"lg:w-[400px]"} img={pro1} />
         </Holder>

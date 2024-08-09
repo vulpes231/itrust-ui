@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Containerdark from "../components/general/Containerdark";
+import Containerlight from "../components/general/Containerlight";
+
+import Faqcomponent from "../components/landing/Faqcomponent";
+import { generalQuestions } from "../constants";
+import Footer from "../components/Footer";
 
 const Title = ({ txt }) => {
-  return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
-};
-const Small = ({ txt }) => {
-  return <small className="font-thin text-xs text-slate-400">{txt}</small>;
-};
-const Subtitle = ({ txt }) => {
   return (
-    <h5 className="underline uppercase font-thin text-purple-500">{txt}</h5>
+    <h3 className="text-xl lg:text-3xl font-bold lg:text-center text-left">
+      {txt}
+    </h3>
   );
 };
+
 const Holder = ({ children, customClass }) => {
   return (
     <div className={`flex flex-col py-16 lg:mx-32  ${customClass}`}>
@@ -19,8 +22,39 @@ const Holder = ({ children, customClass }) => {
   );
 };
 
-const Frequent = () => {
-  return <div>Frequent</div>;
+const Frequent = ({ setActiveLink }) => {
+  useEffect(() => {
+    setActiveLink();
+  }, []);
+  return (
+    <section>
+      <Containerdark>
+        <Holder>
+          <div className="flex flex-col gap-4">
+            <Title txt={"Frequently Ask Questions"} />
+          </div>
+        </Holder>
+      </Containerdark>
+      <Containerlight>
+        <Holder>
+          <Faqcomponent faqTitle={"general"} faqs={generalQuestions} />
+        </Holder>
+      </Containerlight>
+      <Containerdark>
+        <Holder>
+          <div className="py-5">
+            <Faqcomponent faqTitle={"Trading Bot"} faqs={generalQuestions} />
+          </div>
+        </Holder>
+      </Containerdark>
+      <Containerlight>
+        <Holder>
+          <Faqcomponent faqTitle={"Smart trade"} faqs={generalQuestions} />
+        </Holder>
+      </Containerlight>
+      <Footer />
+    </section>
+  );
 };
 
 export default Frequent;

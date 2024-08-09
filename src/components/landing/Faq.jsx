@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
+
 const faqs = [
   { id: 1, title: "Does a crypto trading bot perform?", info: "" },
   { id: 2, title: "How do bots trade crypto?", info: "" },

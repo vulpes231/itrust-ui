@@ -72,7 +72,7 @@ const Aitrading = ({ setActiveLink }) => {
             />
             <Link
               to={"/signup"}
-              className={`${styles.colors.primaryBgColor} text-white px-4 py-2.5 rounded-3xl border-none w-[25%] flex items-center gap-1`}
+              className={`${styles.colors.primaryBgColor} capitalize text-white px-4 py-2.5 rounded-3xl border-none w-[25%] flex items-center gap-1`}
             >
               {" "}
               <MdAppRegistration /> start trading

@@ -64,7 +64,7 @@ const Hero = () => {
               </p>
               <Link
                 to={"/signup"}
-                className={`${styles.colors.primaryBgColor} text-white rounded-3xl w-[70%] lg:w-[50%] py-2.5 px-6 uppercase ${styles.hover.lightBg} whitespace-nowrap text-xs`}
+                className={`${styles.colors.primaryBgColor} text-center text-white rounded-3xl w-[70%] lg:w-[50%] py-2.5 px-6 uppercase ${styles.hover.lightBg} whitespace-nowrap text-xs`}
               >
                 start free trial
               </Link>
@@ -127,7 +127,7 @@ const Hero = () => {
                 </div>
                 <Link
                   to={"/signup"}
-                  className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3"
+                  className="bg-white text-center text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3"
                 >
                   start now
                 </Link>

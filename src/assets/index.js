@@ -78,9 +78,13 @@ import fund1 from "./fund1.png";
 import fund2 from "./fund2.png";
 import fund3 from "./fund3.png";
 import fund4 from "./fund4.png";
+import start1 from "./start1.png";
+import start2 from "./start2.png";
 
 export {
   grid,
+  start1,
+  start2,
   fund1,
   fund2,
   fund3,

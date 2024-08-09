@@ -5,12 +5,12 @@ const subLinks = [
   {
     id: 1,
     title: "faq",
-    path: "",
+    path: "/faq",
   },
   {
     id: 2,
     title: "get started",
-    path: "",
+    path: "/start",
   },
   {
     id: 3,

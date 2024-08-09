@@ -4,7 +4,7 @@ import { styles } from "../constants/styles";
 const Button = ({ type, title, handleClick, customClass }) => {
   return (
     <button
-      className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 w-full rounded-md ${styles.colors.primaryBgColor} text-white ${styles.hover.lightBg}`}
+      className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 w-full capitalize rounded-md ${styles.colors.primaryBgColor} text-white ${styles.hover.lightBg}`}
       type={type}
       onClick={handleClick}
     >

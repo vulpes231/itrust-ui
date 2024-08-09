@@ -135,11 +135,9 @@ const Signup = () => {
       <div className="container px-3">
         <div className="flex justify-center -mx-3">
           <form className="w-full xs:w-4/5 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 px-3">
-            <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 w-full p-6 pt-5">
+            <div className="dark:bg-white bg-slate-950 rounded-lg border dark:border-slate-200 border-slate-800 w-full p-6 pt-5">
               <div className="mb-2">
-                <h3 className="text-xl font-bold text-slate-700 dark:text-white mb-1">
-                  Create Account
-                </h3>
+                <h3 className="text-xl font-bold mb-1">Create Account</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
                   With valid information
                 </p>

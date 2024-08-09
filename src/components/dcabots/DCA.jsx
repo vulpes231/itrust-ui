@@ -13,6 +13,7 @@ import { styles } from "../../constants/styles";
 import Bottypes from "../functionalities/Bottypes";
 import Access from "../functionalities/Access";
 import Footer from "../Footer";
+import { Link } from "react-router-dom";
 
 const iconData = [
   {
@@ -148,9 +149,12 @@ const DCA = ({ setActiveLink }) => {
                 Get trial with full-access to all QuadX trading tools.
               </p>
             </div>
-            <button className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3">
+            <Link
+              to={"/signup"}
+              className="bg-white text-center text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3"
+            >
               start now
-            </button>
+            </Link>
           </div>
         </div>
       </Containerlight>
