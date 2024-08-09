@@ -40,7 +40,9 @@ const Activebot = ({ title, name, botData, handleClick }) => {
       <div className="flex flex-col gap-6">
         <h3
           className={`${
-            title.includes("Active") ? "bg-green-100" : "bg-orange-100"
+            title.includes("Active")
+              ? "bg-green-200 text-slate-900"
+              : "bg-orange-100"
           } text-center p-3 rounded shadow font-medium text-sm`}
         >
           {title}

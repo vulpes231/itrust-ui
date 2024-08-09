@@ -24,7 +24,7 @@ const PieChart = ({ userBalance, coinData }) => {
   const up = usdtPrice?.price || 0;
 
   return (
-    <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 space-y-5 border border-slate-200 dark:border-slate-800 rounded-lg">
+    <div className="dark:bg-white p-6 bg-slate-950 dark:text-slate-950 space-y-5 border dark:border-slate-200 border-slate-800 rounded-lg">
       <div className="flex justify-between items-center">
         <h3 className="capitalize font-medium text-lg">crypto portfolio</h3>
         <select className="flex items-center gap-2 text-xs font-medium bg-transparent border p-1 rounded-lg">

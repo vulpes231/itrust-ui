@@ -12,6 +12,7 @@ import { ai1, ai2, ai3, ai4 } from "../assets";
 import { GiLightThornyTriskelion } from "react-icons/gi";
 import { GrLineChart } from "react-icons/gr";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const Title = ({ txt }) => {
   return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
@@ -69,12 +70,13 @@ const Aitrading = ({ setActiveLink }) => {
                 "A break-through innovation in trading - this is what the hedge-funds don't want you to know. AI analyses all the strategies you feed it, and can decide on its own which one it should use."
               }
             />
-            <button
+            <Link
+              to={"/signup"}
               className={`${styles.colors.primaryBgColor} text-white px-4 py-2.5 rounded-3xl border-none w-[25%] flex items-center gap-1`}
             >
               {" "}
               <MdAppRegistration /> start trading
-            </button>
+            </Link>
           </div>
           <Imagecontainer imageWidth={"lg:w-[400px]"} img={ai1} />
         </Holder>

@@ -15,6 +15,7 @@ import {
   stamp,
 } from "../../assets";
 import Analytics from "./Analytics";
+import { Link } from "react-router-dom";
 
 const Connect = () => {
   return (
@@ -62,11 +63,12 @@ const Connect = () => {
           </div>
         </div>
 
-        <button
+        <Link
+          to={"/signup"}
           className={`${styles.colors.primaryBgColor} text-white rounded-3xl py-2.5 px-6 uppercase ${styles.hover.lightBg} whitespace-nowrap text-xs mx-auto`}
         >
           start trial
-        </button>
+        </Link>
 
         <div className="bg-white p-6 flex flex-col gap-4 lg:flex-row lg:justify-between lg:px-32 rounded-xl shadow-lg">
           <Analytics title={"active users"} value={"412k+"} />

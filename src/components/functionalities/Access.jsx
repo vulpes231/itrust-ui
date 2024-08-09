@@ -58,7 +58,7 @@ const bots = [
 
 const Access = () => {
   return (
-    <div className=" dark:bg-slate-900  dark:text-white text-xs font-medium overflow-auto">
+    <div className=" text-xs font-medium overflow-auto">
       <div className="flex flex-col items-center justify-center gap-6 py-16">
         <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
           Access Most Powerful Copybots on QuadX

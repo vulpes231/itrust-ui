@@ -78,7 +78,7 @@ const RecentActivity = () => {
   }, [accessToken]);
 
   return (
-    <div className="h-64 bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800  overflow-auto text-slate-950 dark:text-slate-200">
+    <div className="h-64 rounded-xl border border-slate-200 shadow-xl overflow-auto ">
       <div className="flex justify-between items-center p-4 capitalize">
         <h2 className="text-sm lg:text-lg font-medium whitespace-nowrap">
           recent activity

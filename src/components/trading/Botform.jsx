@@ -59,7 +59,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
           <select
             name=""
             id=""
-            className={`p-2 w-full capitalize bg-transparent border rounded-sm  dark:text-slate-200 bg-white dark:bg-slate-950`}
+            className={`p-2 w-full capitalize bg-transparent border rounded-sm dark:bg-white bg-slate-950`}
           >
             <option value="">coin balance</option>
           </select>
@@ -69,7 +69,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
             Coin
           </label>
           <select
-            className={`p-2 w-full capitalize bg-transparent border rounded-sm  dark:text-slate-200 bg-white dark:bg-slate-950`}
+            className={`p-2 w-full capitalize bg-transparent border rounded-sm dark:bg-white bg-slate-950`}
             value={formData.walletType}
             onChange={handleInput}
             name="walletType"
@@ -93,7 +93,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
           Select Bot
         </label>
         <select
-          className={`p-2 w-full capitalize bg-transparent border rounded-sm  dark:text-slate-200 bg-white dark:bg-slate-950`}
+          className={`p-2 w-full capitalize bg-transparent border border-slate-800 rounded-sm   dark:bg-white bg-slate-950 dark:border-none shadow`}
           value={formData.botId}
           onChange={handleInput}
           name="botId"
@@ -119,7 +119,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
         <input
           type="text"
           placeholder="0.00"
-          className="w-[50%] p-2 outline-none"
+          className="w-[50%] p-2 outline-none bg-slate-950 dark:border-none border border-slate-800 dark:bg-white"
           value={formData.amount}
           onChange={handleInput}
           name="amount"

@@ -43,8 +43,8 @@ const Why = ({ activeLink }) => {
   console.log(activeLink);
   return (
     <ul
-      className={`flex flex-col p-6 gap-4 bg-white dark:bg-slate-900 dark:text-white absolute top-[60px] ${
-        activeLink === "quadx" ? `left-[30%]` : ``
+      className={`flex flex-col p-6 gap-4 dark:bg-white bg-slate-950 text-white dark:text-slate-950 absolute top-[60px] ${
+        activeLink === "quadx" ? `left-[30%]` : `hidden`
       } rounded-bl-md rounded-br-md `}
     >
       {subLinks.map((link) => {

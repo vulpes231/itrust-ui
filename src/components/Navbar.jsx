@@ -21,11 +21,7 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
         key={link.id}
         className={`capitalize flex gap-1 items-center ${
           styles.hover.lightText
-        } ${
-          activeLink === link.id
-            ? `${styles.colors.primaryTextColor}`
-            : `text-white`
-        }`}
+        } ${activeLink === link.id ? `${styles.colors.primaryTextColor}` : ``}`}
         onClick={() => {
           setActiveLink(link.id);
           if (link.path !== undefined) {
@@ -34,17 +30,14 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
           }
         }}
       >
-        <Link>{link.name}</Link>{" "}
-        <span>
-          <IoIosArrowDown />
-        </span>
+        <Link>{link.name}</Link>
       </li>
     );
   });
 
   return (
     <header
-      className={`fixed top-0 start-0 w-full py-4 lg:py-3 border-b border-slate-200 dark:border-slate-800 bg-[#fff] dark:bg-[#000] z-[1020] px-6`}
+      className={`fixed top-0 start-0 w-full py-4 lg:py-3 border-b z-[1020] px-6 bg-black dark:bg-white`}
     >
       <nav className={`flex items-center w-100 justify-between `}>
         <div className="flex items-center gap-x-2">
@@ -53,7 +46,7 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
           </button>
 
           <Link to={"/"} className=" py-1 px-1.5 rounded-xl">
-            {darkMode ? (
+            {!darkMode ? (
               <img src={whitelogo} alt="logo-image" width={80} />
             ) : (
               <img src={full} alt="logo-image" width={80} />
@@ -62,15 +55,15 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
         </div>
 
         <ul
-          className={`hidden lg:flex lg:items-center gap-8 py-2.5 px-6  dark:bg-[#fff] dark:bg-opacity-15 bg-[#333] rounded-3xl text-white font-medium text-sm font-style`}
+          className={`hidden lg:flex lg:items-center gap-8 py-2.5 px-6 rounded-3xl font-medium text-sm font-style`}
         >
           {myLinks}
         </ul>
 
         <div className="flex items-center gap-x-3 lg:gap-x-5">
           <span onClick={handleModeToggle} className="inline-flex relative">
-            <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800">
-              {darkMode ? <MdNightlightRound /> : <MdSunny />}
+            <button className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden">
+              {!darkMode ? <MdNightlightRound /> : <MdSunny />}
             </button>
           </span>
 

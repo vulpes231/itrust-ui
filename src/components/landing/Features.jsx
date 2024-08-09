@@ -2,6 +2,7 @@ import React from "react";
 import Feat from "./Feat";
 import { cp, am, pos, pros, strat, tops } from "../../assets";
 import { styles } from "../../constants/styles";
+import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -55,16 +56,17 @@ const Features = () => {
   });
   return (
     <div className="bg lg:h-[600px] px-5 sm:px-20 py-20 flex flex-col-reverse gap-4 sm:flex-row sm:items-center pt-20 lg:pt-52 ">
-      <div className="flex flex-col gap-4 w-full text-[#333] dark:text-white lg:mx-32">
+      <div className="flex flex-col gap-4 w-full lg:mx-32">
         <h5 className="capitalize text-xl sm:text-3xl font-medium text-white text-center">
           QuadX features
         </h5>
         <div className="grid lg:grid-cols-3 gap-6 ">{myfeatures}</div>
-        <button
+        <Link
+          to={"/signup"}
           className={`${styles.colors.primaryBgColor} text-white rounded-3xl mx-auto py-2.5 px-6 uppercase ${styles.hover.lightBg} text-xs shadow-xl my-10`}
         >
           start free trial
-        </button>
+        </Link>
       </div>
     </div>
   );

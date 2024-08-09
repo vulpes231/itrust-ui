@@ -25,12 +25,14 @@ const Currencies = ({ coinData }) => {
   };
 
   return (
-    <section className="grid lg:grid-cols-3 gap-5 text-slate-900 dark:text-slate-200">
+    <section className="grid lg:grid-cols-3 gap-5 ">
       {/* my currencies */}
-      <div className="lg:col-span-2  w-full space-y-5 overflow-hidden">
-        <div className="bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 text-slate-950 dark:text-slate-200 space-y-6">
+      <div className="lg:col-span-2 w-full space-y-5 overflow-hidden ">
+        <div className="space-y-6 mt-5">
           <span className="flex justify-between items-center capitalize">
-            <h2 className="text-sm lg:text-lg font-medium">my currencies</h2>
+            <h2 className="text-sm lg:text-lg font-medium lg:pl-5">
+              my currencies
+            </h2>
             <span className="flex items-center text-xs font-normal gap-2">
               <button className="bg-[#805af5] hover:bg-[#cd99ff] text-white px-4 py-2 cursor-pointer  rounded-3xl">
                 24H
@@ -40,10 +42,10 @@ const Currencies = ({ coinData }) => {
               </button>
             </span>
           </span>
-          <div className="overflow-auto lg:overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
+          <div className="overflow-auto lg:overflow-hidden shadow-lg">
+            <table className="min-w-full divide-y divide-gray-200  dark:border-slate-200 border">
               <thead>
-                <tr className="bg-gray-100">
+                <tr className="">
                   <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-medium  uppercase tracking-tight">
                     Coin Name
                   </th>
@@ -128,7 +130,7 @@ const Currencies = ({ coinData }) => {
       </div>
 
       {/* trading */}
-      <div className=" bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-5 w-full overflow-auto">
+      <div className="p-5 w-full overflow-auto">
         <Bots
           title={"Available BOTS"}
           name={"add bot"}

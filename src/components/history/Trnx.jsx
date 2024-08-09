@@ -102,7 +102,7 @@ const Trnx = () => {
   }, [dispatch, accessToken]);
 
   return (
-    <div className="flex flex-col gap-4 bg-white">
+    <div className="flex flex-col gap-4 dark:bg-white bg-slate-950 border-slate-800">
       <div className="flex justify-between items-center capitalize py-2 px-5">
         <h3 className="text-lg font-medium">all transactions</h3>
         <span className="flex gap-2 items-center">

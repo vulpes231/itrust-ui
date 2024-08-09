@@ -1,11 +1,12 @@
 import React from "react";
 import { styles } from "../../constants/styles";
 import Review from "./Review";
+import { Link } from "react-router-dom";
 
 const Chooseq = () => {
   return (
     <div className="px-5 sm:px-20 py-20 flex flex-col  lg:mx-32">
-      <div className="flex flex-col gap-4 w-full text-[#333] dark:text-white ">
+      <div className="flex flex-col gap-4 w-full  ">
         <h5 className="capitalize text-xl sm:text-3xl font-bold ">
           Trade automation opens up <br className="sm:hidden" /> new ways to
           seize <br /> opportunities
@@ -22,11 +23,12 @@ const Chooseq = () => {
           moon. Sleep easy <br className="sm:hidden" /> at night and let bots do
           the work.
         </p>
-        <button
+        <Link
+          to={"/signup"}
           className={`${styles.colors.primaryBgColor} text-white rounded-3xl w-[60%] lg:w-[15%] py-2.5 px-6 uppercase ${styles.hover.lightBg} text-xs shadow-xl whitespace-nowrap`}
         >
           start free trial
-        </button>
+        </Link>
 
         <h5 className="capitalize text-xl sm:text-3xl font-bold mt-6">
           Why do traders choose QuadX?

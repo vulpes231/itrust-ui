@@ -21,10 +21,8 @@ const Transactions = () => {
       <div className="container px-3 font-[Montserrat] space-y-4">
         <div className="mb-7 flex justify-between items-center -mx-3">
           <div className="px-3">
-            <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
-              History
-            </h2>
-            <ul className="inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-300 gap-2">
+            <h2 className="text-xl font-bold mb-2">History</h2>
+            <ul className="inline-flex items-center text-xs font-medium gap-2">
               <li>Home </li>
               <li className="inline-flex items-center mt-0.5">{`>`}</li>
               <li>{username}</li>

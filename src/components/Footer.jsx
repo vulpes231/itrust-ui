@@ -2,28 +2,38 @@ import React from "react";
 
 import { FaTelegram, FaTwitter, FaFacebook } from "react-icons/fa";
 import { bott, pay, whitelogo } from "../assets";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   {
     id: 1,
     title: "why QuadX",
     sublinks: [
-      "AI trading",
-      "copybot",
-      "DCABot",
-      "automated trading",
-      "exchanges",
+      { name: "AI trading", path: "/ai" },
+      { name: "copybot", path: "/copy" },
+      { name: "DCABot", path: "/dca" },
+      { name: "automated trading", path: "/autotrade" },
+      { name: "exchanges", path: "" },
     ],
   },
   {
     id: 2,
     title: "features",
-    sublinks: ["pro tools", "trading futures", "get funded"],
+    sublinks: [
+      { name: "pro tools", path: "/protool" },
+      { name: "trading futures", path: "/pricing" },
+      { name: "get funded", path: "/getfunded" },
+    ],
   },
   {
     id: 3,
     title: "company",
-    sublinks: ["about us", "plans", "blog", "FAQ"],
+    sublinks: [
+      { name: "about us", path: "/company" },
+      { name: "plans", path: "/pricing" },
+      { name: "blog", path: "" },
+      { name: "FAQ", path: "" },
+    ],
   },
 ];
 
@@ -41,7 +51,11 @@ const Footer = () => {
         </h3>
         <ul className="grid grid-cols-2 gap-3 capitalize">
           {link.sublinks.map((lnk, index) => {
-            return <li key={index}>{lnk}</li>;
+            return (
+              <li key={index}>
+                <Link to={lnk.path}>{lnk.name}</Link>
+              </li>
+            );
           })}
         </ul>
       </div>

@@ -9,7 +9,7 @@ const Slider = ({ coinData, currentIndex }) => {
           key={coin.id}
           className={`${
             index !== currentIndex
-              ? "hidden lg:flex bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 w-full gap-5 flex-col"
+              ? "hidden lg:flex dark:bg-white bg-slate-950 text-white dark:text-slate-800 rounded-lg border dark:border-slate-200 border-slate-800 p-4 w-full gap-5 flex-col"
               : "bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-4 space-y-5 w-full"
           }`}
         >

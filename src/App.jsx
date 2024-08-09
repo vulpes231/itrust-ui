@@ -19,7 +19,8 @@ import Wallet from "./pages/Wallet";
 import Porfolio from "./pages/Porfolio";
 import Getfunded from "./pages/Getfunded";
 import Protools from "./pages/Protools";
-// useSelector
+import ScrollToTop from "./components/Scrolltotop";
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState(false);
@@ -66,6 +67,7 @@ const App = () => {
             setActiveLink={setActiveLink}
           />
         )}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Content />} />
           <Route path="/features" element={<Functions />} />

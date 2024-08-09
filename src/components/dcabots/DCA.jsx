@@ -49,7 +49,7 @@ const DCA = ({ setActiveLink }) => {
     setActiveLink();
   }, []);
   return (
-    <section className="bg-slate-50 dark:bg-slate-800">
+    <section className="">
       <Containerdark>
         <div className="flex flex-col lg:flex-row gap-6 py-10 lg:mx-32 ">
           <div className=" pl-16 w-full flex flex-col gap-6 justify-center place-items-center">

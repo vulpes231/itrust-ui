@@ -49,7 +49,7 @@ const Pageslider = () => {
     );
   });
   return (
-    <div className="hidden lg:flex flex-col">
+    <div className="hidden lg:flex flex-col ">
       <div className="flex gap-1.5 items-center">{mySlides}</div>
       <div className="flex items-center justify-between mt-1 ">
         <button

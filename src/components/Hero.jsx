@@ -17,8 +17,8 @@ const Hero = () => {
   return (
     <div className="pt-20 sm:pt-32">
       <div className="flex flex-col gap-6 items-center justify-center">
-        <div className="flex flex-col gap-6 text-white">
-          <h3 className="font-[Roboto] text-3xl md:text-5xl text-center font-semibold leading-normal">
+        <div className="flex flex-col gap-6 ">
+          <h3 className="font-[Roboto] text-3xl md:text-5xl text-center font-semibold leading-normal text-white">
             World biggest <br className="sm:hidden" /> stocks and crypto{" "}
             <br className="sm:hidden" /> trading bot.
           </h3>
@@ -31,6 +31,7 @@ const Hero = () => {
           </p>
 
           <Link
+            to={"/signup"}
             className={`flex font-medium text-sm ${styles.colors.primaryBgColor} text-white ${styles.hover.lightBg} px-10 py-2.5 rounded-3xl mx-auto items-center gap-1 capitalize`}
           >
             <span>
@@ -46,7 +47,7 @@ const Hero = () => {
             <figure className="w-full grid place-content-center">
               <img src={hand} alt="" className="w-full sm:w-[300px]" />
             </figure>
-            <div className="flex flex-col gap-6 w-full text-[#333] dark:text-white">
+            <div className="flex flex-col gap-6 w-full">
               <h3
                 className={`uppercase font-medium text-xs ${styles.colors.primaryTextColor}`}
               >
@@ -61,14 +62,15 @@ const Hero = () => {
                 at reducing average acquisition costs, directly increasing your
                 positive margins from each trade.
               </p>
-              <button
+              <Link
+                to={"/signup"}
                 className={`${styles.colors.primaryBgColor} text-white rounded-3xl w-[70%] lg:w-[50%] py-2.5 px-6 uppercase ${styles.hover.lightBg} whitespace-nowrap text-xs`}
               >
                 start free trial
-              </button>
+              </Link>
             </div>
           </div>
-          <div className="bg h-[500px]">
+          <div className="bg h-[500px] text-white">
             <div className="px-5 py-20 sm:px-20 flex flex-col items-center justify-center gap-10">
               <h3 className="uppercase text-xs font-bold">why choose us</h3>
               <h5 className="capitalize text-xl sm:text-3xl text-center font-bold">
@@ -81,7 +83,7 @@ const Hero = () => {
             </div>
           </div>
           {/* roadmap */}
-          <div className="px-5 sm:px-20 flex flex-col gap-4 py-20 text-[#333] dark:text-white ">
+          <div className="px-5 sm:px-20 flex flex-col gap-4 py-20 ">
             <div className="flex flex-col gap-6 items-center justify-center">
               <h3
                 className={`uppercase text-xs font-bold ${styles.colors.primaryTextColor}`}
@@ -107,11 +109,12 @@ const Hero = () => {
                 move your assets.
               </p>
 
-              <button
+              <Link
+                to={"/signup"}
                 className={`${styles.colors.primaryBgColor} text-white rounded-3xl mx-auto py-2.5 px-6 uppercase ${styles.hover.lightBg} text-xs shadow-xl`}
               >
                 start free trial
-              </button>
+              </Link>
 
               <div className="p-6 rounded-xl bg-[#564DCA] bg-opacity-15 flex flex-col lg:justify-between lg:items-center lg:flex-row shadow-md">
                 <div>
@@ -122,9 +125,12 @@ const Hero = () => {
                     Get trial with full-access to all QuadX trading tools.
                   </p>
                 </div>
-                <button className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3">
+                <Link
+                  to={"/signup"}
+                  className="bg-white text-[#333] rounded-3xl py-2.5 px-6 capitalize shadow-xl w-[40%] md:w-[15%] text-xs mt-3"
+                >
                   start now
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -109,10 +109,8 @@ const Wallet = () => {
     <div className="min-h-screen">
       <div className="container px-3 font-[Montserrat] space-y-4 mt-10">
         <div className="">
-          <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
-            Wallet
-          </h2>
-          <ul className="inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-300 gap-2">
+          <h2 className="text-xl font-bold mb-2">Wallet</h2>
+          <ul className="inline-flex items-center text-xs font-medium gap-2">
             <li>Home </li>
             <li className="inline-flex items-center mt-0.5">{`>`}</li>
             <li className="capitalize">{username}</li>
@@ -129,7 +127,7 @@ const Wallet = () => {
                   className={`flex justify-between items-center cursor-pointer p-6 rounded-sm ${
                     activeCoin === asset.coinName
                       ? "bg-[#805af5] text-white"
-                      : "bg-white"
+                      : "dark:bg-white bg-slate-900"
                   }`}
                 >
                   <span className="font-semibold flex gap-1 items-center capitalize">
@@ -171,7 +169,7 @@ const Wallet = () => {
           </div>
           {/* content */}
           <div className="lg:col-span-2 overflow-auto">
-            <div className="p-6 pb-10  border-b border-slate-200 dark:border-slate-800 dark:text-slate-200 bg-white dark:bg-slate-950 rounded-xl flex flex-col gap-6 w-full">
+            <div className="p-6 pb-10  border dark:border-slate-200 border-slate-800  dark:bg-white bg-slate-950 rounded-xl flex flex-col gap-6 w-full">
               <div>
                 <h3 className="font-medium ">Balances</h3>
               </div>
@@ -228,7 +226,7 @@ const Wallet = () => {
               </div>
             </div>
             {/* seperate */}
-            <div className="p-6 col-span-2 border-b border-slate-200 dark:border-slate-800 dark:text-slate-200 bg-white dark:bg-slate-950 rounded-xl flex flex-col gap-6 my-6 ">
+            <div className="p-6 col-span-2 border dark:border-slate-200 border-slate-800  dark:bg-white bg-slate-950 rounded-xl flex flex-col gap-6 my-6 ">
               <div>
                 {activeSection === "deposit" ? (
                   <Deposit
@@ -253,7 +251,7 @@ const Wallet = () => {
                 ) : null}
               </div>
             </div>
-            <div>
+            <div className="mb-10">
               <Trans activeSection={activeSection} />
             </div>
           </div>

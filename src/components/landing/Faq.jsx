@@ -52,7 +52,7 @@ const Faq = () => {
   });
   return (
     <div className="px-5 sm:px-20 py-20 flex flex-col-reverse gap-4 sm:flex-row sm:items-center pt-20 lg:pt-12 ">
-      <div className="flex flex-col lg:flex-row gap-4 w-full text-[#333] dark:text-white lg:mx-32  ">
+      <div className="flex flex-col lg:flex-row gap-4 w-full lg:mx-32  ">
         <h5 className="capitalize text-xl sm:text-3xl font-bold text-center w-[10%] py-3">
           FAQ
         </h5>

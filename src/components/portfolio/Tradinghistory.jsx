@@ -2,7 +2,7 @@ import React from "react";
 
 const Tradinghistory = () => {
   return (
-    <div className="bg-white p-6 dark:bg-slate-950 dark:text-slate-200 rounded-lg space-y-5 border border-slate-200 dark:border-slate-800 ">
+    <div className="dark:bg-white p-6 bg-slate-950 dark:text-slate-200 rounded-lg space-y-5 border dark:border-slate-200 border-slate-800 ">
       <div className="flex justify-between items-center">
         <h3 className="capitalize font-medium text-md">recent trades</h3>
         <button
@@ -13,7 +13,7 @@ const Tradinghistory = () => {
       </div>
       <div className="overflow-x-scroll">
         <table className=" text-xs min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-100 text-gray-400 dark:bg-slate-800 dark:text-slate-200 text-left">
+          <thead className="text-left">
             <tr className="text-xs p-2 font-normal uppercase">
               <th className="px-4 py-3 whitespace-nowrap">copy bot</th>
               <th className="px-4 py-3 whitespace-nowrap">date</th>

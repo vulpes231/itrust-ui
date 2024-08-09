@@ -12,10 +12,10 @@ import { MdSunny, MdNightlightRound } from "react-icons/md";
 import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
 import Navmenu from "./Navmenu";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logoutmodal from "./dash/Logoutmodal";
 import Mobilelink from "./Mobilelink";
-import { full } from "../assets";
+import { full, whitelogo } from "../assets";
 
 const Authnav = ({ handleModeToggle, darkMode }) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
   }, [success]);
 
   return (
-    <header className="isolate fixed top-0 start-0 w-full py-4 xl:py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 z-[1020] px-3">
+    <header className="isolate fixed top-0 start-0 w-full py-4 xl:py-3 bg-black dark:bg-white z-[1020] px-3">
       <div className="container px-3">
         <nav className="flex items-center w-100 justify-between">
           <div className="flex items-center gap-x-2">
@@ -52,11 +52,15 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
               <Menu handleLogout={handleLogout} />
             </div>
 
-            <figure className="dark:bg-slate-200 py-1 px-1.5 rounded-xl">
-              <img src={full} alt="logo-image" width={80} />
-            </figure>
+            <Link className=" py-1 px-1.5 rounded-xl">
+              {!darkMode ? (
+                <img src={whitelogo} alt="logo-image" width={80} />
+              ) : (
+                <img src={full} alt="logo-image" width={80} />
+              )}
+            </Link>
           </div>
-          <ul className="hidden lg:flex items-center gap-10 text-xs font-thin text-[#333]">
+          <ul className="hidden lg:flex items-center gap-10 text-xs font-thin ">
             <Sidebarlink title={"account"} icon={<GoHome />} path={"/dash"} />
             <Sidebarlink
               title={"portfolio"}
@@ -83,7 +87,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             <li className="inline-flex relative">
               <button
                 onClick={handleModeToggle}
-                className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800"
+                className="inline-flex items-center justify-center h-8 w-8 rounded-full overflow-hidden transition-all text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:text-slate-900 bg-slate-800 dark:bg-slate-200"
               >
                 {darkMode ? <MdNightlightRound /> : <MdSunny />}
               </button>
@@ -96,7 +100,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
         {loading && <Logoutmodal />}
       </div>
       {/* mobile menu */}
-      <div className="fixed bottom-0 left-0 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 sm:hidden w-full py-4 px-5">
+      <div className="fixed bottom-0 left-0 sm:hidden w-full py-4 px-5">
         <ul className="flex items-center justify-between">
           <Mobilelink title={"account"} icon={<GoHome />} path={"/dash"} />
           <Mobilelink

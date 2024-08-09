@@ -35,7 +35,7 @@ const Trans = ({ activeSection }) => {
       <tr
         key={trn._id}
         className={`capitalize text-xs font-light ${
-          index % 2 ? "bg-gray-100" : "bg-white"
+          index % 2 ? "bg-gray-100" : "bg-white "
         }`}
       >
         <td className="px-2 py-3 text-center whitespace-nowrap">{trn.date}</td>
@@ -107,7 +107,7 @@ const Trans = ({ activeSection }) => {
   });
 
   return (
-    <div className="flex flex-col gap-4 bg-white">
+    <div className="flex flex-col gap-4 border dark:bg-white bg-slate-900 dark:border-slate-200 border-slate-800 rounded-xl">
       <div className="flex justify-between items-center capitalize py-2 px-5">
         <h3 className="text-sm lg:text-lg font-medium">Recent transactions</h3>
         <span className="flex gap-2 items-center">
@@ -118,9 +118,9 @@ const Trans = ({ activeSection }) => {
         </span>
       </div>
       <div className="overflow-auto">
-        <table className="min-w-full text-xs divide-x-2 divide-gray-200 border-collapse border border-gray-300">
+        <table className="min-w-full text-xs divide-x-2 divide-gray-200 border-collapse ">
           <thead>
-            <tr className="capitalize bg-gray-300 font-medium text-gray-500 ">
+            <tr className="capitalize font-medium">
               <th className="px-2 py-3">date</th>
               <th className="px-2 py-3">coin</th>
               <th className="px-2 py-3">transaction ID</th>

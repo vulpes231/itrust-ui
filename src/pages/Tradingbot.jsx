@@ -64,9 +64,7 @@ const Tradingbot = () => {
       <div className="container px-3 font-[Montserrat] space-y-4">
         <div className="mb-7 flex justify-between items-center -mx-3">
           <div className="px-3">
-            <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
-              Trading Bots
-            </h2>
+            <h2 className="text-xl font-bold mb-2">Trading Bots</h2>
             <ul className="inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-300 gap-2">
               <li>Home </li>
               <li className="inline-flex items-center mt-0.5">{`>`}</li>
@@ -106,7 +104,7 @@ const Tradingbot = () => {
             />
           </div>
           <div className="flex flex-col gap-4 ">
-            <h3 className="bg-white dark:bg-slate-950 dark:text-slate-200 text-center p-3 rounded shadow font-medium text-sm capitalize">
+            <h3 className="bg-white text-slate-900 text-center p-3 rounded shadow font-medium text-sm capitalize">
               add bot
             </h3>
             <Botform
