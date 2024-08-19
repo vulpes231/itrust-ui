@@ -45,7 +45,7 @@ const texts = [
 const Companyinfo = () => {
   return (
     <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium px-5">
-      <div className="flex flex-col gap-10 py-20 lg:mx-32 ">
+      <div className="flex flex-col gap-10 py-20 lg:py-44 lg:mx-32 ">
         <div className="flex flex-col gap-2 w-full">
           <Lineicon iconData={iconData} />
           <hr className="border-[#333] border w-[70%] mx-auto" />
@@ -54,7 +54,7 @@ const Companyinfo = () => {
           {texts.map((txt) => {
             return (
               <div key={txt.id} className="flex flex-col gap-4">
-                <h3 className="text-2xl lg:text-3xl font-bold break-words">
+                <h3 className="text-2xl lg:text-4xl font-bold break-words">
                   {txt.title.split("\n").map((line, index) => (
                     <React.Fragment key={index}>
                       {line}
@@ -62,7 +62,7 @@ const Companyinfo = () => {
                     </React.Fragment>
                   ))}
                 </h3>
-                <small className="text-slate-400 break-words w-[90%] text-xs font-thin">
+                <small className="text-slate-500 text-sm font-thin break-words w-[90%] ">
                   {txt.info}
                 </small>
               </div>

@@ -15,14 +15,14 @@ import { SiAmazonsimpleemailservice } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 const Title = ({ txt }) => {
-  return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
+  return <h3 className="text-xl lg:text-4xl font-bold">{txt}</h3>;
 };
 const Small = ({ txt }) => {
-  return <small className="font-thin text-xs text-slate-400">{txt}</small>;
+  return <small className="font-normal text-sm text-slate-400">{txt}</small>;
 };
 const Subtitle = ({ txt }) => {
   return (
-    <h5 className="underline uppercase font-thin text-purple-500">{txt}</h5>
+    <h5 className="underline uppercase font-normal text-purple-500">{txt}</h5>
   );
 };
 const Holder = ({ children, customClass }) => {

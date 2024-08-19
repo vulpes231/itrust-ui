@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Content, Footer, Authnav, DCA, Autotrade } from "./components";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import {
   Aitrading,
   Company,
@@ -26,16 +26,16 @@ import ScrollToTop from "./components/Scrolltotop";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState(false);
-
-  const removeActiveLink = () => {
-    setActiveLink(false);
-  };
-
   const [token, setToken] = useState(false);
   const { accessToken } = useSelector((state) => state.login);
+  const location = useLocation(); // Get the current route
 
   const handleModeToggle = () => {
     setDarkMode(!darkMode);
+  };
+
+  const removeActiveLink = () => {
+    setActiveLink(false);
   };
 
   useEffect(() => {
@@ -56,19 +56,23 @@ const App = () => {
     }
   }, []);
 
+  const isAuthPage =
+    location.pathname === "/signin" || location.pathname === "/signup";
+
   return (
     <TitleProvider>
       <div className="flex flex-col min-h-screen max-w-full pt-16 ">
-        {accessToken || token ? (
-          <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
-        ) : (
-          <Navbar
-            darkMode={darkMode}
-            handleModeToggle={handleModeToggle}
-            activeLink={activeLink}
-            setActiveLink={setActiveLink}
-          />
-        )}
+        {!isAuthPage &&
+          (accessToken || token ? (
+            <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
+          ) : (
+            <Navbar
+              darkMode={darkMode}
+              handleModeToggle={handleModeToggle}
+              activeLink={activeLink}
+              setActiveLink={setActiveLink}
+            />
+          ))}
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Content />} />

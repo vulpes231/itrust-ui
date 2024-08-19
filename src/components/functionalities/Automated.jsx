@@ -53,10 +53,10 @@ const Automated = () => {
           >
             Automated trade
           </h6>
-          <h3 className="text-xl lg:text-3xl font-bold capitalize ">
+          <h3 className="text-xl lg:text-4xl font-bold capitalize ">
             Automated trading with Trading Bot
           </h3>
-          <small className="text-slate-400">
+          <small className="text-slate-500 text-sm font-thin">
             Trade 24 hours a day with automated bots
           </small>
         </div>
@@ -65,7 +65,9 @@ const Automated = () => {
             return (
               <div key={ft.id}>
                 <h3 className="text-lg lg:text-xl font-bold">{ft.title}</h3>
-                <small className="text-slate-400">{ft.info}</small>
+                <small className="text-slate-500 text-sm font-thin">
+                  {ft.info}
+                </small>
               </div>
             );
           })}

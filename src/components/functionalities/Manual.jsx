@@ -47,10 +47,10 @@ const Manual = () => {
           >
             manual trade
           </h6>
-          <h3 className="text-xl lg:text-3xl font-bold capitalize">
+          <h3 className="text-xl lg:text-4xl font-bold capitalize">
             manual trading with smart trade
           </h3>
-          <small className="text-slate-400">
+          <small className="text-slate-400 text-sm font-normal">
             Trade optimization: Sell and buy coins in a single window.Utilize
             Smart Trade from start to finish
           </small>
@@ -60,7 +60,9 @@ const Manual = () => {
             return (
               <div key={ft.id}>
                 <h3 className="text-lg lg:text-xl font-bold">{ft.title}</h3>
-                <small className="text-slate-400">{ft.info}</small>
+                <small className="text-slate-500 text-sm font-thin">
+                  {ft.info}
+                </small>
               </div>
             );
           })}

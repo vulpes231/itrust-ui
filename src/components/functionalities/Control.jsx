@@ -35,8 +35,8 @@ const Control = () => {
           >
             positions
           </h6>
-          <h3 className="text-xl lg:text-3xl font-bold capitalize">porfolio</h3>
-          <small className="text-slate-400">
+          <h3 className="text-xl lg:text-4xl font-bold capitalize">porfolio</h3>
+          <small className="text-slate-500 text-sm font-thin">
             Don’t let the fear of a market shift keep you up at night. With our
             A.I., your bot can automatically recognize trends and switch to a
             better strategy.
@@ -47,7 +47,9 @@ const Control = () => {
             return (
               <div key={ft.id}>
                 <h3 className="text-lg lg:text-xl font-bold">{ft.title}</h3>
-                <small className="text-slate-400">{ft.info}</small>
+                <small className="text-slate-500 text-sm font-thin">
+                  {ft.info}
+                </small>
               </div>
             );
           })}

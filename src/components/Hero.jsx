@@ -12,22 +12,23 @@ import Faq from "./landing/Faq";
 import Blog from "./landing/Blog";
 import Manage from "./landing/Manage";
 import Footer from "./Footer";
+import Breakmobile from "./Breakmobile";
+import Breaklarge from "./Breaklarge";
 
 const Hero = () => {
   return (
     <div className="pt-20 sm:pt-32">
       <div className="flex flex-col gap-6 items-center justify-center">
         <div className="flex flex-col gap-6 ">
-          <h3 className="font-[Roboto] text-3xl md:text-5xl text-center font-semibold leading-normal text-white">
-            World biggest <br className="sm:hidden" /> stocks and crypto{" "}
-            <br className="sm:hidden" /> trading bot.
+          <h3 className="font-[Roboto] text-3xl md:text-6xl text-center font-semibold leading-normal text-white">
+            World biggest <Breakmobile /> stocks <Breaklarge /> and crypto{" "}
+            <Breakmobile /> trading bots.
           </h3>
-          <p className="font-style text-center mx-auto leading-relaxed font-thin text-sm text-slate-400">
-            Build your portfolio while you sleep using{" "}
-            <br className="sm:hidden" /> expertly engineered automated bots that
-            deliver <br className="sm:hidden" /> the performance elite traders
-            demand <br className="sm:hidden" /> with the simplicity new users
-            need.
+          <p className="font-style text-center mx-auto leading-relaxed font-thin text-sm text-slate-300">
+            Build your portfolio while you sleep using <Breakmobile /> expertly
+            engineered automated bots that deliver <Breaklarge />{" "}
+            <Breakmobile /> the performance elite traders demand <Breakmobile />{" "}
+            with the simplicity new users need.
           </p>
 
           <Link
@@ -43,9 +44,9 @@ const Hero = () => {
             <img src={hero} alt="" className="w-[300px] lg:w-[550px]" />
           </figure>
 
-          <div className="px-5 sm:px-20 flex flex-col-reverse gap-4 sm:flex-row sm:items-center pt-24">
+          <div className="px-5 sm:px-20 flex flex-col-reverse gap-4 sm:flex-row sm:items-center py-24">
             <figure className="w-full grid place-content-center">
-              <img src={hand} alt="" className="w-full sm:w-[300px]" />
+              <img src={hand} alt="" className="w-full sm:w-[350px]" />
             </figure>
             <div className="flex flex-col gap-6 w-full">
               <h3
@@ -53,14 +54,15 @@ const Hero = () => {
               >
                 about quadx
               </h3>
-              <h5 className="capitalize text-xl sm:text-3xl font-bold">
+              <h5 className="capitalize text-xl sm:text-4xl font-bold">
                 QuadX helps traders win regardless of market conditions.
               </h5>
-              <p className="font-thin text-xs text-slate-400">
+              <p className="font-thin text-sm text-slate-500">
                 For every market condition, there’s a trading strategy that can
-                take advantage of it. Quadx trade bots happen to be really good
-                at reducing average acquisition costs, directly increasing your
-                positive margins from each trade.
+                take advantage of <Breaklarge /> it. Quadx trade bots happen to
+                be really good at reducing average acquisition <Breaklarge />{" "}
+                costs, directly increasing your positive margins from each
+                trade.
               </p>
               <Link
                 to={"/signup"}
@@ -73,7 +75,7 @@ const Hero = () => {
           <div className="bg h-[500px] text-white">
             <div className="px-5 py-20 sm:px-20 flex flex-col items-center justify-center gap-10">
               <h3 className="uppercase text-xs font-bold">why choose us</h3>
-              <h5 className="capitalize text-xl sm:text-3xl text-center font-bold">
+              <h5 className="capitalize text-xl sm:text-4xl text-center font-bold">
                 Trading is hard, but <br />
                 QuadX makes it <br className="sm:hidden" /> easier
               </h5>
@@ -90,19 +92,19 @@ const Hero = () => {
               >
                 roadmap
               </h3>
-              <h5 className="capitalize text-xl sm:text-3xl font-bold text-center">
+              <h5 className="capitalize text-xl sm:text-4xl font-bold text-center">
                 the right tools for <br /> every kind of
                 <br className="sm:hidden" /> market.
               </h5>
             </div>
             <div className="lg:mx-32 flex flex-col gap-6">
               <Roadmap />
-              <h5 className="capitalize text-xl lg:text-3xl font-semibold px-6 tracking-wide ">
+              <h5 className="capitalize text-xl lg:text-4xl font-semibold px-6 tracking-wide ">
                 Level up your trading game with advanced ai <br /> crypto
                 trading tools that work on the biggest <br /> exchanges
               </h5>
 
-              <p className="font-thin text-xs text-slate-500  px-6">
+              <p className="font-thin text-sm text-slate-500  px-6">
                 Winning trades is the goal, and QuadX is your all-in-one tool to
                 achieve it. Integrating with most any exchange, QuadX provides
                 you the <br /> functions you wish you had and doesn't make you

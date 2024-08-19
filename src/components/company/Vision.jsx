@@ -29,10 +29,10 @@ const Vision = () => {
     <div className=" dark:bg-slate-900 dark:text-white text-xs font-medium px-5">
       <div className="flex flex-col  gap-20 py-10 lg:mx-32 ">
         <div className="flex flex-col gap-3 items-center justify-center">
-          <h3 className="text-xl lg:text-3xl font-bold capitalize">
+          <h3 className="text-xl lg:text-4xl font-bold capitalize">
             Our vision
           </h3>
-          <small className="font-thin text-xs text-slate-400 lg:text-center">
+          <small className="text-slate-500 text-sm font-thin  lg:text-center">
             We believe the financial system should be built to work for
             everyone. That’s why we create products that let <br /> you start
             investing at your own pace, on your own terms.
@@ -50,7 +50,7 @@ const Vision = () => {
                     </React.Fragment>
                   ))}
                 </h3>
-                <small className="font-thin text-xs text-slate-400">
+                <small className="text-slate-500 text-sm font-thin">
                   {vis.info}
                 </small>
               </div>

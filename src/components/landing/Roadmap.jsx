@@ -30,12 +30,12 @@ const sliderData = [
 
 const Slide = ({ img, title, info }) => {
   return (
-    <div className="flex flex-col gap-2 text-xs p-6 w-full rounded-x ">
+    <div className="flex flex-col gap-4 text-xs p-6 w-full rounded-x ">
       <figure className="grid place-content-center">
-        <img src={img} alt="" className="w-[42px]" />
+        <img src={img} alt="" className="w-[80px]" />
       </figure>
-      <span className="font-normal  text-sm capitalize">{title}</span>
-      <span className="whitespace-wrap text-slate-500 font-thin text-xs">
+      <h5 className="font-medium text-md capitalize">{title}</h5>
+      <span className="whitespace-wrap text-slate-500 font-thin text-sm">
         {info}
       </span>
     </div>

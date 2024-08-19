@@ -12,6 +12,15 @@ import Learn from "./dropdowns/Learn";
 
 const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
   const { title } = useContext(TitleContext);
+  const [showDrop, SetShowDrop] = useState(false);
+
+  const handleSetShowDrop = () => {
+    SetShowDrop((prev) => !prev);
+  };
+
+  const cancelShowDrop = () => {
+    SetShowDrop(false);
+  };
 
   const navigate = useNavigate();
 
@@ -23,10 +32,10 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
           styles.hover.lightText
         } ${activeLink === link.id ? `${styles.colors.primaryTextColor}` : ``}`}
         onClick={() => {
-          setActiveLink(link.id);
-          if (link.path !== undefined) {
+          if (link.path === undefined) {
+            handleSetShowDrop();
+          } else {
             navigate(link.path);
-            setActiveLink(link.id);
           }
         }}
       >

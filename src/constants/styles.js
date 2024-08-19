@@ -2,8 +2,8 @@ const lightBg = "bg-[#cd99ff]";
 const darkBg = "bg-[#805af5]";
 const darkText = "text-[#805af5]";
 const lighttext = "text-[#cd99ff]";
-const darkBorder = " border border-[#805af5]";
-const lightBorder = "border border-[#cd99ff]";
+const darkBorder = " border-2 border-[#805af5]";
+const lightBorder = "border-2 border-[#cd99ff]";
 
 const lightModeText = "text-slate-950";
 const darkModetext = "text-slate-200";

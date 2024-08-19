@@ -3,6 +3,7 @@ import { styles } from "../../constants/styles";
 import { MdStar } from "react-icons/md";
 import { btc } from "../../assets";
 import { Link } from "react-router-dom";
+import Breaklarge from "../Breaklarge";
 btc;
 const bots = [
   {
@@ -60,14 +61,14 @@ const bots = [
 const Access = () => {
   return (
     <div className=" text-xs font-medium overflow-auto">
-      <div className="flex flex-col items-center justify-center gap-6 py-16">
-        <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
+      <div className="flex flex-col items-center justify-center gap-6 py-16 lg:py-44">
+        <h3 className="text-xl lg:text-4xl font-bold capitalize text-center ">
           Access Most Powerful Copybots on QuadX
         </h3>
-        <small>
+        <small className="text-slate-500 text-sm font-thin">
           Create an account, track strategy statistics, launch bots, and close
-          orders. Whether you’re at home or on the road, manage your portfolio
-          anywhere.
+          orders. <Breaklarge /> Whether you’re at home or on the road, manage
+          your portfolio anywhere.
         </small>
         <div className="overflow-auto flex items-center gap-4 lg:max-w-[1200px] px-2 w-full">
           {bots.map((bot) => {

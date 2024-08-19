@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import { styles } from "../constants/styles";
+import { useNavigate } from "react-router-dom";
 
 const priceManual = [
   {
@@ -56,19 +57,35 @@ const priceManual = [
 ];
 
 const Pricing = () => {
+  const navigate = useNavigate();
+  const [activePrice, setActivePrice] = useState(1);
+
+  const changeActivePrice = (price) => {
+    setActivePrice(price.id);
+  };
+
+  const goToSignUp = (e) => {
+    e.preventDefault();
+    navigate("/signup");
+  };
   return (
-    <section className="bg-slate-50 dark:bg-slate-900 ">
+    <section>
       <div className="min-h-screen px-5 sm:px-40 py-20">
-        <h3 className="text-slate-950 dark:text-slate-200 text-center mb-10 text-2xl font-bold">
+        <h3 className="dark:text-slate-950 text-white text-center mb-10 text-2xl lg:text-4xl font-bold">
           Choose a Plan
         </h3>
-        <div className="bg-white rounded-xl p-6 flex flex-col gap-10 items-center justify-center ">
-          <div className="grid lg:grid-cols-4 gap-3 w-full text-xs">
+        <div className="bg-white rounded-xl p-6 flex flex-col gap-10 items-center justify-center text-black">
+          <div className="grid lg:grid-cols-4 gap-3 w-full text-xs ">
             {priceManual.map((price) => {
               return (
                 <div
                   key={price.id}
-                  className={`flex flex-col gap-6 ${styles.hover.darkBorder} p-4 rounded-lg cursor-pointer`}
+                  className={`flex flex-col gap-6 p-4 rounded-lg cursor-pointer ${
+                    activePrice === price.id
+                      ? `${styles.border.darkBorder}`
+                      : `border-none`
+                  }`}
+                  onClick={() => changeActivePrice(price)}
                 >
                   <div className="flex flex-col gap-2">
                     <h5 className="capitalize ">{price.level}</h5>
@@ -78,6 +95,7 @@ const Pricing = () => {
                   <div>
                     <button
                       className={`px-6 py-2.5 rounded-3xl ${styles.border.darkBorder} ${styles.colors.primaryTextColor}`}
+                      onClick={goToSignUp}
                     >
                       {price.btn}
                     </button>

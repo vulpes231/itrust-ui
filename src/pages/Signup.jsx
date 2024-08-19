@@ -11,6 +11,8 @@ import { createAccount } from "../features/signupSlice";
 import Modal from "../components/Modal";
 
 import { MdCheck } from "react-icons/md";
+import { whitelogo } from "../assets";
+import { styles } from "../constants/styles";
 
 const nationalities = [
   { code: "us", name: "United States" },
@@ -135,6 +137,9 @@ const Signup = () => {
       <div className="container px-3">
         <div className="flex justify-center -mx-3">
           <form className="w-full xs:w-4/5 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 px-3">
+            <figure className=" flex items-center justify-center py-5">
+              <img src={whitelogo} alt="" className="w-[100px] " />
+            </figure>
             <div className="dark:bg-white bg-slate-950 rounded-lg border dark:border-slate-200 border-slate-800 w-full p-6 pt-5">
               <div className="mb-2">
                 <h3 className="text-xl font-bold mb-1">Create Account</h3>
@@ -238,7 +243,7 @@ const Signup = () => {
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
-                      className="p-2  w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border-slate-200 dark:border-slate-800 border"
+                      className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
                     >
                       <option value="">choose country</option>
                       {countries.map((cty) => {
@@ -304,7 +309,7 @@ const Signup = () => {
                   <Formspan>
                     <Label title={"nationality"} />
                     <select
-                      className="font-thin text-xs border p-2 outline-[#2563EB]"
+                      className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
                       name="nationality"
                       value={formData.nationality}
                       onChange={handleChange}
@@ -322,7 +327,7 @@ const Signup = () => {
                   <Formspan>
                     <Label title={"currency"} />
                     <select
-                      className="font-thin text-xs border p-2 outline-[#2563EB]"
+                      className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
                       name="currency"
                       value={formData.currency}
                       onChange={handleChange}
@@ -340,7 +345,7 @@ const Signup = () => {
                     />
 
                     <select
-                      className="font-thin text-xs border p-2 outline-[#2563EB]"
+                      className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
                       name="investmentExperience"
                       value={formData.investmentExperience}
                       onChange={handleChange}
@@ -358,7 +363,7 @@ const Signup = () => {
                     <Label title={" are you employed? "} />
 
                     <select
-                      className="font-thin text-xs border p-2 outline-[#2563EB]"
+                      className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
                       name="occupation"
                       value={formData.occupation}
                       onChange={handleChange}
@@ -452,6 +457,15 @@ const Signup = () => {
                   </div>
                 )}
               </div>
+              <p className="text-center text-xs font-sm py-3 flex gap-2">
+                Already have an account?
+                <Link
+                  className={`${styles.colors.primaryTextColor}`}
+                  to={"/signin"}
+                >
+                  Sign in
+                </Link>
+              </p>
             </div>
           </form>
           {success && (

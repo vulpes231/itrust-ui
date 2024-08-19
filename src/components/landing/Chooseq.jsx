@@ -2,26 +2,25 @@ import React from "react";
 import { styles } from "../../constants/styles";
 import Review from "./Review";
 import { Link } from "react-router-dom";
+import Breakmobile from "../Breakmobile";
 
 const Chooseq = () => {
   return (
     <div className="px-5 sm:px-20 py-20 flex flex-col  lg:mx-32">
       <div className="flex flex-col gap-4 w-full  ">
-        <h5 className="capitalize text-xl sm:text-3xl font-bold ">
+        <h5 className="capitalize text-xl sm:text-4xl font-bold ">
           Trade automation opens up <br className="sm:hidden" /> new ways to
           seize <br /> opportunities
         </h5>
-        <p className="font-thin text-xs text-slate-400">
-          Unlike traditional stock markets, cryptocurrency{" "}
-          <br className="sm:hidden" /> markets operate 24 hours per day, 7 days
-          per week. <br className="sm:hidden" /> This is a point of fear for
-          manual traders, but <br /> not for QuadX users. Your ai crypto trading
-          bots aren’t <br className="sm:hidden" /> limited to Mon-Fri normal
-          business hours to open <br className="sm:hidden" /> deals. You can set
-          up bots to operate <br /> under almost any contingency, whether it’s a
-          flash <br className="sm:hidden" /> crash or the market shooting to the
-          moon. Sleep easy <br className="sm:hidden" /> at night and let bots do
-          the work.
+        <p className="font-thin text-sm text-slate-500">
+          Unlike traditional stock markets, cryptocurrency <Breakmobile />{" "}
+          markets operate 24 hours per day, 7 days per week. <Breakmobile />{" "}
+          This is a point of fear for manual traders, but <br /> not for QuadX
+          users. Your ai crypto trading bots aren’t <Breakmobile /> limited to
+          Mon-Fri normal business hours to open <Breakmobile /> deals. You can
+          set up bots to operate <br /> under almost any contingency, whether
+          it’s a flash <Breakmobile /> crash or the market shooting to the moon.
+          Sleep easy <Breakmobile /> at night and let bots do the work.
         </p>
         <Link
           to={"/signup"}

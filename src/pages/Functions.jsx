@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer } from "../components";
+import { Breaklarge, Footer } from "../components";
 import { ftpg } from "../assets";
 
 import Getstartedbtn from "../components/Getstartedbtn";
@@ -26,8 +26,9 @@ const Functions = () => {
               Get Maximum <br className="hidden lg:flex" /> Value
             </h3>
             <small>
-              Cryptotrading is 24/7. So is your bot. Give yourself an edge, and
-              while everyone else sleeps, you’ll never miss a beat.
+              Cryptotrading is 24/7. So is your bot. Give yourself an edge,{" "}
+              <Breaklarge />
+               and while everyone else sleeps, you’ll never miss a beat.
             </small>
             <Getstartedbtn />
           </div>

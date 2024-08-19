@@ -26,9 +26,13 @@ import Imagecontainer from "./general/Imagecontainer";
 import Title from "./general/Title";
 import Lineicon from "./general/Lineicon";
 import Innerflexrow from "./general/Innerflexrow";
+import Breakmobile from "./Breakmobile";
+import Breaklarge from "./Breaklarge";
 
 export {
   Innerflexrow,
+  Breakmobile,
+  Breaklarge,
   Containerlight,
   Lineicon,
   Containerdark,

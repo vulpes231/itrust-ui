@@ -19,10 +19,10 @@ const Strategy = () => {
         </figure>
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl lg:text-3xl font-bold capitalize">
+            <h3 className="text-xl lg:text-4xl font-bold capitalize">
               strategies
             </h3>
-            <small className="text-slate-400">
+            <small className="text-slate-500 text-sm font-thin">
               Don’t let the fear of a market shift keep you up at night. With
               our A.I., your bot can automatically recognize trends and switch
               to a better strategy.
@@ -32,7 +32,7 @@ const Strategy = () => {
             {feats.map((ft, index) => {
               return (
                 <li
-                  className="flex items-center gap-3 capitalize text-slate-400"
+                  className="flex items-center gap-3 capitalize text-slate-500 text-sm font-thin"
                   key={index}
                 >
                   <MdCheck className="text-green-500 font-bold" />
