@@ -17,14 +17,30 @@ import { Link } from "react-router-dom";
 const Title = ({ txt }) => {
   return <h3 className="text-xl lg:text-4xl font-bold">{txt}</h3>;
 };
-const Small = ({ txt }) => {
-  return <small className="font-normal text-sm text-slate-400">{txt}</small>;
-};
+
 const Subtitle = ({ txt }) => {
   return (
     <h5 className="underline uppercase font-normal text-purple-500">{txt}</h5>
   );
 };
+
+const formatTextWithLineBreaks = (text) => {
+  return text.split("\n").map((part, index) => (
+    <React.Fragment key={index}>
+      {part}
+      {index < text.split("\n").length - 1 && <br />}
+    </React.Fragment>
+  ));
+};
+
+const Small = ({ txt }) => {
+  return (
+    <small className="font-thin text-sm text-slate-500">
+      {formatTextWithLineBreaks(txt)}
+    </small>
+  );
+};
+
 const Holder = ({ children, customClass }) => {
   return (
     <div className={`flex flex-col py-16 lg:mx-32  ${customClass}`}>
@@ -61,33 +77,33 @@ const Aitrading = ({ setActiveLink }) => {
   return (
     <section>
       <Containerdark>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-col lg:flex-row gap-6 py-10 lg:mx-32 ">
+          <div className="flex flex-col gap-4 w-full">
             <Subtitle txt={"AI Trading"} />
             <Title txt={"Let your bot learn and decide by itself"} />
             <Small
               txt={
-                "A break-through innovation in trading - this is what the hedge-funds don't want you to know. AI analyses all the strategies you feed it, and can decide on its own which one it should use."
+                "A break-through innovation in trading - this is what the hedge-funds don't\n want you to know. AI analyses all the strategies you feed it, and can decide\n on its own which one it should use."
               }
             />
             <Link
               to={"/signup"}
-              className={`${styles.colors.primaryBgColor} capitalize text-white px-4 py-2.5 rounded-3xl border-none w-[25%] flex items-center gap-1`}
+              className={`${styles.colors.primaryBgColor} capitalize text-white px-4 py-2.5 rounded-3xl border-none gap-1 w-[130px] flex items-center justify-center`}
             >
               {" "}
               <MdAppRegistration /> start trading
             </Link>
           </div>
           <Imagecontainer imageWidth={"lg:w-[400px]"} img={ai1} />
-        </Holder>
+        </div>
       </Containerdark>
       <Containerlight>
         <div className="flex flex-col gap-2 w-full py-5">
           <Lineicon iconData={iconData} />
           <hr className="border-[#333] border w-[95%] mx-auto" />
         </div>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
-          <Imagecontainer img={ai2} imageWidth={"lg:w-[400px]"} />
+        <Holder customClass={"lg:flex-row lg:items-center gap-10 lg:py-32"}>
+          <Imagecontainer img={ai2} imageWidth={"lg:w-[500px]"} />
           <div className="flex flex-col gap-4">
             <Subtitle txt={"RATE ALL YOUR STRATEGIES"} />
             <Title
@@ -97,14 +113,14 @@ const Aitrading = ({ setActiveLink }) => {
             />
             <Small
               txt={
-                "Imagine having hundreds of strategies, using signals and even TradingView? Combine all of these and import them all into your AI."
+                "Imagine having hundreds of strategies, using signals and even\n TradingView? Combine all of these and import them all into your AI."
               }
             />
           </div>
         </Holder>
       </Containerlight>
       <Containerdark>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
+        <Holder customClass={"lg:flex-row lg:items-center gap-10 lg:py-32"}>
           <div className="flex flex-col gap-4">
             <Subtitle txt={"LEARN AUTOMATICALLY"} />
             <Title txt={"Once you’ve fed your AI,it’s time to train."} />
@@ -118,14 +134,14 @@ const Aitrading = ({ setActiveLink }) => {
         </Holder>
       </Containerdark>
       <Containerlight>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
-          <Imagecontainer img={ai4} imageWidth={"lg:w-[400px]"} />
-          <div className="flex flex-col gap-4">
+        <Holder customClass={"lg:flex-row lg:items-center gap-10 lg:py-32"}>
+          <Imagecontainer img={ai4} imageWidth={"lg:w-[350px]"} />
+          <div className="flex flex-col gap-4 w-full">
             <Subtitle txt={"ADAPT TO CHANGING MARKET"} />
             <Title txt={"Your pocket hedge-fund"} />
             <Small
               txt={
-                "Hedge-funds don't have one strategy to rule them all. They have hundreds of strategies and constantly switch between them to optimize trading. Now you can do the same thing. Your AI will scan for changing trends and adapt accordingly for every trading pair."
+                "Hedge-funds don't have one strategy to rule them all. They have hundreds of\n strategies and constantly switch between them to optimize trading. Now you\n can do the same thing. Your AI will scan for changing trends and adapt\n accordingly for every trading pair."
               }
             />
           </div>
@@ -135,7 +151,7 @@ const Aitrading = ({ setActiveLink }) => {
         <Bottypes />
       </Containerdark>
       <Containerlight>
-        <div className="flex flex-col gap-6 py-10 lg:mx-32 ">
+        <div className="flex flex-col gap-6 lg:mx-32 ">
           <Access />
         </div>
       </Containerlight>

@@ -19,12 +19,10 @@ const subLinks = [
   },
 ];
 
-const Learn = ({ activeLink }) => {
+const Learn = () => {
   return (
     <ul
-      className={`flex flex-col p-6 gap-4 dark:bg-white bg-slate-950 text-white dark:text-slate-950 absolute top-[60px] ${
-        activeLink === "learn" ? `right-[40%]` : `hidden`
-      } rounded-bl-md rounded-br-md `}
+      className={`flex flex-col p-6 gap-4 dark:bg-white bg-slate-950 text-white dark:text-slate-950 absolute top-[60px] rounded-bl-md rounded-br-md `}
     >
       {subLinks.map((link) => {
         return (

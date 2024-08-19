@@ -7,10 +7,22 @@ import { start1, start2, grid, grid2, grid3, grid4 } from "../assets";
 import { Link } from "react-router-dom";
 
 const Title = ({ txt, custom }) => {
-  return <h3 className={`"text-xl lg:text-3xl font-bold ${custom}`}>{txt}</h3>;
+  return <h3 className={`"text-xl lg:text-4xl font-bold ${custom}`}>{txt}</h3>;
+};
+const formatTextWithLineBreaks = (text) => {
+  return text.split("\n").map((part, index) => (
+    <React.Fragment key={index}>
+      {part}
+      {index < text.split("\n").length - 1 && <br />}
+    </React.Fragment>
+  ));
 };
 const Small = ({ txt }) => {
-  return <small className="font-thin text-xs text-slate-400">{txt}</small>;
+  return (
+    <small className="font-thin text-sm text-slate-500">
+      {formatTextWithLineBreaks(txt)}
+    </small>
+  );
 };
 const Subtitle = ({ txt }) => {
   return (
@@ -154,7 +166,7 @@ const Getstart = ({ setActiveLink }) => {
         </Holder>
       </Containerdark>
       <Containerlight>
-        <div className="flex flex-col gap-6 py-10 lg:mx-32 ">
+        <div className="flex flex-col gap-6 py-10 lg:mx-32 lg:py-32 ">
           <div className="flex items-center justify-center flex-col">
             <h3 className="text-xl lg:text-3xl font-bold">Ready-to-use Bots</h3>
             <small className="text-slate-400 break-words text-xs font-thin">

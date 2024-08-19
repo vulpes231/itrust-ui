@@ -46,7 +46,7 @@ const Autotrade = ({ setActiveLink }) => {
           <div className=" pl-16 w-full flex flex-col gap-6 justify-center place-items-center">
             <Title text={"Bots don't need sleep."} />
 
-            <small className="text-slate-400 break-words text-xs font-thin">
+            <small className="text-slate-500 break-words text-sm font-thin">
               Cryptotrading is 24/7. So is your bot. Give yourself an edge, and
               while everyone else sleeps, you’ll never miss a beat.
             </small>
@@ -55,7 +55,7 @@ const Autotrade = ({ setActiveLink }) => {
         </div>
       </Containerdark>
       <Containerlight>
-        <div className="flex flex-col gap-5 py-10 lg:mx-32">
+        <div className="flex flex-col gap-5 py-10 lg:py-32 lg:mx-32">
           <div className="flex flex-col gap-2 w-full">
             <Lineicon iconData={iconData} />
             <hr className="border-[#333] border w-[95%] mx-auto" />
@@ -69,7 +69,7 @@ const Autotrade = ({ setActiveLink }) => {
                 social trading
               </h6>
               <Title text={"Trade like a pro. Without being one."} />
-              <small className="text-slate-400 break-words text-xs font-thin">
+              <small className="text-slate-500 break-words text-sm font-thin">
                 You don’t need to be a pro to trade like one. Level up your game
                 - and your results - by copying pro traders on our marketplace.
                 Subscribe to trading signals, which tell your bot when to buy or
@@ -81,7 +81,7 @@ const Autotrade = ({ setActiveLink }) => {
         </div>
       </Containerlight>
       <Containerdark>
-        <div className="flex flex-col gap-6 py-10 lg:mx-32 lg:flex-row">
+        <div className="flex flex-col gap-6 py-10 lg:py-32 lg:mx-32 lg:flex-row">
           <div className=" pl-16 w-full flex flex-col gap-6 ">
             <h6
               className={`${styles.colors.primaryTextColor} underline uppercase font-thin`}
@@ -91,7 +91,7 @@ const Autotrade = ({ setActiveLink }) => {
             <Title
               text={"Find your ideal trading opportunity. Automatically, 24/7."}
             />
-            <small className="text-slate-400 break-words text-xs font-thin">
+            <small className="text-slate-500 break-words text-sm font-thin">
               Don’t let the fear of a market shift keep you up at night. With
               our A.I., your bot can automatically recognise trends and switch
               to a better strategy, so you can rest easy. Create or download
@@ -103,7 +103,7 @@ const Autotrade = ({ setActiveLink }) => {
         </div>
       </Containerdark>
       <Containerlight>
-        <div className="flex flex-col gap-6 py-10 lg:mx-32 justify-center items-center">
+        <div className="flex flex-col gap-6 py-10 lg:py-32 lg:mx-32 justify-center items-center">
           <div className="flex flex-col gap-2 ">
             <h6
               className={`${styles.colors.primaryTextColor} underline uppercase font-thin`}
@@ -111,7 +111,7 @@ const Autotrade = ({ setActiveLink }) => {
               Cloud Hosted
             </h6>
             <Title text={"Available anytime. Anywhere."} />
-            <small className="text-slate-400 break-words text-xs font-thin">
+            <small className="text-slate-500 break-words text-sm font-thin">
               Hosted in the cloud, QuadX is available 24/7. Protect and monitor
               your assets, <br /> even while you’re logged out. Access your
               account from any device, <br /> including web, phone, tablet and

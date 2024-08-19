@@ -2,7 +2,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdMenu, MdSunny, MdNightlightRound } from "react-icons/md";
-import { IoIosArrowDown } from "react-icons/io";
 import { TitleContext } from "../contexts/TitleContext";
 import { navLinks } from "../constants";
 import { full, whitelogo } from "../assets";
@@ -12,17 +11,28 @@ import Learn from "./dropdowns/Learn";
 
 const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
   const { title } = useContext(TitleContext);
-  const [showDrop, SetShowDrop] = useState(false);
+  const [showDrop, SetShowDrop] = useState(null);
 
-  const handleSetShowDrop = () => {
-    SetShowDrop((prev) => !prev);
-  };
+  // const handleSetShowDrop = () => {
+  //   SetShowDrop((prev) => !prev);
+  // };
 
-  const cancelShowDrop = () => {
-    SetShowDrop(false);
-  };
+  // const cancelShowDrop = () => {
+  //   SetShowDrop(false);
+  // };
 
   const navigate = useNavigate();
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link.id);
+    if (link.path === "") {
+      // Handle showing the dropdown
+      SetShowDrop(link.id === showDrop ? null : link.id);
+    } else {
+      // Navigate to the path
+      navigate(link.path);
+    }
+  };
 
   const myLinks = navLinks.map((link) => {
     return (
@@ -31,15 +41,17 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
         className={`capitalize flex gap-1 items-center ${
           styles.hover.lightText
         } ${activeLink === link.id ? `${styles.colors.primaryTextColor}` : ``}`}
-        onClick={() => {
-          if (link.path === undefined) {
-            handleSetShowDrop();
-          } else {
-            navigate(link.path);
-          }
-        }}
+        onClick={() => handleLinkClick(link)}
       >
         <Link>{link.name}</Link>
+        {/* Show dropdown if this link has no path and is the active dropdown */}
+        {link.path === "" && showDrop === link.id && (
+          <>
+            {link.id === "quadx" && <Why />}
+            {link.id === "learn" && <Learn />}
+            {/* Add other dropdown conditions here */}
+          </>
+        )}
       </li>
     );
   });
@@ -94,11 +106,6 @@ const Navbar = ({ handleModeToggle, darkMode, activeLink, setActiveLink }) => {
             )}
           </span>
         </div>
-        {activeLink === "quadx" ? (
-          <Why activeLink={activeLink} />
-        ) : activeLink === "learn" ? (
-          <Learn activeLink={activeLink} />
-        ) : null}
       </nav>
     </header>
   );

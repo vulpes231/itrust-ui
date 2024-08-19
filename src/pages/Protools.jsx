@@ -14,10 +14,24 @@ import { MdAppRegistration } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Title = ({ txt }) => {
-  return <h3 className="text-xl lg:text-3xl font-bold">{txt}</h3>;
+  return <h3 className="text-xl lg:text-4xl font-bold">{txt}</h3>;
 };
+
+const formatTextWithLineBreaks = (text) => {
+  return text.split("\n").map((part, index) => (
+    <React.Fragment key={index}>
+      {part}
+      {index < text.split("\n").length - 1 && <br />}
+    </React.Fragment>
+  ));
+};
+
 const Small = ({ txt }) => {
-  return <small className="font-thin text-xs text-slate-400">{txt}</small>;
+  return (
+    <small className="font-thin text-sm text-slate-500">
+      {formatTextWithLineBreaks(txt)}
+    </small>
+  );
 };
 const Subtitle = ({ txt }) => {
   return (
@@ -61,12 +75,12 @@ const Protools = ({ setActiveLink }) => {
     <section>
       <Containerdark>
         <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-full">
             <Subtitle txt={"Pro Tools"} />
             <Title txt={"Leverage market inefficiencies or liquidity"} />
             <Small
               txt={
-                " Advanced trading techniques made available for everyone. Utilise pro tools that were previously only available for professionals or developers."
+                " Advanced trading techniques made available for everyone. Utilise pro tools\n that were previously only available for professionals or developers."
               }
             />
             <Link
@@ -92,20 +106,20 @@ const Protools = ({ setActiveLink }) => {
             <Title txt={"Leverage price inefficiencies on your exchange."} />
             <Small
               txt={
-                "Market Arbitrage enables you to take advantage of price differences between pairs on your exchange."
+                "Market Arbitrage enables you to take advantage of price differences\n between pairs on your exchange."
               }
             />
           </div>
         </Holder>
       </Containerlight>
       <Containerdark>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
-          <div className="flex flex-col gap-4">
+        <Holder customClass={"lg:flex-row lg:items-center gap-10 lg:py-32"}>
+          <div className="flex flex-col gap-4 w-full">
             <Subtitle txt={"EXCHANGE ARBITRAGE"} />
             <Title txt={"Exchange Arbitrage, without withdrawals."} />
             <Small
               txt={
-                "Execute exchange arbitrage between exchanges without sending funds from one exchange to another. Just connect the exchanges with appropriate funds, enable Exchange Arbitrage, and let your QuadX do the rest."
+                "Execute exchange arbitrage between exchanges without sending funds from\n one exchange to another. Just connect the exchanges with appropriate funds,\n enable Exchange Arbitrage, and let your QuadX do the rest."
               }
             />
           </div>
@@ -113,14 +127,14 @@ const Protools = ({ setActiveLink }) => {
         </Holder>
       </Containerdark>
       <Containerlight>
-        <Holder customClass={"lg:flex-row lg:items-center gap-10"}>
+        <Holder customClass={"lg:flex-row lg:items-center gap-10 lg:py-32"}>
           <Imagecontainer img={pro4} imageWidth={"lg:w-[400px]"} />
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-full">
             <Subtitle txt={"MARKET MAKING"} />
             <Title txt={"Leverage big spreads, or create liquidity."} />
             <Small
               txt={
-                "Market makers are the best friend of every exchange or crypto project. Now you can profit easily from a big spread, and make the markets. A win-win for everybody."
+                "Market makers are the best friend of every exchange or crypto\n project. Now you can profit easily from a big spread, and make the\n markets. A win-win for everybody."
               }
             />
           </div>

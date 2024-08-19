@@ -107,7 +107,7 @@ const Holder = ({ children, customClass }) => {
 
 const Small = ({ text }) => {
   return (
-    <small className="text-slate-400 break-words text-xs font-thin">
+    <small className="text-slate-500 break-words text-sm font-thin">
       {formatTextWithLineBreaks(text)}
     </small>
   );
@@ -160,7 +160,11 @@ const Copybot = ({ setActiveLink }) => {
   return (
     <section>
       <Containerdark>
-        <Holder customClass={"lg:justify-between lg:flex-row lg:items-center"}>
+        <div
+          className={
+            "flex flex-col lg:mx-32 lg:justify-between lg:flex-row lg:items-center"
+          }
+        >
           <div className="flex flex-col gap-4">
             <Subtitle text={"Copy Bots"} />
             <Title text={"Copy top traders"} />
@@ -176,12 +180,14 @@ const Copybot = ({ setActiveLink }) => {
           <figure>
             <img src={clip} alt="Trading graphic" />
           </figure>
-        </Holder>
+        </div>
       </Containerdark>
       <Containerlight>
-        <Holder customClass={"pl-20 gap-20 lg:flex-row lg:items-center "}>
+        <Holder
+          customClass={"pl-20 gap-20 lg:flex-row lg:items-center lg:py-32"}
+        >
           <div className="flex flex-col gap-4 w-full">
-            <h3 className="text-xl lg:text-3xl font-bold text-center">
+            <h3 className="text-xl lg:text-4xl font-bold text-center">
               The benefits of a Copy Bot
             </h3>
             <div className={`flex flex-col lg:flex-row lg:items-start w-full `}>
@@ -218,12 +224,12 @@ const Copybot = ({ setActiveLink }) => {
             <hr className="border-[#333] border w-[95%] mx-auto" />
           </div>
           <div className="flex flex-col items-center justify-center gap-6 mt-10">
-            <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
+            <h3 className="text-xl lg:text-4xl font-bold capitalize text-center ">
               1.Select Copy Bot
             </h3>
             <Small
               text={
-                "Make informed decisions on who to copy based on the exchange the trader uses, the currencies they are trading, their trading results and reviews."
+                "Make informed decisions on who to copy based on the exchange the trader uses,\n the currencies they are trading, their trading results and\n reviews."
               }
             />
             <figure className="relative">
@@ -242,23 +248,23 @@ const Copybot = ({ setActiveLink }) => {
           customClass={"lg:justify-between lg:flex-row lg:items-center gap-10"}
         >
           <Imagecontainer img={clipcon} imageWidth={"w-[400px]"} />
-          <div>
+          <div className="flex flex-col gap-4">
             <Title text={"2. Connect Your Exchange"} />
             <Small
-              text={`Your funds stay safe on your exchange. Connect QuadX with API keys or Wallet Connect. We offer “How to connect to” tutorials for all supported crypto exchanges.The exchanges that are supported are Bybit, Binance, OKX, BitFinex, Coinbase, Bitget, Bitstamp, Gate.io, Kraken,. Gemini, HtX, Kucoin`}
+              text={`Your funds stay safe on your exchange. Connect QuadX with API keys or Wallet Connect.\n We offer “How to connect to” tutorials for all supported crypto exchanges.\n\nThe exchanges that are supported are Bybit, Binance, OKX, BitFinex, Coinbase, Bitget, Bitstamp, Gate.io, Kraken,. Gemini, HtX, Kucoin`}
             />
           </div>
         </Holder>
       </Containerlight>
       <Containerdark>
         <Holder>
-          <div className="flex flex-col items-center justify-center gap-6">
-            <h3 className="text-xl lg:text-3xl font-bold capitalize text-center ">
+          <div className="flex flex-col items-center justify-center gap-6 lg:py-32">
+            <h3 className="text-xl lg:text-4xl font-bold capitalize text-center ">
               3. Easily keep track of your Copy Bots` activity
             </h3>
             <Small
               text={
-                "Keeping track of your investments have never been easier Manual entries to a portfolio tracker are something of the past Your Dashboard will show all the positions your Copy Bot has opened"
+                "Keeping track of your investments have never been easier Manual entries\n to a portfolio tracker are something of the past Your Dashboard\n will show all the positions your Copy Bot has opened"
               }
             />
             <figure className="relative">
@@ -268,10 +274,10 @@ const Copybot = ({ setActiveLink }) => {
         </Holder>
       </Containerdark>
       <Containerlight>
-        <div className="flex flex-col gap-6 py-10 lg:mx-32 ">
+        <div className="flex flex-col gap-6 py-10 lg:mx-32 lg:py-32">
           <div className="flex items-center justify-center flex-col">
-            <h3 className="text-xl lg:text-3xl font-bold">Ready-to-use Bots</h3>
-            <small className="text-slate-400 break-words text-xs font-thin">
+            <h3 className="text-xl lg:text-4xl font-bold">Ready-to-use Bots</h3>
+            <small className="text-slate-500 break-words text-sm font-thin">
               -Steps for Configure a Bot strategy
             </small>
           </div>
@@ -286,7 +292,7 @@ const Copybot = ({ setActiveLink }) => {
               <h4 className="font-medium text-lg">
                 Start Trading on QuadX Today
               </h4>
-              <p className="font-thin text-xs text-slate-500">
+              <p className="font-thin text-sm text-slate-500">
                 Get trial with full-access to all QuadX trading tools.
               </p>
             </div>
