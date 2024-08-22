@@ -19,7 +19,7 @@ const Signin = () => {
   const { changeTitle } = useContext(TitleContext);
   const [formData, setFormData] = useState(initialState);
 
-  const { success, error, loading, accessToken } = useSelector(
+  const { success, error, loading, accessToken, user } = useSelector(
     (state) => state.login
   );
 
@@ -44,9 +44,6 @@ const Signin = () => {
     if (accessToken) {
       const tokenString = JSON.stringify(accessToken);
       sessionStorage.setItem("accessToken", tokenString);
-      sessionStorage.setItem("username", formData.username);
-      // console.log(tokenString);
-
       navigate("/dash");
     }
   }, [accessToken]);

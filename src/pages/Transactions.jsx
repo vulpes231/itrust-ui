@@ -3,18 +3,37 @@ import { TitleContext } from "../contexts/TitleContext";
 import { getAccessToken } from "../constants";
 import { History, Section } from "../components";
 import { styles } from "../constants/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getUser } from "../features/userSlice";
 
 const Transactions = () => {
+  const dispatch = useDispatch();
   const accessToken = getAccessToken();
   const { changeTitle } = useContext(TitleContext);
-  const username = sessionStorage.getItem("username");
+  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     changeTitle("Quadx - History");
 
     if (!accessToken) {
       navigate("/signin");
+    } else {
+      dispatch(getUser());
     }
   }, [accessToken]);
+
+  if (user?.isKYCVerified !== true) {
+    return (
+      <Section>
+        <div className="flex items-center justify-center flex-col">
+          <p>Verify your account to access the full application features.</p>
+          <Link className="underline text-xs font-thin" to={"/verify"}>
+            complete verification now
+          </Link>
+        </div>
+      </Section>
+    );
+  }
 
   return (
     <Section>
@@ -25,7 +44,7 @@ const Transactions = () => {
             <ul className="inline-flex items-center text-xs font-medium gap-2">
               <li>Home </li>
               <li className="inline-flex items-center mt-0.5">{`>`}</li>
-              <li>{username}</li>
+              <li>{user?.username}</li>
             </ul>
           </div>
           <div className="px-3">

@@ -10,8 +10,10 @@ import {
   Functions,
   Getstart,
   Pricing,
+  Profile,
   Signin,
   Signup,
+  Verify,
 } from "./pages";
 import { TitleProvider } from "./contexts/TitleContext";
 import { useSelector } from "react-redux";
@@ -118,6 +120,8 @@ const App = () => {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/tradingbot" element={<Tradingbot />} />
           <Route path="/history" element={<Transactions />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/verify" element={<Verify />} />
         </Routes>
       </div>
       {/* <Footer /> */}

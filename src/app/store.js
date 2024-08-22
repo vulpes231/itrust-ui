@@ -6,6 +6,7 @@ import walletReducer from "../features/walletSlice";
 import coinReducer from "../features/coinSlice";
 import botReducer from "../features/botSlice";
 import transactionReducer from "../features/transactionSlice";
+import userReducer from "../features/userSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     coin: coinReducer,
     bot: botReducer,
     transaction: transactionReducer,
+    user: userReducer,
   },
 });
 

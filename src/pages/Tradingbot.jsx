@@ -5,11 +5,12 @@ import { Analytics, Section } from "../components";
 import { styles } from "../constants/styles";
 import Bots from "../components/dash/Bots";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllBots, getUserBots } from "../features/botSlice";
 import { getUserAccount } from "../features/walletSlice";
 import Botform from "../components/trading/Botform";
 import Activebot from "../components/trading/Activebots";
+import { getUser } from "../features/userSlice";
 
 const Tradingbot = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const Tradingbot = () => {
   const accessToken = getAccessToken();
   const { changeTitle } = useContext(TitleContext);
   const [showBorder, setShowBorder] = useState(false);
+
+  const { user } = useSelector((state) => state.user);
 
   const { userBots, bots } = useSelector((state) => state.bot);
   const { userAccounts, getAccountLoading, getAccountError } = useSelector(
@@ -45,6 +48,7 @@ const Tradingbot = () => {
       dispatch(getAllBots());
       dispatch(getUserBots());
       dispatch(getUserAccount());
+      dispatch(getUser());
     }
   }, [accessToken]);
 
@@ -58,6 +62,19 @@ const Tradingbot = () => {
       return () => clearTimeout(timeout);
     }
   }, [showBorder]);
+
+  if (user?.isKYCVerified !== true) {
+    return (
+      <Section>
+        <div className="flex items-center justify-center flex-col">
+          <p>Verify your account to access the full application features.</p>
+          <Link className="underline text-xs font-thin" to={"/verify"}>
+            complete verification now
+          </Link>
+        </div>
+      </Section>
+    );
+  }
 
   return (
     <Section>
