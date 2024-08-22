@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyAccount } from "../features/userSlice";
+import { verifyAccount } from "../features/verifySlice";
+import { Link, useNavigate } from "react-router-dom";
+import { TitleContext } from "../contexts/TitleContext";
+import { getAccessToken } from "../constants";
 
 const initialState = {
-  passport: "",
-  idFront: "",
-  idBack: "",
-  utility: "",
+  passport: null,
+  idFront: null,
+  idBack: null,
+  utility: null,
 };
 
 const Verify = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
+  const { changeTitle } = useContext(TitleContext);
+
+  const accessToken = getAccessToken();
 
   const { verifyLoading, verifyError, verified } = useSelector(
-    (state) => state.user
+    (state) => state.verify
   );
 
   const handleFileChange = (e) => {
@@ -35,20 +42,43 @@ const Verify = () => {
         formData.append(key, form[key]);
       }
     }
+
     dispatch(verifyAccount(formData));
   };
 
+  const resetForm = () => {
+    setForm(initialState);
+  };
+
   useEffect(() => {
+    let timeout;
     if (verified) {
-      console.log("Account verified!");
+      timeout = 2000;
+      resetForm();
+      setTimeout(() => {
+        navigate("/dash");
+      }, timeout);
     }
+    return () => clearTimeout(timeout);
   }, [verified]);
+
+  useEffect(() => {
+    changeTitle("Quadx - Verify Account");
+
+    if (!accessToken) {
+      navigate("/signin");
+    }
+  }, [accessToken]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="dark:bg-white bg-slate-900 text-white dark:text-slate-950 p-8 rounded-lg shadow-lg w-full max-w-3xl">
         <h1 className="text-3xl font-bold mb-6">Verify your account</h1>
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form
+          className="space-y-6"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div>
             <label className="block text-lg font-medium mb-2">
               Upload Passport
@@ -117,6 +147,14 @@ const Verify = () => {
         {verifyError && (
           <div className="mt-4 text-red-500">
             <p>Error: {verifyError}</p>
+          </div>
+        )}
+        {verified && (
+          <div className="absolute top-[30%] right-0 text-yellow-500">
+            <p>verification pending</p>
+            <Link className="underline" to={"/dash"}>
+              go to account
+            </Link>
           </div>
         )}
       </div>

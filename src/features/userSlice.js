@@ -10,9 +10,6 @@ const initialState = {
   updateUserLoading: false,
   updateUserError: false,
   userUpdated: false,
-  verifyLoading: false,
-  verifyError: false,
-  verified: false,
 };
 
 export const getUser = createAsyncThunk("user/getUser", async () => {
@@ -29,7 +26,7 @@ export const getUser = createAsyncThunk("user/getUser", async () => {
     return response.data;
   } catch (error) {
     if (error.response) {
-      const errMsg = error.response.message.data;
+      const errMsg = error.response.data.message;
       throw new Error(errMsg);
     } else {
       throw new Error("An error occurred. ");
@@ -53,32 +50,7 @@ export const updateUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response) {
-        const errMsg = error.response.message.data;
-        throw new Error(errMsg);
-      } else {
-        throw new Error("An error occurred. ");
-      }
-    }
-  }
-);
-
-export const verifyAccount = createAsyncThunk(
-  "user/verifyAccount",
-  async (formData) => {
-    const accessToken = getAccessToken();
-    const url = `${devserver}/user/verify`;
-    try {
-      const response = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      if (error.response) {
-        const errMsg = error.response.message.data;
+        const errMsg = error.response.data.message;
         throw new Error(errMsg);
       } else {
         throw new Error("An error occurred. ");
@@ -126,21 +98,6 @@ const userSlice = createSlice({
         state.updateUserLoading = false;
         state.userUpdated = false;
         state.updateUserError = action.error.message;
-      });
-
-    builder
-      .addCase(verifyAccount.pending, (state) => {
-        state.verifyLoading = true;
-      })
-      .addCase(verifyAccount.fulfilled, (state) => {
-        state.verifyLoading = false;
-        state.verified = true;
-        state.verifyError = false;
-      })
-      .addCase(verifyAccount.rejected, (state, action) => {
-        state.verifyLoading = false;
-        state.verified = false;
-        state.verifyError = action.error.message;
       });
   },
 });

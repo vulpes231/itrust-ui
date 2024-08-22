@@ -10,6 +10,7 @@ import { btc, doge, eth, ltc, tether } from "../assets";
 import { getCoinData } from "../features/coinSlice";
 import Trnx from "../components/history/Trnx";
 import Trans from "../components/wallet/Trans";
+import { getUser } from "../features/userSlice";
 
 const headers = [
   { id: "date", name: "date" },
@@ -51,7 +52,7 @@ const Wallet = () => {
     setActiveSection(section);
   };
 
-  const username = sessionStorage.getItem("username");
+  const { user } = useSelector((state) => state.user);
 
   const btcPrice = getSingleCoinPrice("btc", coinData);
   const ethPrice = getSingleCoinPrice("eth", coinData);
@@ -72,6 +73,7 @@ const Wallet = () => {
       dispatch(getUserAccount());
       dispatch(getUserBalance());
       dispatch(getCoinData());
+      dispatch(getUser());
     }
   }, [accessToken, dispatch]);
 
@@ -113,7 +115,7 @@ const Wallet = () => {
           <ul className="inline-flex items-center text-xs font-medium gap-2">
             <li>Home </li>
             <li className="inline-flex items-center mt-0.5">{`>`}</li>
-            <li className="capitalize">{username}</li>
+            <li className="capitalize">{user?.username}</li>
           </ul>
         </div>
         <div className="grid gap-6 lg:grid-cols-3">

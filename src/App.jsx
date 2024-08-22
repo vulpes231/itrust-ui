@@ -6,11 +6,14 @@ import {
   Company,
   Copybot,
   Dashboard,
+  Docs,
   Frequent,
   Functions,
   Getstart,
+  Plans,
   Pricing,
   Profile,
+  Rewards,
   Signin,
   Signup,
   Verify,
@@ -122,6 +125,9 @@ const App = () => {
           <Route path="/history" element={<Transactions />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/plans" element={<Plans />} />
+          <Route path="/rewards" element={<Rewards />} />
+          <Route path="/docs" element={<Docs />} />
         </Routes>
       </div>
       {/* <Footer /> */}

@@ -27,7 +27,12 @@ const Transactions = () => {
       <Section>
         <div className="flex items-center justify-center flex-col">
           <p>Verify your account to access the full application features.</p>
-          <Link className="underline text-xs font-thin" to={"/verify"}>
+          <Link
+            className={`"underline text-xs font-thin ${
+              user?.KYCStatus !== "not verified" ? "hidden" : "flex"
+            }`}
+            to={"/verify"}
+          >
             complete verification now
           </Link>
         </div>

@@ -59,11 +59,24 @@ const Dashboard = () => {
           </div>
           {!user?.isKYCVerified && (
             <p className="flex flex-col items-center">
-              <span className="text-red-500">
+              <span
+                className={` capitalize ${
+                  user?.KYCStatus === "not verified"
+                    ? "text-red-500"
+                    : user?.KYCStatus === "pending"
+                    ? "text-yellow-500"
+                    : "text-green-500"
+                }`}
+              >
                 {" "}
-                Account status: Not verified
+                Account status: {user?.KYCStatus}
               </span>
-              <Link to={"/verify"} className="underline text-xs cursor-pointer">
+              <Link
+                to={"/verify"}
+                className={`underline text-xs cursor-pointer ${
+                  user?.KYCStatus !== "not verified" ? "hidden" : "flex"
+                }`}
+              >
                 complete verification.
               </Link>
             </p>

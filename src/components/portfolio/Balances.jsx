@@ -17,7 +17,7 @@ const Balances = ({ totalBalance, userAccount }) => {
           />
         </span>
         <p className="font-semibold text-lg">
-          ${userAccount.account.tradingBalance.toFixed(2)}
+          ${userAccount?.account?.tradingBalance?.toFixed(2)}
         </p>
         <p className="capitalize font-normal text-xs">
           crypto holdings: ${totalBalance}

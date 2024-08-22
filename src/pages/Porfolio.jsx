@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { styles } from "../constants/styles";
 import Bots from "../components/dash/Bots";
 import { getUserAccount, getUserBalance } from "../features/walletSlice";
+import { getUser } from "../features/userSlice";
 
 const Porfolio = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,8 @@ const Porfolio = () => {
   const { changeTitle } = useContext(TitleContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
-  const username = sessionStorage.getItem("username");
+
+  const { user } = useSelector((state) => state.user);
 
   const { coinData } = useSelector((state) => state.coin);
 
@@ -51,6 +53,7 @@ const Porfolio = () => {
       dispatch(getCoinData());
       dispatch(getUserAccount());
       dispatch(getUserBalance());
+      dispatch(getUser());
     }
   }, []);
 
@@ -84,7 +87,7 @@ const Porfolio = () => {
             <ul className="inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-300 gap-2">
               <li>Home </li>
               <li className="inline-flex items-center mt-0.5">{`>`}</li>
-              <li>{username}</li>
+              <li className="capitalize">{user?.username}</li>
             </ul>
           </div>
           <div className="px-3">

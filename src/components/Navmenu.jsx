@@ -65,10 +65,22 @@ const Navmenu = ({ handleLogout }) => {
               icon={<FaUser />}
               path={"/profile"}
             />
-            <Sidebarlink title={"rewards"} icon={<MdFmdGood />} />
-            <Sidebarlink title={"plans"} icon={<MdSubscriptions />} />
-            <Sidebarlink title={"documents"} icon={<MdEditDocument />} />
-            <Sidebarlink title={"settings"} icon={<MdSettings />} />
+            <Sidebarlink
+              title={"rewards"}
+              icon={<MdFmdGood />}
+              path={"/rewards"}
+            />
+            <Sidebarlink
+              title={"plans"}
+              icon={<MdSubscriptions />}
+              path={"/plans"}
+            />
+            <Sidebarlink
+              title={"documents"}
+              icon={<MdEditDocument />}
+              path={"/docs"}
+            />
+            {/* <Sidebarlink title={"settings"} icon={<MdSettings />} /> */}
             <li
               className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize`}
               onClick={handleLogout}
