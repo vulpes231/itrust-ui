@@ -25,7 +25,7 @@ export const getUser = createAsyncThunk("user/getUser", async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {

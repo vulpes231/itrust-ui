@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { profile } from "../assets";
 import Sidebarlink from "./Sidebarlink";
-import { MdLogout, MdMoney, MdOutlinePolicy, MdSettings } from "react-icons/md";
+import {
+  MdEditDocument,
+  MdFmdGood,
+  MdLogout,
+  MdMoney,
+  MdOutlinePolicy,
+  MdSettings,
+  MdSubscriptions,
+} from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { styles } from "../constants/styles";
+import { getAccessToken } from "../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../features/userSlice";
 
 const Navmenu = ({ handleLogout }) => {
+  const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
+  const accessToken = getAccessToken();
+
+  const { user } = useSelector((state) => state.user);
+
   const showMenu = () => {
     setMenu((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUser());
+    }
+  }, [accessToken]);
+
   return (
     <div
       onClick={showMenu}
@@ -19,7 +42,7 @@ const Navmenu = ({ handleLogout }) => {
       <div
         className={
           menu
-            ? "bg-[#fff] w-[170px] absolute top-[47px] right-1 rounded-md shadow-sm font-[Montserrat]"
+            ? "bg-slate-950 border dark:border-none text-white dark:bg-white dark:text-slate-950 w-[170px] absolute top-[47px] right-1 rounded-md shadow-sm font-[Montserrat]"
             : "hidden"
         }
       >
@@ -28,21 +51,23 @@ const Navmenu = ({ handleLogout }) => {
             <img src={profile} alt="" width={30} className="" />
           </span>
           <span className="text-xs flex flex-col">
-            <small className="font-bold text-zinc-400">Test User</small>
-            <small className="bg-purple-100 py-1 px-2 rounded-lg text-purple-500 font-semibold">
+            <small className="font-bold capitalize">{user?.username}</small>
+            <small className="bg-purple-100 bg-opacity-15 py-1 px-2 rounded-lg text-purple-500 font-semibold">
               Balance: $0.00
             </small>
           </span>
         </div>
         <hr />
-        <div className="px-3 text-zinc-400 text-xs font-medium">
+        <div className="px-3 text-xs font-medium">
           <ul className="flex flex-col py-5">
             <Sidebarlink
               title={"profile"}
               icon={<FaUser />}
               path={"/profile"}
             />
-            {/* <Sidebarlink title={"change password"} icon={<MdOutlinePolicy />} /> */}
+            <Sidebarlink title={"rewards"} icon={<MdFmdGood />} />
+            <Sidebarlink title={"plans"} icon={<MdSubscriptions />} />
+            <Sidebarlink title={"documents"} icon={<MdEditDocument />} />
             <Sidebarlink title={"settings"} icon={<MdSettings />} />
             <li
               className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize`}

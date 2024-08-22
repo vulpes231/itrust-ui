@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import Section from "../components/Section";
+
 import Changepass from "../components/Changepass";
 
 import { MdMailOutline, MdPhone, MdPhonelink } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { getAccessToken } from "../constants";
+import { getUser } from "../features/userSlice";
 
 const Flexdiv = ({ children }) => {
   return <div className="flex flex-col  w-full">{children}</div>;
@@ -11,7 +14,7 @@ const Flexdiv = ({ children }) => {
 const Userinput = ({ placeholder }) => {
   return (
     <input
-      className="outline-none w-full p-2 border-2 bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs"
+      className="outline-none w-full p-2 border-2 dark:border-slate-950 bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs"
       type="text"
       placeholder={placeholder}
       readOnly
@@ -21,16 +24,29 @@ const Userinput = ({ placeholder }) => {
 
 const Userlabel = ({ labelFor }) => {
   return (
-    <label htmlFor={labelFor} className="capitalize text-slate-400">
+    <label
+      htmlFor={labelFor}
+      className="capitalize text-slate-400 dark:text-slate-800"
+    >
       {labelFor}
     </label>
   );
 };
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const accessToken = getAccessToken();
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
     document.title = "Quadx - User Profile";
   }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUser());
+    }
+  }, [accessToken]);
   return (
     <div className="w-full lg:max-w-[1100px] lg:mx-auto flex flex-col items-center py-10 min-h-screen">
       {/* <h3 className="text-sm lg:text-xl uppercase font-bold">
@@ -38,15 +54,15 @@ const Profile = () => {
       </h3> */}
       <div className="grid lg:grid-cols-3 w-full">
         {/* image and personal */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-8">
           <img src="" alt="" className="w-200px" />
-          <h5>test user</h5>
+          <h5 className="font-bold capitalize">{user?.username}</h5>
           <small className="flex items-center gap-1">
             {" "}
-            <MdMailOutline /> testuser@mail.com
+            <MdMailOutline /> {user?.email}
           </small>
           <small className="flex items-center gap-1">
-            <MdPhonelink /> +123456789
+            <MdPhonelink /> {user?.phone}
           </small>
         </div>
         {/* others */}
@@ -59,21 +75,21 @@ const Profile = () => {
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"name"} />
-                  <Userinput placeholder={"firstname"} />
+                  <Userinput placeholder={user?.firstname || "John"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"surname"} />
-                  <Userinput placeholder={"lastname"} />
+                  <Userinput placeholder={user?.firstname || "Doe"} />
                 </Flexdiv>
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"username"} />
-                  <Userinput placeholder={"username"} />
+                  <Userinput placeholder={user?.username || "Testuser"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"date of birth"} />
-                  <Userinput placeholder={"lastname"} />
+                  <Userinput placeholder={user?.dob || "yyyy/mm/dd"} />
                 </Flexdiv>
               </div>
             </form>
@@ -88,38 +104,39 @@ const Profile = () => {
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"phone"} />
-                  <Userinput placeholder={"phone number"} />
+                  <Userinput placeholder={user?.phone || "+1234567890"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"email"} />
-                  <Userinput placeholder={"email"} />
+                  <Userinput
+                    placeholder={user?.email || "example@example.com"}
+                  />
                 </Flexdiv>
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"street address"} />
-                  <Userinput placeholder={"123 example street"} />
+                  <Userinput
+                    placeholder={user?.address?.street || "123 example street"}
+                  />
                 </Flexdiv>
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"state"} />
-                  <Userinput placeholder={"state"} />
+                  <Userinput placeholder={user?.address?.state || "Meza"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"city"} />
-                  <Userinput placeholder={"city"} />
+                  <Userinput placeholder={user?.address?.city || "Downtown"} />
                 </Flexdiv>
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"zip"} />
-                  <Userinput placeholder={"zip"} />
+                  <Userinput placeholder={user?.address?.zipcode || "12345"} />
                 </Flexdiv>
-                <Flexdiv>
-                  <Userlabel labelFor={"date of birth"} />
-                  <Userinput placeholder={"lastname"} />
-                </Flexdiv>
+                <Flexdiv></Flexdiv>
               </div>
             </form>
           </div>
@@ -133,32 +150,30 @@ const Profile = () => {
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"social security number"} />
-                  <Userinput placeholder={"ssn"} />
+                  <Userinput placeholder={user?.ssn || "NONE"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"occupation"} />
-                  <Userinput placeholder={"occupation"} />
+                  <Userinput placeholder={user?.occupation || "NONE"} />
                 </Flexdiv>
               </div>
 
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"nationality"} />
-                  <Userinput placeholder={"nationality"} />
+                  <Userinput placeholder={user?.nationality || "alien"} />
                 </Flexdiv>
                 <Flexdiv>
                   <Userlabel labelFor={"currency"} />
-                  <Userinput placeholder={"currency"} />
+                  <Userinput placeholder={user?.currency || "NONE"} />
                 </Flexdiv>
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
                 <Flexdiv>
                   <Userlabel labelFor={"experience"} />
-                  <Userinput placeholder={"experience"} />
+                  <Userinput placeholder={user?.experience || "NONE"} />
                 </Flexdiv>
-                <Flexdiv>
-                  <Userlabel labelFor={"date of birth"} />
-                </Flexdiv>
+                <Flexdiv></Flexdiv>
               </div>
             </form>
           </div>
