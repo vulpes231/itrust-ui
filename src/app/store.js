@@ -8,6 +8,8 @@ import botReducer from "../features/botSlice";
 import transactionReducer from "../features/transactionSlice";
 import userReducer from "../features/userSlice";
 import verifyReducer from "../features/verifySlice";
+import planReducer from "../features/planSlice";
+import docuReducer from "../features/docuSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     transaction: transactionReducer,
     user: userReducer,
     verify: verifyReducer,
+    plan: planReducer,
+    docu: docuReducer,
   },
 });
 
