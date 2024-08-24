@@ -1,5 +1,5 @@
 import axios from "axios";
-import { devserver, getAccessToken } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -14,7 +14,7 @@ export const verifyAccount = createAsyncThunk(
   async (formData) => {
     console.log(formData);
     const accessToken = getAccessToken();
-    const url = `${devserver}/verify`;
+    const url = `${liveserver}/verify`;
     try {
       const response = await axios.post(url, formData, {
         headers: {

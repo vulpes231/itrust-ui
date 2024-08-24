@@ -1,5 +1,5 @@
 import axios from "axios";
-import { devserver, getAccessToken } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -13,7 +13,7 @@ export const getUserDocuments = createAsyncThunk(
   "docu/getUserDocuments",
   async () => {
     const accessToken = getAccessToken();
-    const url = `${devserver}/docs`;
+    const url = `${liveserver}/docs`;
     try {
       const response = await axios.get(url, {
         headers: {

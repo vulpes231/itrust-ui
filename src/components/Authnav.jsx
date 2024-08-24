@@ -100,7 +100,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
         {loading && <Logoutmodal />}
       </div>
       {/* mobile menu */}
-      <div className="fixed bottom-0 left-0 sm:hidden w-full py-4 px-5">
+      <div className="fixed bottom-0 left-0 sm:hidden w-full py-4 px-5 bg-slate-950 dark:bg-white">
         <ul className="flex items-center justify-between">
           <Mobilelink title={"account"} icon={<GoHome />} path={"/dash"} />
           <Mobilelink

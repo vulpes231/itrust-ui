@@ -35,6 +35,38 @@ const App = () => {
   const { accessToken } = useSelector((state) => state.login);
   const location = useLocation(); // Get the current route
 
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the A2HS prompt");
+        } else {
+          console.log("User dismissed the A2HS prompt");
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
+
   const handleModeToggle = () => {
     setDarkMode(!darkMode);
   };
@@ -129,6 +161,14 @@ const App = () => {
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/docs" element={<Docs />} />
         </Routes>
+        {deferredPrompt && (
+          <button
+            onClick={handleInstallClick}
+            className="bg-purple-500 text-white px-4 py-2 rounded"
+          >
+            Install App
+          </button>
+        )}
       </div>
       {/* <Footer /> */}
     </TitleProvider>

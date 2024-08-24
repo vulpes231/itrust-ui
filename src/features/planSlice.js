@@ -1,5 +1,5 @@
 import axios from "axios";
-import { devserver, getAccessToken } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -11,7 +11,7 @@ const initialState = {
 
 export const getPlans = createAsyncThunk("plan/getPlans", async () => {
   const accessToken = getAccessToken();
-  const url = `${devserver}/plans`;
+  const url = `${liveserver}/plans`;
   try {
     const response = await axios.get(url, {
       headers: {
