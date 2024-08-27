@@ -9,8 +9,8 @@ const intitialState = {
 };
 
 const styles = {
-  input: `outline-none w-full p-2 border-2 bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs`,
-  label: `capitalize text-slate-400 text-sm`,
+  input: `outline-none w-full p-2 border bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs focus:border-none focus:outline-purple-500`,
+  label: `capitalize text-sm font-medium`,
 };
 
 const Changepass = () => {
@@ -71,18 +71,18 @@ const Changepass = () => {
     return () => clearTimeout(timeout);
   }, [passwordChanged]);
   return (
-    <form action="" className="flex flex-col gap-2 pt-5">
-      <h4 className="text-xs lg:text-lg font-medium capitalize">
-        Change password
+    <form action="" className="flex flex-col gap-2 bg-black dark:bg-white">
+      <h4 className="text-xs lg:text-lg font-semibold capitalize p-6">
+        password update
       </h4>
-      <div className="grid md:grid-cols-2 gap-4">
+      <hr />
+      <div className="grid gap-4 p-6">
         <div className="flex flex-col gap-1">
           <label className={styles.label} htmlFor="">
             current password
           </label>
           <input
             type="text"
-            placeholder="current password"
             onChange={handleInput}
             value={form.password}
             name="password"
@@ -95,7 +95,6 @@ const Changepass = () => {
           </label>
           <input
             type="text"
-            placeholder="new password"
             onChange={handleInput}
             value={form.newPassword}
             name="newPassword"
@@ -108,7 +107,6 @@ const Changepass = () => {
           </label>
           <input
             type="text"
-            placeholder="confirm password"
             onChange={handleInput}
             value={form.confirmNewPass}
             name="confirmNewPass"
@@ -121,10 +119,10 @@ const Changepass = () => {
         <p className="text-green-500">password updated successfully.</p>
       )}
       <button
-        className="bg-purple-500 text-white border-none py-2.5 w-[180px] text-center rounded-3xl capitalize font-medium text-sm"
+        className="bg-purple-500 text-white border-none py-2.5 w-[140px] text-center rounded-sm capitalize font-medium text-sm mt-5 shadow-xl m-6"
         onClick={handleSubmit}
       >
-        {!changeLoading ? "change password" : "wait..."}
+        {!changeLoading ? "update" : "wait..."}
       </button>
     </form>
   );

@@ -22,6 +22,8 @@ import copy from "./landingaset/copy.svg";
 import dca from "./landingaset/dca.svg";
 import pro from "./landingaset/ai.svg";
 import btc from "./btc.png";
+import btcs from "./btc.svg";
+import rew from "./rew.svg";
 import eth from "./eth.png";
 import tether from "./tet.png";
 import profile from "./profile.png";
@@ -83,6 +85,8 @@ import start2 from "./start2.png";
 
 export {
   grid,
+  btcs,
+  rew,
   start1,
   start2,
   fund1,

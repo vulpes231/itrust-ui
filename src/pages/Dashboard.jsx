@@ -57,30 +57,7 @@ const Dashboard = () => {
               <li className="capitalize">{user?.username}</li>
             </ul>
           </div>
-          {!user?.isKYCVerified && (
-            <p className="hidden md:flex flex-col items-center ">
-              <span
-                className={` capitalize ${
-                  user?.KYCStatus === "not verified"
-                    ? "text-red-500"
-                    : user?.KYCStatus === "pending"
-                    ? "text-yellow-500"
-                    : "text-green-500"
-                }`}
-              >
-                {" "}
-                Account status: {user?.KYCStatus}
-              </span>
-              <Link
-                to={"/verify"}
-                className={`underline text-xs cursor-pointer ${
-                  user?.KYCStatus !== "not verified" ? "hidden" : "flex"
-                }`}
-              >
-                complete verification.
-              </Link>
-            </p>
-          )}
+
           <div className="px-3">
             <button
               className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
@@ -89,30 +66,34 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        {!user?.isKYCVerified && (
-          <p className="flex flex-col items-center text-xs sm:hidden">
+        <div className={`grid grid-cols-3  `}>
+          {!user?.isKYCVerified && (
             <span
-              className={` capitalize ${
+              className={`capitalize border rounded-lg p-4 flex flex-col gap-4 col-span-2 ${
                 user?.KYCStatus === "not verified"
-                  ? "text-red-500"
+                  ? "border-red-500"
                   : user?.KYCStatus === "pending"
-                  ? "text-yellow-500"
-                  : "text-green-500"
+                  ? "border-yellow-500"
+                  : "border-green-500"
               }`}
             >
-              {" "}
-              Account status: {user?.KYCStatus}
+              <h4 className="font-bold">verify your identity</h4>
+              <p className="w-[80%] lowercase text-slate-300 text-sm">
+                Kindly complete your profile and upload a photo of your state
+                ID, driver's license or passport so we can finish processing
+                your application.
+              </p>
+              <Link
+                to={"/verify"}
+                className={`text-xs cursor-pointer text-purple-500 ${
+                  user?.KYCStatus === "not verified" ? "flex" : "hidden"
+                }  `}
+              >
+                upload document now
+              </Link>
             </span>
-            <Link
-              to={"/verify"}
-              className={`underline text-xs cursor-pointer ${
-                user?.KYCStatus !== "not verified" ? "hidden" : "flex"
-              }`}
-            >
-              complete verification.
-            </Link>
-          </p>
-        )}
+          )}
+        </div>
         <>
           <Account username={user?.username} />
         </>
