@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCoinData } from "../features/coinSlice";
 import { styles } from "../constants/styles";
 import { getUser } from "../features/userSlice";
+import Identitystepone from "./Identitystepone";
+import Verify from "./Verify";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -22,7 +24,17 @@ const Dashboard = () => {
 
   const accessToken = getAccessToken();
 
-  // console.log(user);
+  const [verifyIdentityModal, setVerifyIdentityModal] = useState(false);
+  const [verifyStepTwo, setVerifyStepTwo] = useState(false);
+
+  const handleStep = (e) => {
+    e.preventDefault();
+    setVerifyIdentityModal(false);
+    setVerifyStepTwo(true);
+  };
+  const cancelVerify = () => {
+    setVerifyStepTwo(false);
+  };
 
   useEffect(() => {
     changeTitle("Quadx - Dashboard");
@@ -59,38 +71,42 @@ const Dashboard = () => {
           </div>
 
           <div className="px-3">
-            <button
+            <Link
+              to={"/wallet"}
               className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
             >
               Deposit
-            </button>
+            </Link>
           </div>
         </div>
         <div className={`grid grid-cols-3  `}>
           {!user?.isKYCVerified && (
             <span
-              className={`capitalize border rounded-lg p-4 flex flex-col gap-4 col-span-2 ${
-                user?.KYCStatus === "not verified"
-                  ? "border-red-500"
-                  : user?.KYCStatus === "pending"
-                  ? "border-yellow-500"
-                  : "border-green-500"
-              }`}
+              className={`capitalize rounded-lg flex flex-col gap-4 col-span-2 `}
             >
-              <h4 className="font-bold">verify your identity</h4>
-              <p className="w-[80%] lowercase text-slate-300 text-sm">
-                Kindly complete your profile and upload a photo of your state
-                ID, driver's license or passport so we can finish processing
-                your application.
-              </p>
-              <Link
-                to={"/verify"}
-                className={`text-xs cursor-pointer text-purple-500 ${
-                  user?.KYCStatus === "not verified" ? "flex" : "hidden"
-                }  `}
-              >
-                upload document now
-              </Link>
+              {user?.KYCStatus == "not verified" ? (
+                <div className="flex flex-col gap-4 border-red-500 border p-4">
+                  <h4 className="font-bold">verify your identity</h4>
+                  <p className="w-[80%] lowercase text-slate-300 text-sm">
+                    Kindly complete your profile and upload a photo of your
+                    state ID, driver's license or passport so we can finish
+                    processing your application.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setVerifyIdentityModal(true)}
+                    className={`text-xs cursor-pointer text-purple-500 ${
+                      user?.KYCStatus === "not verified" ? "flex" : "hidden"
+                    }  `}
+                  >
+                    upload document now
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4 border-yellow-500 border p-4 font-bold">
+                  <p>Document uploaded and pending approval</p>
+                </div>
+              )}
             </span>
           )}
         </div>
@@ -103,6 +119,8 @@ const Dashboard = () => {
         <>
           <Currencies coinData={coinData} />
         </>
+        {verifyIdentityModal && <Identitystepone step={handleStep} />}
+        {verifyStepTwo && <Verify cancelVerify={cancelVerify} />}
       </div>
     </Section>
   );

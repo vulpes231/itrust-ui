@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import Bots from "./Bots";
 import RecentActivity from "./Recentactivity";
@@ -7,22 +7,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllBots } from "../../features/botSlice";
 import { getAccessToken } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../../features/userSlice";
+import Unverified from "../Unverified";
 
 const Currencies = ({ coinData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [verifyError, setVerifyError] = useState(false);
   const { bots } = useSelector((state) => state.bot);
+  const { user } = useSelector((state) => state.user);
 
   const accessToken = getAccessToken();
   useEffect(() => {
     if (accessToken) {
       dispatch(getAllBots());
+      dispatch(getUser());
     }
   }, [accessToken, dispatch]);
 
-  const handleClick = () => {
-    navigate("/tradingbot");
+  const handleLinkClick = (e, path) => {
+    e.preventDefault();
+
+    if (user?.KYCstatus == "verified") {
+      navigate(path);
+    } else {
+      setVerifyError(true);
+    }
   };
+
+  useEffect(() => {
+    let timeout;
+    if (verifyError) {
+      timeout = 2000;
+      setTimeout(() => {
+        setVerifyError(false);
+      }, timeout);
+    }
+    () => clearTimeout(timeout);
+  }, [verifyError]);
 
   return (
     <section className="grid lg:grid-cols-3 gap-5 ">
@@ -135,9 +157,10 @@ const Currencies = ({ coinData }) => {
           title={"Available BOTS"}
           name={"add bot"}
           botData={bots}
-          handleClick={handleClick}
+          handleClick={handleLinkClick}
         />
       </div>
+      {verifyError && <Unverified />}
     </section>
   );
 };

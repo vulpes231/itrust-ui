@@ -65,6 +65,7 @@ import ideal from "./ideal.png";
 import watch from "./watch.png";
 import phone from "./phone.png";
 import clip from "./clip.png";
+import verify from "./verify.svg";
 import clipbg from "./clipbg.png";
 import clipcon from "./clipcon.png";
 import cliphone from "./cliphone.png";
@@ -168,4 +169,5 @@ export {
   htx,
   kucoin,
   cicon,
+  verify,
 };

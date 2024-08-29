@@ -76,11 +76,12 @@ const Tradingbot = () => {
             </ul>
           </div>
           <div className="px-3">
-            <button
+            <Link
+              to={"/wallet"}
               className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
             >
               Deposit
-            </button>
+            </Link>
           </div>
         </div>
         {/* content */}
