@@ -3,7 +3,7 @@ import { verify } from "../assets";
 
 const Identitystepone = ({ step }) => {
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-black bg-opacity-40 absolute top-0 left-0">
+    <div className="w-full font-[Montserrat] h-screen flex items-center justify-center bg-black bg-opacity-40 absolute top-0 left-0">
       <div className="flex flex-col dark:bg-white bg-black border border-slate-700 dark:border-none w-full md:w-[500px] lg:-mt-20">
         <h3 className="capitalize font-bold p-4">upload document</h3>
         <figure>

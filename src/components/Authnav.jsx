@@ -17,6 +17,7 @@ import { styles } from "../constants/styles";
 import { getAccessToken } from "../constants";
 import { getUser } from "../features/userSlice";
 import Unverified from "./Unverified";
+import { FaGears } from "react-icons/fa6";
 
 const Authlink = ({ title, icon, path, closeMenu, handleLinkClick }) => {
   return (
@@ -131,6 +132,11 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
               path={"/history"}
               handleLinkClick={(e) => handleLinkClick(e, "/history")}
             />
+            <Sidebarlink
+              title={"settings"}
+              icon={<FaGears />}
+              path={"/settings"}
+            />
           </ul>
           <ul className="flex items-center gap-x-3 lg:gap-x-5">
             <li className="inline-flex relative">
@@ -173,6 +179,11 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             icon={<LuArchive />}
             path={"/history"}
             handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
+          />
+          <Mobilelink
+            title={"settings"}
+            icon={<FaGears />}
+            path={"/settings"}
           />
         </ul>
       </div>

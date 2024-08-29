@@ -72,7 +72,7 @@ const Profile = () => {
     }
   }, [userUpdated]);
   return (
-    <div className="w-full lg:max-w-[1100px] lg:mx-auto flex flex-col items-center py-10 min-h-screen">
+    <div className="w-full lg:max-w-[1100px] font-[Montserrat] lg:mx-auto flex flex-col items-center py-10 min-h-screen">
       <div className="flex justify-between items-center w-full py-10 text-xs">
         <h3 className="text-sm lg:text-2xl capitalize font-bold">profile</h3>
         <span className="flex items-center gap-2">

@@ -14,6 +14,7 @@ import {
   Pricing,
   Profile,
   Rewards,
+  Settings,
   Signin,
   Signup,
   Verify,
@@ -161,6 +162,7 @@ const App = () => {
           <Route path="/plans" element={<Plans />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/docs" element={<Docs />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
         {deferredPrompt && (
           <button

@@ -41,7 +41,7 @@ const Plans = () => {
   }, [dispatch, accessToken]);
   return (
     <Section>
-      <div className="lg:max-w-[1100px] lg:mx-auto flex flex-col gap-5 ">
+      <div className="lg:max-w-[1100px] lg:mx-auto flex flex-col gap-5 font-[Montserrat]">
         <div className="flex justify-between items-center capitalize">
           <h3>My Plan</h3>
           <p>current plan: {user?.plan}</p>

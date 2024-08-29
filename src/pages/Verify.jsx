@@ -78,7 +78,7 @@ const Verify = ({ cancelVerify }) => {
   }, [accessToken]);
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-black bg-opacity-40 absolute top-0 left-0 overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-black bg-opacity-40 absolute top-0 left-0 overflow-hidden font-[Montserrat]">
       <div className="flex flex-col dark:bg-white bg-black border border-slate-700 dark:border-none w-full md:w-[700px] lg:-mt-20">
         <h3 className="capitalize font-bold p-4">
           Upload a photo of your ID/ Driver's License / Passport

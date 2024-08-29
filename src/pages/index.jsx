@@ -10,12 +10,14 @@ import Plans from "./Plans";
 import Pricing from "./Pricing";
 import Profile from "./Profile";
 import Rewards from "./Rewards";
+import Settings from "./Settings";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Verify from "./Verify";
 
 export {
   Verify,
+  Settings,
   Plans,
   Rewards,
   Docs,

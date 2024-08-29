@@ -49,7 +49,7 @@ const Rewards = () => {
 
   return (
     <Section>
-      <div className="lg:max-w-[1100px] lg:mx-auto dark:text-[#333] text-[#fff]">
+      <div className="lg:max-w-[1100px] lg:mx-auto dark:text-[#333] text-[#fff] font-[Montserrat]">
         <div className=" w-full py-10 text-xs grid grid-cols-3 gap-6">
           <span className="flex justify-between items-center col-span-2">
             <h3 className="text-sm lg:text-2xl capitalize font-bold">

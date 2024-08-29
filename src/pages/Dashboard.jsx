@@ -87,7 +87,7 @@ const Dashboard = () => {
               {user?.KYCStatus == "not verified" ? (
                 <div className="flex flex-col gap-4 border-red-500 border p-4">
                   <h4 className="font-bold">verify your identity</h4>
-                  <p className="w-[80%] lowercase text-slate-300 text-sm">
+                  <p className="w-[80%] lowercase text-white dark:text-slate-900 text-sm">
                     Kindly complete your profile and upload a photo of your
                     state ID, driver's license or passport so we can finish
                     processing your application.
@@ -95,7 +95,7 @@ const Dashboard = () => {
                   <button
                     type="button"
                     onClick={() => setVerifyIdentityModal(true)}
-                    className={`text-xs cursor-pointer text-purple-500 ${
+                    className={`text-xs cursor-pointer text-purple-500 capitalize ${
                       user?.KYCStatus === "not verified" ? "flex" : "hidden"
                     }  `}
                   >
