@@ -10,6 +10,7 @@ const Holder = ({ children }) => {
     </div>
   );
 };
+
 const Hr = () => {
   return <hr className=" dark:border-slate-200 border-slate-700 border" />;
 };

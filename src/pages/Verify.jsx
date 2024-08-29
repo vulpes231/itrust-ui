@@ -63,7 +63,7 @@ const Verify = ({ cancelVerify }) => {
       timeout = 2000;
       resetForm();
       setTimeout(() => {
-        navigate("/dash");
+        window.location.reload();
       }, timeout);
     }
     return () => clearTimeout(timeout);
@@ -147,14 +147,6 @@ const Verify = ({ cancelVerify }) => {
         {verifyError && (
           <div className="mt-4 text-red-500">
             <p>Error: {verifyError}</p>
-          </div>
-        )}
-        {verified && (
-          <div className="absolute top-[30%] right-0 text-yellow-500">
-            <p>verification pending</p>
-            <Link className="underline" to={"/dash"}>
-              go to account
-            </Link>
           </div>
         )}
       </div>
