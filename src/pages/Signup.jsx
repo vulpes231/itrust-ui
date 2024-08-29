@@ -14,27 +14,12 @@ const Signup = () => {
   const [page, setPage] = useState(1);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     username: "",
     email: "",
     password: "",
     password2: "",
-    phone: "",
-    address: "",
-    country: "",
-    state: "",
-    city: "",
-    zip: "",
-    ssn: "",
-    dob: "",
-    nationality: "",
-    currency: "usd",
-    investmentExperience: "",
-    occupation: "",
-    brokerageFamily: "",
-    referralCode: "",
-    termsAccepted: false,
   });
 
   useEffect(() => {
@@ -78,7 +63,11 @@ const Signup = () => {
               )}
               {/* contact */}
               {page === 2 && (
-                <Steptwo formData={formData} handleChange={handleChange} />
+                <Steptwo
+                  formData={formData}
+                  handleChange={handleChange}
+                  pageSwitch={handlePageSwitch}
+                />
               )}
               {/* verify */}
               {page === 3 && (

@@ -9,7 +9,7 @@ const intitialState = {
 };
 
 const styles = {
-  input: `outline-none w-full p-2 border bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs focus:border-none focus:outline-purple-500`,
+  input: `outline-none w-full p-2 border bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs focus:border-none focus:outline-purple-500 order border-slate-600 dark:border-slate-200`,
   label: `capitalize text-sm font-medium`,
 };
 
@@ -75,7 +75,7 @@ const Changepass = () => {
       <h4 className="text-xs lg:text-lg font-semibold capitalize p-6">
         password update
       </h4>
-      <hr />
+      <hr className="order border-slate-600 dark:border-slate-200" />
       <div className="grid gap-4 p-6">
         <div className="flex flex-col gap-1">
           <label className={styles.label} htmlFor="">
@@ -114,7 +114,7 @@ const Changepass = () => {
           />
         </div>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 px-3">{error}</p>}
       {passwordChanged && (
         <p className="text-green-500">password updated successfully.</p>
       )}

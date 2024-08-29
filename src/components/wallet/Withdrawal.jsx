@@ -76,11 +76,12 @@ const Withdrawal = ({ coinData, type, activeSection, setActiveSection }) => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="w-full p-2 border outline-none"
+                className="bg-transparent border outline-none dark:border-slate-200 px-2 w-full p-2  text-xs font-thin focus:outline-purple-500 focus:border-none"
                 placeholder="3ybbMnshjgsdopds672839jhsdj"
                 value={formData.address}
                 onChange={handleInputChange}
                 name="address"
+                readOnly
               />
             </div>
           </div>
@@ -89,7 +90,7 @@ const Withdrawal = ({ coinData, type, activeSection, setActiveSection }) => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="w-[85%] p-2 border outline-none"
+                className="bg-transparent border outline-none dark:border-slate-200 px-2 w-[85%] p-2  text-xs font-thin focus:outline-purple-500 focus:border-none"
                 placeholder="0.00"
                 value={formData.amount}
                 onChange={handleInputChange}

@@ -4,6 +4,7 @@ import Label from "./Label";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { updateUser } from "../features/userSlice";
 
 const nationalities = [
   { code: "us", name: "United States" },
@@ -14,14 +15,66 @@ const nationalities = [
   { code: "nl", name: "Netherlands" },
 ];
 
-const Stepthree = ({ formData, handleChange }) => {
+const Stepthree = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    ssn: "",
+    dob: "",
+    nationality: "",
+    currency: "usd",
+    investmentExperience: "",
+    occupation: "",
+    brokerageFamily: "",
+    referralCode: "",
+    termsAccepted: false,
+  });
+
+  const [error, setError] = useState(false);
+
+  const { updateUserLoading, updateUserError, userUpdated } = useSelector(
+    (state) => state.user
+  );
+
+  const goToDash = () => {
+    navigate("/dash");
+  };
+
+  const completeProfile = (e) => {
+    e.preventDefault();
+    // console.log("clicked");
+    // Check if all fields are filled
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (value) => value.trim() === ""
+    );
+
+    if (isAnyFieldEmpty) {
+      // console.log("yes");
+      // Set the error message if any field is empty
+      setError("All fields are required!");
+      return; // Exit the function to prevent further execution
+    }
+
+    // No empty fields, so proceed with dispatch and navigation
+    dispatch(updateUser(formData));
+    navigate("/dash");
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
   return (
     <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
       <Formspan>
         <Label title={"social security number"} />
         <Input
+          error={error}
           type={"text"}
           name="ssn"
           value={formData.ssn}
@@ -32,6 +85,7 @@ const Stepthree = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"date of birth"} />
         <Input
+          error={error}
           type={"date"}
           name="dob"
           value={formData.dob}
@@ -42,7 +96,9 @@ const Stepthree = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"nationality"} />
         <select
-          className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
+          className={` ${
+            error && " outline-red-500"
+          } z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none`}
           name="nationality"
           value={formData.nationality}
           onChange={handleChange}
@@ -60,7 +116,9 @@ const Stepthree = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"currency"} />
         <select
-          className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
+          className={` ${
+            error && " outline-red-500"
+          } z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none`}
           name="currency"
           value={formData.currency}
           onChange={handleChange}
@@ -76,7 +134,9 @@ const Stepthree = ({ formData, handleChange }) => {
         <Label title={"how much investment experience do you have?"} />
 
         <select
-          className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
+          className={` ${
+            error && " outline-red-500"
+          } z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none`}
           name="investmentExperience"
           value={formData.investmentExperience}
           onChange={handleChange}
@@ -92,7 +152,9 @@ const Stepthree = ({ formData, handleChange }) => {
         <Label title={" are you employed? "} />
 
         <select
-          className="z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none"
+          className={` ${
+            error && " outline-red-500"
+          } z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none`}
           name="occupation"
           value={formData.occupation}
           onChange={handleChange}
@@ -112,6 +174,7 @@ const Stepthree = ({ formData, handleChange }) => {
           <span className="flex items-center gap-1">
             yes{" "}
             <input
+              error={error}
               type="radio"
               name="brokerageFamily"
               value="yes"
@@ -122,6 +185,7 @@ const Stepthree = ({ formData, handleChange }) => {
           <span className="flex items-center gap-1">
             no{" "}
             <input
+              error={error}
               type="radio"
               name="brokerageFamily"
               value="no"
@@ -135,6 +199,7 @@ const Stepthree = ({ formData, handleChange }) => {
         <Label title={"referral code (optional)"} />
 
         <Input
+          error={error}
           type={"text"}
           name="referralCode"
           value={formData.referralCode}
@@ -143,6 +208,7 @@ const Stepthree = ({ formData, handleChange }) => {
       </Formspan>
       <div className="flex gap-2 items-center">
         <input
+          // error={error}
           type="checkbox"
           name="termsAccepted"
           checked={formData.termsAccepted}
@@ -151,6 +217,15 @@ const Stepthree = ({ formData, handleChange }) => {
         <small className="whitespace-nowrap text-xs font-thin">
           I have read &amp; accept <Link>Terms &amp; conditions.</Link>
         </small>
+      </div>
+      {updateUserError && <p className="text-red-500">{updateUserError}</p>}
+      <div className="pt-3">
+        <Button
+          type={"submit"}
+          handleClick={completeProfile}
+          title={!updateUserLoading ? "complete profile" : "wait..."}
+        />
+        <Button type={"submit"} handleClick={goToDash} title={"skip"} />
       </div>
     </div>
   );

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { logoutUser } from "../features/logoutSlice";
 import { useDispatch, useSelector } from "react-redux";
-
 import { LuBot, LuArchive } from "react-icons/lu";
 import { IoWalletOutline } from "react-icons/io5";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { GoHome } from "react-icons/go";
-
 import { MdSunny, MdNightlightRound } from "react-icons/md";
-
 import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
 import Navmenu from "./Navmenu";
@@ -16,11 +13,34 @@ import { Link, useNavigate } from "react-router-dom";
 import Logoutmodal from "./dash/Logoutmodal";
 import Mobilelink from "./Mobilelink";
 import { full, whitelogo } from "../assets";
+import { styles } from "../constants/styles";
+import { getAccessToken } from "../constants";
+import { getUser } from "../features/userSlice";
+import Unverified from "./Unverified";
+
+const Authlink = ({ title, icon, path, closeMenu, handleLinkClick }) => {
+  return (
+    <li className="relative menu-item group [&amp;>*]:text-purple-600 [&amp;>*]:dark:text-purple-600 active current">
+      <span
+        className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize whitespace-nowrap`}
+      >
+        <span>{icon}</span>
+        <Link onClick={handleLinkClick} to={path}>
+          {title}
+        </Link>
+      </span>
+    </li>
+  );
+};
 
 const Authnav = ({ handleModeToggle, darkMode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [verifyError, setVerifyError] = useState(false);
+  const { user } = useSelector((state) => state.user);
   const { error, success, loading } = useSelector((state) => state.logout);
+  const accessToken = getAccessToken();
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -42,6 +62,33 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
       window.location.reload();
     }
   }, [success]);
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUser());
+    }
+  }, [accessToken, dispatch]);
+
+  const handleLinkClick = (e, path) => {
+    e.preventDefault();
+
+    if (user?.KYCstatus == "verified") {
+      navigate(path);
+    } else {
+      setVerifyError(true);
+    }
+  };
+
+  useEffect(() => {
+    let timeout;
+    if (verifyError) {
+      timeout = 2000;
+      setTimeout(() => {
+        setVerifyError(false);
+      }, timeout);
+    }
+    () => clearTimeout(timeout);
+  }, [verifyError]);
 
   return (
     <header className="isolate fixed top-0 start-0 w-full py-4 xl:py-3 bg-black dark:bg-white z-[1020] px-3">
@@ -72,15 +119,17 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
               icon={<IoWalletOutline />}
               path={"/wallet"}
             />
-            <Sidebarlink
+            <Authlink
               title={"trading bots"}
               icon={<LuBot />}
               path={"/tradingbot"}
+              handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
             />
-            <Sidebarlink
+            <Authlink
               title={"history"}
               icon={<LuArchive />}
               path={"/history"}
+              handleLinkClick={(e) => handleLinkClick(e, "/history")}
             />
           </ul>
           <ul className="flex items-center gap-x-3 lg:gap-x-5">
@@ -113,18 +162,21 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             icon={<IoWalletOutline />}
             path={"/wallet"}
           />
-          <Mobilelink
+          <Authlink
             title={"trading bots"}
             icon={<LuBot />}
             path={"/tradingbot"}
+            handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
           />
-          <Mobilelink
+          <Authlink
             title={"history"}
             icon={<LuArchive />}
             path={"/history"}
+            handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
           />
         </ul>
       </div>
+      {verifyError && <Unverified />}
     </header>
   );
 };

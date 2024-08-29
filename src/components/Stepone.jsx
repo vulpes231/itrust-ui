@@ -14,10 +14,13 @@ const Stepone = ({ formData, handleChange, pageSwitch }) => {
   const navigate = useNavigate();
   const [appError, setAppError] = useState(false);
 
-  const { loading, error, success } = useSelector((state) => state.create);
+  const { loading, error, success, accessToken } = useSelector(
+    (state) => state.create
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     dispatch(createAccount(formData));
   };
 
@@ -26,6 +29,8 @@ const Stepone = ({ formData, handleChange, pageSwitch }) => {
     if (success) {
       timeout = 3000;
       setTimeout(() => {
+        const tokenString = JSON.stringify(accessToken);
+        sessionStorage.setItem("accessToken", tokenString);
         pageSwitch();
       }, timeout);
     }
@@ -55,8 +60,8 @@ const Stepone = ({ formData, handleChange, pageSwitch }) => {
         <Label title={"first name"} />
         <Input
           type={"text"}
-          name="firstName"
-          value={formData.firstName}
+          name="firstname"
+          value={formData.firstname}
           handleChange={handleChange}
           placeHolder={"Enter Firstname"}
         />
@@ -65,8 +70,8 @@ const Stepone = ({ formData, handleChange, pageSwitch }) => {
         <Label title={"last name"} />
         <Input
           type={"text"}
-          name="lastName"
-          value={formData.lastName}
+          name="lastname"
+          value={formData.lastname}
           handleChange={handleChange}
           placeHolder={"Enter Lastname"}
         />

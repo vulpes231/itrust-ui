@@ -94,7 +94,7 @@ const Deposit = ({ coinData, type, userAccount }) => {
               <div className="flex items-center">
                 <input
                   type="text"
-                  className="w-[85%] p-2 border placeholder:text-slate-950 dark:text-slate-200 outline-none"
+                  className="w-[85%] p-2 border dark:placeholder:text-slate-950 outline-none  bg-transparent placeholder:text-slate-200"
                   readOnly
                   placeholder={placeholderAddress}
                   ref={inputRef}
@@ -112,7 +112,7 @@ const Deposit = ({ coinData, type, userAccount }) => {
               <div className="flex items-center">
                 <input
                   type="text"
-                  className="w-[85%] py-2 px-4 border outline-none text-slate-950"
+                  className="w-[85%] py-2 px-4 border outline-none text-slate-200 focus:outline-purple-500 focus:border-none bg-transparent  dark:text-slate-950"
                   placeholder="0.00"
                   value={formData.amount}
                   onChange={handleInputChange}

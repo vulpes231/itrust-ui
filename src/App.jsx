@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Content, Footer, Authnav, DCA, Autotrade } from "./components";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   Aitrading,
   Company,
@@ -31,9 +31,10 @@ import ScrollToTop from "./components/Scrolltotop";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState(false);
+
   const [token, setToken] = useState(false);
   const { accessToken } = useSelector((state) => state.login);
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 

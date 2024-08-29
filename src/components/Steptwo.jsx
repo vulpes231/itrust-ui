@@ -4,11 +4,61 @@ import Label from "./Label";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "./Button";
+import { updateUser } from "../features/userSlice";
 
-const Steptwo = ({ formData, handleChange }) => {
+const Steptwo = ({ pageSwitch }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
+
+  const [error, setError] = useState(false);
+
+  const { updateUserLoading, updateUserError, userUpdated } = useSelector(
+    (state) => state.user
+  );
+
+  const [formData, setFormData] = useState({
+    phone: "",
+    address: "",
+    country: "",
+    state: "",
+    city: "",
+    zip: "",
+  });
+
+  const goToDash = () => {
+    navigate("/dash");
+  };
+
+  const completeProfile = (e) => {
+    e.preventDefault();
+    // console.log("clicked");
+    // Check if all fields are filled
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (value) => value.trim() === ""
+    );
+
+    if (isAnyFieldEmpty) {
+      // console.log("yes");
+      // Set the error message if any field is empty
+      setError("All fields are required!");
+      return; // Exit the function to prevent further execution
+    }
+
+    // No empty fields, so proceed with dispatch and navigation
+    dispatch(updateUser(formData));
+    navigate("/dash");
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
   useEffect(() => {
     // Fetch countries data from a source (e.g., REST API)
     fetch("https://restcountries.com/v3.1/all")
@@ -28,11 +78,19 @@ const Steptwo = ({ formData, handleChange }) => {
       })
       .catch((error) => console.error("Error fetching countries:", error));
   }, []);
+
+  useEffect(() => {
+    if (userUpdated) {
+      pageSwitch();
+    }
+  }, [userUpdated]);
+
   return (
     <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
       <Formspan>
         <Label title={"phone"} />
         <Input
+          error={error}
           type={"text"}
           name="phone"
           value={formData.phone}
@@ -43,6 +101,7 @@ const Steptwo = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"address"} />
         <Input
+          error={error}
           type={"text"}
           name="address"
           value={formData.address}
@@ -69,6 +128,7 @@ const Steptwo = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"state"} />
         <Input
+          error={error}
           type={"text"}
           name="state"
           value={formData.state}
@@ -79,6 +139,7 @@ const Steptwo = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"city"} />
         <Input
+          error={error}
           type={"text"}
           name="city"
           value={formData.city}
@@ -89,6 +150,7 @@ const Steptwo = ({ formData, handleChange }) => {
       <Formspan>
         <Label title={"zip code"} />
         <Input
+          error={error}
           type={"text"}
           name="zip"
           value={formData.zip}
@@ -96,6 +158,15 @@ const Steptwo = ({ formData, handleChange }) => {
           placeHolder={"Enter Zipcode"}
         />
       </Formspan>
+      {updateUserError && <p className="text-red-500">{updateUserError}</p>}
+      <div className="pt-3 flex flex-col gap-4">
+        <Button
+          type={"submit"}
+          handleClick={completeProfile}
+          title={!updateUserLoading ? "complete profile" : "wait..."}
+        />
+        <Button type={"submit"} handleClick={goToDash} title={"skip"} />
+      </div>
     </div>
   );
 };

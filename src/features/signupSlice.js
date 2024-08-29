@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: false,
   success: false,
+  accessToken: false,
 };
 
 export const createAccount = createAsyncThunk(
@@ -47,15 +48,17 @@ const createAccountSlice = createSlice({
       .addCase(createAccount.pending, (state) => {
         state.loading = true;
       })
-      .addCase(createAccount.fulfilled, (state) => {
+      .addCase(createAccount.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         state.success = true;
+        state.accessToken = action.payload.accessToken;
       })
       .addCase(createAccount.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
         state.success = false;
+        state.accessToken = false;
       });
   },
 });

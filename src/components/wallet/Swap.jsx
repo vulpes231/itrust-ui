@@ -70,7 +70,7 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
               <label htmlFor="">Account</label>
               <select
                 name="to"
-                className="bg-transparent border dark:border-slate-200 px-2 w-full p-2 font-thin"
+                className="bg-transparent outline-none border dark:border-slate-200 px-2 w-full p-2 font-thin focus:outline-purple-500 focus:border-none"
                 value={formData.to}
                 onChange={handleInputChange}
               >
@@ -84,7 +84,7 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
               <label htmlFor="">Coin</label>
               <select
                 name="from"
-                className="bg-transparent border dark:border-slate-200 px-2 w-full p-2  text-xs font-thin"
+                className="bg-transparent border outline-none dark:border-slate-200 px-2 w-full p-2  text-xs font-thin focus:outline-purple-500 focus:border-none"
                 value={formData.from}
                 onChange={handleInputChange}
               >
@@ -106,7 +106,7 @@ const Swap = ({ userAccount, coinData, type, userBalance }) => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="w-[85%] p-2 border outline-none"
+                className="w-[85%] py-2 px-4 border outline-none text-slate-200 focus:outline-purple-500 focus:border-none bg-transparent  dark:text-slate-950"
                 placeholder="0.00"
                 value={formData.amount}
                 name="amount"
