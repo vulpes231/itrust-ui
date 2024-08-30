@@ -49,26 +49,6 @@ const Fundedmodal = ({ closeModal }) => {
           <form action="" className="flex flex-col gap-4 p-6">
             <div>
               <label htmlFor="" className={styles.label}>
-                account
-              </label>
-              <select
-                name="account"
-                onChange={handleChange}
-                value={form.account}
-                className={styles.select}
-              >
-                <option value="">Choose account</option>
-                {accounts.map((acct, index) => {
-                  return (
-                    <option value={acct} key={index}>
-                      {acct}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="" className={styles.label}>
                 amount
               </label>
               <input

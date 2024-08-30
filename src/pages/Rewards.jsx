@@ -50,8 +50,8 @@ const Rewards = () => {
   return (
     <Section>
       <div className="lg:max-w-[1100px] lg:mx-auto dark:text-[#333] text-[#fff] font-[Montserrat]">
-        <div className=" w-full py-10 text-xs grid grid-cols-3 gap-6">
-          <span className="flex justify-between items-center col-span-2">
+        <div className="w-full py-10 text-xs flex gap-6 justify-between">
+          <span className="flex flex-col md:flex-row justify-between items-center gap-6 ">
             <h3 className="text-sm lg:text-2xl capitalize font-bold">
               Rewards
             </h3>
@@ -66,8 +66,8 @@ const Rewards = () => {
             Dashboard<span>{">"} Rewards</span>
           </span>
         </div>
-        <div className=" w-full py-10 text-xs grid grid-cols-3 gap-6">
-          <div className="flex flex-col col-span-2 gap-6">
+        <div className=" w-full py-10 text-xs grid lg:grid-cols-3 gap-6 p-2">
+          <div className="flex flex-col md:col-span-2 gap-6">
             <Rewarcard
               img={rew}
               smallText={"Offered by Investments"}

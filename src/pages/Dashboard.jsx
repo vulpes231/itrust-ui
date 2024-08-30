@@ -79,7 +79,7 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className={`grid grid-cols-3  `}>
+        <div className={`grid md:grid-cols-3  `}>
           {!user?.isKYCVerified && (
             <span
               className={`capitalize rounded-lg flex flex-col gap-4 col-span-2 `}
@@ -103,7 +103,7 @@ const Dashboard = () => {
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-col gap-4 border-yellow-500 border p-4 font-bold">
+                <div className="border-yellow-500 border p-4 font-medium text-sm md:text-lg lg:w-[60%]">
                   <p>Document uploaded and pending approval</p>
                 </div>
               )}

@@ -7,11 +7,10 @@ const Mobilelink = ({ title, icon, path }) => {
     <li>
       <Link
         to={path}
-        className={`flex flex-col items-center ${styles.hover.lightBg} `}
+        className={`flex flex-col items-center gap-1 ${styles.hover.lightBg} `}
       >
-        <span className="h-4">{icon}</span>
-        <span className="whitespace-nowrap text-[10px] font-light capitalize">
-          {" "}
+        <span>{icon}</span>
+        <span className="whitespace-nowrap text-[8px] font-light capitalize">
           {title}
         </span>
       </Link>

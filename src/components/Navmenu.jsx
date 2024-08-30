@@ -15,6 +15,7 @@ import { styles } from "../constants/styles";
 import { getAccessToken } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../features/userSlice";
+import { FaGears } from "react-icons/fa6";
 
 const Navmenu = ({ handleLogout }) => {
   const dispatch = useDispatch();
@@ -61,11 +62,6 @@ const Navmenu = ({ handleLogout }) => {
         <div className="px-3 text-xs font-medium">
           <ul className="flex flex-col py-5">
             <Sidebarlink
-              title={"profile"}
-              icon={<FaUser />}
-              path={"/profile"}
-            />
-            <Sidebarlink
               title={"rewards"}
               icon={<MdFmdGood />}
               path={"/rewards"}
@@ -79,6 +75,12 @@ const Navmenu = ({ handleLogout }) => {
               title={"documents"}
               icon={<MdEditDocument />}
               path={"/docs"}
+            />
+
+            <Sidebarlink
+              title={"settings"}
+              icon={<FaGears />}
+              path={"/settings"}
             />
             {/* <Sidebarlink title={"settings"} icon={<MdSettings />} /> */}
             <li

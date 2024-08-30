@@ -1,22 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { devserver, liveserver } from "../constants";
+import { devserver, getAccessToken, liveserver } from "../constants";
 
 const initialState = {
-  loading: false,
-  error: false,
-  success: false,
+  logoutLoading: false,
+  logoutError: false,
+  logoutSuccess: false,
 };
 
 export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
-  let accessToken;
-  const storedAccessToken = sessionStorage.getItem("accessToken");
-  accessToken = storedAccessToken ? JSON.parse(storedAccessToken) : null;
-
-  if (!accessToken) {
-    throw new Error("No access token found");
-  }
-  // console.log(accessToken);
+  const accessToken = getAccessToken();
   const url = `${liveserver}/logout`;
   try {
     const response = await axios.post(
@@ -29,10 +22,7 @@ export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
         },
       }
     );
-
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.clear();
-    // console.log(response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -49,25 +39,25 @@ const logoutSlice = createSlice({
   initialState,
   reducers: {
     reset(state) {
-      state.loading = false;
-      state.error = false;
-      state.success = false;
+      state.logoutLoading = false;
+      state.logoutError = false;
+      state.logoutSuccess = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(logoutUser.pending, (state) => {
-        state.loading = true;
+        state.logoutLoading = true;
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        state.loading = false;
-        state.error = false;
-        state.success = true;
+        state.logoutLoading = false;
+        state.logoutError = false;
+        state.logoutSuccess = true;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-        state.success = false;
+        state.logoutLoading = false;
+        state.logoutError = action.error.message;
+        state.logoutSuccess = false;
       });
   },
 });

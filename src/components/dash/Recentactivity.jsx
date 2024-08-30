@@ -78,16 +78,18 @@ const RecentActivity = () => {
   }, [accessToken]);
 
   return (
-    <div className="h-64 rounded-xl border border-slate-200 shadow-xl overflow-auto ">
+    <div className="h-64 rounded-xl border border-slate-700 dark:border-slate-300 shadow-xl overflow-auto ">
       <div className="flex justify-between items-center p-4 capitalize">
         <h2 className="text-sm lg:text-lg font-medium whitespace-nowrap">
           recent activity
         </h2>
         <small>sort by: current week</small>
       </div>
-      <hr />
+      <hr className="border border-slate-700 dark:border-slate-300" />
       <div className=" h-full p-4 ">
-        <div className="px-4 py-2 space-y-4">{myTrnx}</div>
+        <div className="px-4 py-2 space-y-4">
+          {myTrnx ? <p>You have no transaction.</p> : myTrnx}
+        </div>
       </div>
     </div>
   );

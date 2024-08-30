@@ -10,6 +10,7 @@ import userReducer from "../features/userSlice";
 import verifyReducer from "../features/verifySlice";
 import planReducer from "../features/planSlice";
 import docuReducer from "../features/docuSlice";
+import tradeReducer from "../features/tradeSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     verify: verifyReducer,
     plan: planReducer,
     docu: docuReducer,
+    trade: tradeReducer,
   },
 });
 

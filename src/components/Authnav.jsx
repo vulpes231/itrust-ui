@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { logoutUser } from "../features/logoutSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LuBot, LuArchive } from "react-icons/lu";
 import { IoWalletOutline } from "react-icons/io5";
@@ -10,59 +9,36 @@ import Menu from "./Menu";
 import Sidebarlink from "./Sidebarlink";
 import Navmenu from "./Navmenu";
 import { Link, useNavigate } from "react-router-dom";
-import Logoutmodal from "./dash/Logoutmodal";
 import Mobilelink from "./Mobilelink";
 import { full, whitelogo } from "../assets";
 import { styles } from "../constants/styles";
 import { getAccessToken } from "../constants";
 import { getUser } from "../features/userSlice";
 import Unverified from "./Unverified";
-import { FaGears } from "react-icons/fa6";
 
-const Authlink = ({ title, icon, path, closeMenu, handleLinkClick }) => {
+const Authlink = ({ title, icon, path, handleLinkClick }) => {
   return (
     <li className="relative menu-item group [&amp;>*]:text-purple-600 [&amp;>*]:dark:text-purple-600 active current">
-      <span
-        className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize whitespace-nowrap`}
+      <Link
+        onClick={handleLinkClick}
+        to={path}
+        className={`flex flex-col md:flex-row items-center gap-1 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize whitespace-nowrap`}
       >
         <span>{icon}</span>
-        <Link onClick={handleLinkClick} to={path}>
-          {title}
-        </Link>
-      </span>
+        <span className="text-[8px] lg:text-xs">{title}</span>
+      </Link>
     </li>
   );
 };
 
-const Authnav = ({ handleModeToggle, darkMode }) => {
+const Authnav = ({ handleModeToggle, darkMode, handleLogout }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [verifyError, setVerifyError] = useState(false);
   const { user } = useSelector((state) => state.user);
-  const { error, success, loading } = useSelector((state) => state.logout);
+
   const accessToken = getAccessToken();
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-
-    dispatch(logoutUser());
-    console.log("Dispatched");
-  };
-  useEffect(() => {
-    if (success) {
-      console.log("Clearing cookies");
-      document.cookie.split(";").forEach((c) => {
-        document.cookie = c
-          .replace(/^ +/, "")
-          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
-      });
-      sessionStorage.removeItem("accessToken");
-      sessionStorage.clear();
-      navigate("/signin");
-      window.location.reload();
-    }
-  }, [success]);
 
   useEffect(() => {
     if (accessToken) {
@@ -71,6 +47,7 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
   }, [accessToken, dispatch]);
 
   const handleLinkClick = (e, path) => {
+    console.log("show");
     e.preventDefault();
 
     if (user?.KYCstatus == "verified") {
@@ -132,11 +109,6 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
               path={"/history"}
               handleLinkClick={(e) => handleLinkClick(e, "/history")}
             />
-            <Sidebarlink
-              title={"settings"}
-              icon={<FaGears />}
-              path={"/settings"}
-            />
           </ul>
           <ul className="flex items-center gap-x-3 lg:gap-x-5">
             <li className="inline-flex relative">
@@ -152,38 +124,36 @@ const Authnav = ({ handleModeToggle, darkMode }) => {
             </li>
           </ul>
         </nav>
-        {loading && <Logoutmodal />}
       </div>
       {/* mobile menu */}
       <div className="fixed bottom-0 left-0 sm:hidden w-full py-4 px-5 bg-slate-950 dark:bg-white">
         <ul className="flex items-center justify-between">
-          <Mobilelink title={"account"} icon={<GoHome />} path={"/dash"} />
+          <Mobilelink
+            title={"account"}
+            icon={<GoHome className="text-2xl" />}
+            path={"/dash"}
+          />
           <Mobilelink
             title={"portfolio"}
-            icon={<LiaBusinessTimeSolid />}
+            icon={<LiaBusinessTimeSolid className="text-2xl" />}
             path={"/portfolio"}
           />
           <Mobilelink
             title={"wallet"}
-            icon={<IoWalletOutline />}
+            icon={<IoWalletOutline className="text-2xl" />}
             path={"/wallet"}
           />
           <Authlink
             title={"trading bots"}
-            icon={<LuBot />}
+            icon={<LuBot className="text-2xl" />}
             path={"/tradingbot"}
             handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
           />
           <Authlink
             title={"history"}
-            icon={<LuArchive />}
+            icon={<LuArchive className="text-2xl" />}
             path={"/history"}
             handleLinkClick={(e) => handleLinkClick(e, "/tradingbot")}
-          />
-          <Mobilelink
-            title={"settings"}
-            icon={<FaGears />}
-            path={"/settings"}
           />
         </ul>
       </div>

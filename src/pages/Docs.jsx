@@ -8,7 +8,7 @@ import { getUserDocuments } from "../features/docuSlice";
 
 const Nocontent = () => {
   return (
-    <div className="flex items-center justify-center h-full ">
+    <div className="flex items-start justify-start h-full ">
       <img src="" alt="" />
       <small>you have no documents.</small>
     </div>
@@ -41,7 +41,6 @@ const Docs = () => {
       <div className="lg:max-w-[1100px] lg:mx-auto flex flex-col gap-5 ">
         <div className="flex justify-between items-center">
           <h3>My Documents</h3>
-          <p>Total: {userDocs?.length}</p>
         </div>
         <div className="min-h-[500px] capitalize bg:slate-900 dark:bg-white">
           {userDocs?.length < 1 ? (

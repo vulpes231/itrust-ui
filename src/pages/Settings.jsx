@@ -38,6 +38,7 @@ const Settings = () => {
   }, [accessToken]);
 
   const settingLinks = [
+    "Personal information",
     "Investment profile",
     "Investing",
     "Security and privacy",
@@ -46,9 +47,13 @@ const Settings = () => {
 
   const [toggleID, setToggleID] = useState(false);
   const [togglePOA, setTogglePOA] = useState(false);
+  const [togglePass, setTogglePass] = useState(false);
 
   const handleTogglePOA = () => {
     setTogglePOA((prev) => !prev);
+  };
+  const handleTogglePass = () => {
+    setTogglePass((prev) => !prev);
   };
   const handleToggleID = () => {
     setToggleID((prev) => !prev);
@@ -56,7 +61,7 @@ const Settings = () => {
 
   return (
     <div className="w-full lg:max-w-[1100px] lg:mx-auto py-10 min-h-screen font-[Montserrat]">
-      <div className="flex justify-between items-center w-full py-10 text-xs">
+      <div className="flex justify-between items-center w-full py-10 text-xs p-2">
         <h3 className="text-sm lg:text-xl capitalize font-semibold">
           settings
         </h3>
@@ -65,7 +70,7 @@ const Settings = () => {
         </span>
       </div>
       <div className="grid md:grid-cols-3 w-full">
-        <aside className=" ">
+        <aside className=" p-2">
           <ul className="flex flex-col gap-3">
             {settingLinks.map((link, index) => {
               return (
@@ -89,7 +94,7 @@ const Settings = () => {
           </ul>
         </aside>
         <div className="md:col-span-2 w-full ">
-          {activePage === 0 && (
+          {activePage === 1 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize">personal details</h3>
@@ -140,7 +145,7 @@ const Settings = () => {
               </div>
             </div>
           )}
-          {activePage === 1 && (
+          {activePage === 2 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize">investing</h3>
@@ -153,15 +158,47 @@ const Settings = () => {
               </div>
             </div>
           )}
-          {activePage === 2 && (
+          {activePage === 3 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold capitalize">security</h3>
+                <h3 className="font-bold capitalize px-3">security</h3>
                 <Hr />
-                <Holder>
-                  <span>devices</span>
-                  <span></span>
-                </Holder>
+
+                <h5
+                  onClick={handleTogglePass}
+                  className="p-2 bg-slate-800 dark:bg-slate-200 text-purple-700 font-medium cursor-pointer capitalize"
+                >
+                  change password
+                </h5>
+                <div
+                  className={togglePass ? "flex flex-col gap-4 p-4" : "hidden"}
+                >
+                  <div className="flex flex-col capitalize">
+                    <label htmlFor="">current password</label>
+                    <input
+                      type="password"
+                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="">new password</label>
+                    <input
+                      type="password"
+                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="">confirm password</label>
+                    <input
+                      type="password"
+                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
+                    />
+                  </div>
+                  <button className="py-1.5 bg-purple-500 rounded-sm text-white capitalize">
+                    update
+                  </button>
+                </div>
+
                 <Hr />
                 <Holder>
                   <span>data sharing and permission</span>
@@ -171,7 +208,7 @@ const Settings = () => {
               </div>
             </div>
           )}
-          {activePage === 3 && (
+          {activePage === 4 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize">documents</h3>

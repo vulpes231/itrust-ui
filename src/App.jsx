@@ -12,7 +12,6 @@ import {
   Getstart,
   Plans,
   Pricing,
-  Profile,
   Rewards,
   Settings,
   Signin,
@@ -20,7 +19,7 @@ import {
   Verify,
 } from "./pages";
 import { TitleProvider } from "./contexts/TitleContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Transactions from "./pages/Transactions";
 import Tradingbot from "./pages/Tradingbot";
 import Wallet from "./pages/Wallet";
@@ -28,32 +27,22 @@ import Porfolio from "./pages/Porfolio";
 import Getfunded from "./pages/Getfunded";
 import Protools from "./pages/Protools";
 import ScrollToTop from "./components/Scrolltotop";
+import { logoutUser } from "./features/logoutSlice";
+import Logoutmodal from "./components/dash/Logoutmodal";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(false);
   const [activeLink, setActiveLink] = useState(false);
-
   const [token, setToken] = useState(false);
-  const { accessToken } = useSelector((state) => state.login);
-  const location = useLocation();
-
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
+  const { accessToken } = useSelector((state) => state.login);
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-
-    return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handleBeforeInstallPrompt
-      );
-    };
-  }, []);
+  const { logoutError, logoutSuccess, logoutLoading } = useSelector(
+    (state) => state.logout
+  );
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
@@ -76,6 +65,33 @@ const App = () => {
   const removeActiveLink = () => {
     setActiveLink(false);
   };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
+  useEffect(() => {
+    if (logoutSuccess) {
+      sessionStorage.clear();
+      setToken(false);
+    }
+  }, [logoutSuccess]);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
+  }, []);
 
   useEffect(() => {
     // Apply dark mode class to the body
@@ -103,7 +119,11 @@ const App = () => {
       <div className="flex flex-col min-h-screen max-w-full pt-16 ">
         {!isAuthPage &&
           (accessToken || token ? (
-            <Authnav darkMode={darkMode} handleModeToggle={handleModeToggle} />
+            <Authnav
+              darkMode={darkMode}
+              handleModeToggle={handleModeToggle}
+              handleLogout={handleLogout}
+            />
           ) : (
             <Navbar
               darkMode={darkMode}
@@ -157,7 +177,6 @@ const App = () => {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/tradingbot" element={<Tradingbot />} />
           <Route path="/history" element={<Transactions />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/rewards" element={<Rewards />} />
@@ -174,6 +193,7 @@ const App = () => {
         )}
       </div>
       {/* <Footer /> */}
+      {logoutLoading && <Logoutmodal />}
     </TitleProvider>
   );
 };
