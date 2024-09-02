@@ -31,6 +31,7 @@ import { logoutUser } from "./features/logoutSlice";
 import Logoutmodal from "./components/dash/Logoutmodal";
 import { resetLogin } from "./features/loginSlice";
 import { resetSignup } from "./features/signupSlice";
+import { getAccessToken } from "./constants";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const App = () => {
   const [token, setToken] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-  const { accessToken } = useSelector((state) => state.login);
+  const accessToken = getAccessToken();
 
   const { logoutError, logoutSuccess, logoutLoading } = useSelector(
     (state) => state.logout
@@ -73,13 +74,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (logoutSuccess) {
-      console.log("logged out");
-      sessionStorage.clear();
-      dispatch(resetLogin());
+    if (accessToken) {
+      setToken(accessToken);
+    } else {
       setToken(false);
     }
-  }, [logoutSuccess, dispatch]);
+  }, [accessToken]);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -101,14 +101,6 @@ const App = () => {
     document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
-  useEffect(() => {
-    if (accessToken) {
-      setToken(accessToken);
-    } else {
-      setToken(false);
-    }
-  }, [accessToken]);
-
   const isAuthPage =
     location.pathname === "/signin" || location.pathname === "/signup";
 
@@ -116,11 +108,13 @@ const App = () => {
     <TitleProvider>
       <div className="flex flex-col min-h-screen max-w-full pt-16 ">
         {!isAuthPage &&
-          (accessToken || token ? (
+          (token ? (
             <Authnav
               darkMode={darkMode}
               handleModeToggle={handleModeToggle}
               handleLogout={handleLogout}
+              success={logoutSuccess}
+              setToken={setToken}
             />
           ) : (
             <Navbar

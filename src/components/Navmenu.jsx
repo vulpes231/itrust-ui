@@ -16,8 +16,10 @@ import { getAccessToken } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../features/userSlice";
 import { FaGears } from "react-icons/fa6";
+import { resetLogin } from "../features/loginSlice";
+import { resetLogout } from "../features/logoutSlice";
 
-const Navmenu = ({ handleLogout }) => {
+const Navmenu = ({ handleLogout, success, setToken }) => {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
   const accessToken = getAccessToken();
@@ -33,6 +35,17 @@ const Navmenu = ({ handleLogout }) => {
       dispatch(getUser());
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    if (success) {
+      console.log("logged out");
+      sessionStorage.clear();
+      dispatch(resetLogin());
+      dispatch(resetLogout());
+      // dispatch(resetLogout())
+      setToken(false);
+    }
+  }, [success, dispatch]);
 
   return (
     <div
@@ -82,13 +95,13 @@ const Navmenu = ({ handleLogout }) => {
               icon={<FaGears />}
               path={"/settings"}
             />
-            {/* <Sidebarlink title={"settings"} icon={<MdSettings />} /> */}
-            <li
+
+            <button
               className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize`}
               onClick={handleLogout}
             >
               <MdLogout /> logout
-            </li>
+            </button>
           </ul>
         </div>
       </div>

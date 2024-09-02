@@ -70,7 +70,7 @@ const Wallet = () => {
   useEffect(() => {
     changeTitle("Quadx - Wallet");
     if (!accessToken) {
-      console.log(accessToken);
+      // console.log(accessToken);
       navigate("/signin");
     }
   }, [accessToken]);

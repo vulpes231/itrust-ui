@@ -38,7 +38,7 @@ const logoutSlice = createSlice({
   name: "logout",
   initialState,
   reducers: {
-    reset(state) {
+    resetLogout(state) {
       state.logoutLoading = false;
       state.logoutError = false;
       state.logoutSuccess = false;
@@ -62,5 +62,5 @@ const logoutSlice = createSlice({
   },
 });
 
-export const { reset } = logoutSlice.actions;
+export const { resetLogout } = logoutSlice.actions;
 export default logoutSlice.reducer;

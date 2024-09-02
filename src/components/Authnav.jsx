@@ -31,7 +31,13 @@ const Authlink = ({ title, icon, path, handleLinkClick }) => {
   );
 };
 
-const Authnav = ({ handleModeToggle, darkMode, handleLogout }) => {
+const Authnav = ({
+  handleModeToggle,
+  darkMode,
+  handleLogout,
+  success,
+  setToken,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -120,7 +126,11 @@ const Authnav = ({ handleModeToggle, darkMode, handleLogout }) => {
               </button>
             </li>
             <li className="inline-flex relative">
-              <Navmenu handleLogout={handleLogout} />
+              <Navmenu
+                handleLogout={handleLogout}
+                success={success}
+                setToken={setToken}
+              />
             </li>
           </ul>
         </nav>
