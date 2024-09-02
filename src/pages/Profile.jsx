@@ -5,6 +5,7 @@ import Changepass from "../components/Changepass";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccessToken } from "../constants";
 import { getUser, updateUser } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Userinput = ({ placeholder, value, handleChange, name, readOnly }) => {
   return (
@@ -30,6 +31,7 @@ const Userlabel = ({ labelFor }) => {
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = getAccessToken();
   const [form, setForm] = useState({
     firstname: "",
@@ -59,6 +61,14 @@ const Profile = () => {
   useEffect(() => {
     document.title = "Quadx - User Profile";
   }, []);
+
+  useEffect(() => {
+    if (!accessToken) {
+      console.log("yes");
+      // dispatch(resetLogin());
+      navigate("/signin");
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     if (accessToken) {

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccessToken } from "../constants";
 import { getUser } from "../features/userSlice";
+import { TitleContext } from "../contexts/TitleContext";
+import { useNavigate } from "react-router-dom";
 
 const Holder = ({ children }) => {
   return (
@@ -17,8 +19,9 @@ const Hr = () => {
 
 const Settings = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = getAccessToken();
-
+  const { changeTitle } = useContext(TitleContext);
   const [activePage, setActivePage] = useState(0);
 
   const { user } = useSelector((state) => state.user);
@@ -28,9 +31,13 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    document.title = "Quadx - User Settings";
-  }, []);
+    changeTitle("Quadx - User settings");
 
+    if (!accessToken) {
+      // dispatch(resetLogin());
+      navigate("/signin");
+    }
+  }, [accessToken]);
   useEffect(() => {
     if (accessToken) {
       dispatch(getUser());

@@ -39,9 +39,12 @@ const Dashboard = () => {
   useEffect(() => {
     changeTitle("Quadx - Dashboard");
     if (!accessToken) {
-      // window.location.href = "/signin";
       navigate("/signin");
-    } else {
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (accessToken) {
       dispatch(getCoinData());
       dispatch(getUser());
     }
@@ -102,11 +105,11 @@ const Dashboard = () => {
                     upload document now
                   </button>
                 </div>
-              ) : (
+              ) : user?.KYCStatus == "pending" ? (
                 <div className="border-yellow-500 border p-4 font-medium text-sm md:text-lg lg:w-[60%]">
                   <p>Document uploaded and pending approval</p>
                 </div>
-              )}
+              ) : null}
             </span>
           )}
         </div>

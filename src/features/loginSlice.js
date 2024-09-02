@@ -6,8 +6,8 @@ const initialState = {
   loading: false,
   error: false,
   success: false,
-  accessToken: null,
-  username: null,
+  accessToken: false,
+  username: false,
 };
 
 export const loginUser = createAsyncThunk(
@@ -38,12 +38,12 @@ const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    reset(state) {
+    resetLogin(state) {
       state.loading = false;
-      state.accessToken = null;
+      state.accessToken = false;
       state.error = false;
       state.success = false;
-      state.username = null;
+      state.username = false;
     },
   },
   extraReducers: (builder) => {
@@ -62,11 +62,11 @@ const loginSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
         state.success = false;
-        state.accessToken = null;
-        state.username = null;
+        state.accessToken = false;
+        state.username = false;
       });
   },
 });
 
-export const { reset } = loginSlice.actions;
+export const { resetLogin } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Content, Footer, Authnav, DCA, Autotrade } from "./components";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navbar, Content, Authnav, DCA, Autotrade } from "./components";
+import { Route, Routes, useLocation } from "react-router-dom";
 import {
   Aitrading,
   Company,
@@ -29,6 +29,8 @@ import Protools from "./pages/Protools";
 import ScrollToTop from "./components/Scrolltotop";
 import { logoutUser } from "./features/logoutSlice";
 import Logoutmodal from "./components/dash/Logoutmodal";
+import { resetLogin } from "./features/loginSlice";
+import { resetSignup } from "./features/signupSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -72,10 +74,12 @@ const App = () => {
 
   useEffect(() => {
     if (logoutSuccess) {
+      console.log("logged out");
       sessionStorage.clear();
+      dispatch(resetLogin());
       setToken(false);
     }
-  }, [logoutSuccess]);
+  }, [logoutSuccess, dispatch]);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -94,22 +98,16 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Apply dark mode class to the body
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
   useEffect(() => {
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
     if (accessToken) {
       setToken(accessToken);
     } else {
       setToken(false);
     }
-  }, []);
+  }, [accessToken]);
 
   const isAuthPage =
     location.pathname === "/signin" || location.pathname === "/signup";
@@ -192,7 +190,6 @@ const App = () => {
           </button>
         )}
       </div>
-      {/* <Footer /> */}
       {logoutLoading && <Logoutmodal />}
     </TitleProvider>
   );

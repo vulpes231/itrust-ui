@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Section } from "../components";
 import { getPlans } from "../features/planSlice";
 import { getUser } from "../features/userSlice";
+import { resetLogin } from "../features/loginSlice";
 
 const Nocontent = () => {
   return (
@@ -29,6 +30,7 @@ const Plans = () => {
     changeTitle("Quadx - Plans");
 
     if (!accessToken) {
+      // dispatch(resetLogin());
       navigate("/signin");
     }
   }, [accessToken]);

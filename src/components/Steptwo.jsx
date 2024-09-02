@@ -3,13 +3,11 @@ import Formspan from "./Formspan";
 import Label from "./Label";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
-import { updateUser } from "../features/userSlice";
+import { resetUpdateUser, updateUser } from "../features/userSlice";
 
 const Steptwo = ({ pageSwitch }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
 
   const [error, setError] = useState(false);
@@ -27,28 +25,26 @@ const Steptwo = ({ pageSwitch }) => {
     zip: "",
   });
 
-  const goToDash = () => {
-    navigate("/dash");
+  const goToDash = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    window.location.href = "/dash";
   };
 
   const completeProfile = (e) => {
+    e.stopPropagation();
     e.preventDefault();
-    // console.log("clicked");
-    // Check if all fields are filled
+
     const isAnyFieldEmpty = Object.values(formData).some(
       (value) => value.trim() === ""
     );
 
     if (isAnyFieldEmpty) {
-      // console.log("yes");
-      // Set the error message if any field is empty
       setError("All fields are required!");
-      return; // Exit the function to prevent further execution
+      return;
     }
 
-    // No empty fields, so proceed with dispatch and navigation
     dispatch(updateUser(formData));
-    navigate("/dash");
   };
 
   const handleChange = (e) => {
@@ -81,6 +77,7 @@ const Steptwo = ({ pageSwitch }) => {
 
   useEffect(() => {
     if (userUpdated) {
+      dispatch(resetUpdateUser());
       pageSwitch();
     }
   }, [userUpdated]);
@@ -163,7 +160,7 @@ const Steptwo = ({ pageSwitch }) => {
         <Button
           type={"submit"}
           handleClick={completeProfile}
-          title={!updateUserLoading ? "complete profile" : "wait..."}
+          title={!updateUserLoading ? "next" : "wait..."}
         />
         <Button type={"submit"} handleClick={goToDash} title={"skip"} />
       </div>

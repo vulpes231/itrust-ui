@@ -22,7 +22,7 @@ export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
         },
       }
     );
-    console.log(response.data);
+    console.log(response.status);
     return response.data;
   } catch (error) {
     if (error.response) {

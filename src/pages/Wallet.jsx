@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAccount, getUserBalance } from "../features/walletSlice";
 import { getAccessToken, getSingleCoinPrice } from "../constants";
 import { FaMoneyBill } from "react-icons/fa";
 import { MdCheck } from "react-icons/md";
-import Datatable from "../components/wallet/Datatable";
+import { TitleContext } from "../contexts/TitleContext";
 import { Deposit, Swap, Withdrawal } from "../components";
 import { btc, doge, eth, ltc, tether } from "../assets";
 import { getCoinData } from "../features/coinSlice";
 import Trnx from "../components/history/Trnx";
 import Trans from "../components/wallet/Trans";
 import { getUser } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const headers = [
   { id: "date", name: "date" },
@@ -31,7 +32,9 @@ const coins = [
 
 const Wallet = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = getAccessToken();
+  const { changeTitle } = useContext(TitleContext);
 
   const {
     userAccounts,
@@ -65,8 +68,12 @@ const Wallet = () => {
   };
 
   useEffect(() => {
-    document.title = "Quadx - Wallet";
-  }, []);
+    changeTitle("Quadx - Wallet");
+    if (!accessToken) {
+      console.log(accessToken);
+      navigate("/signin");
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     if (accessToken) {

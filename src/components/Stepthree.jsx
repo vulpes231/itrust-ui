@@ -4,7 +4,8 @@ import Label from "./Label";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { updateUser } from "../features/userSlice";
+import { resetUpdateUser, updateUser } from "../features/userSlice";
+import Button from "./Button";
 
 const nationalities = [
   { code: "us", name: "United States" },
@@ -23,13 +24,18 @@ const Stepthree = () => {
     ssn: "",
     dob: "",
     nationality: "",
-    currency: "usd",
-    investmentExperience: "",
+    currency: "",
+    experience: "",
     occupation: "",
-    brokerageFamily: "",
-    referralCode: "",
-    termsAccepted: false,
+    family: "",
+    referral: "",
   });
+
+  const [terms, setTerms] = useState(false);
+
+  const handleTerms = () => {
+    setTerms((prev) => !prev);
+  };
 
   const [error, setError] = useState(false);
 
@@ -37,28 +43,40 @@ const Stepthree = () => {
     (state) => state.user
   );
 
-  const goToDash = () => {
+  const goToDash = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     navigate("/dash");
+    window.location.reload();
   };
 
   const completeProfile = (e) => {
+    e.stopPropagation();
     e.preventDefault();
-    // console.log("clicked");
-    // Check if all fields are filled
-    const isAnyFieldEmpty = Object.values(formData).some(
+
+    // Destructure formData to separate referral from other fields
+    const { referral, ...requiredFields } = formData;
+
+    console.log(formData);
+
+    // Check if any of the required fields are empty
+    const isAnyFieldEmpty = Object.values(requiredFields).some(
       (value) => value.trim() === ""
     );
 
     if (isAnyFieldEmpty) {
-      // console.log("yes");
-      // Set the error message if any field is empty
       setError("All fields are required!");
-      return; // Exit the function to prevent further execution
+      return;
     }
 
-    // No empty fields, so proceed with dispatch and navigation
+    // Check if terms are accepted
+    if (!terms) {
+      setError("Agree to terms and conditions!");
+      return;
+    }
+
+    // Dispatch the update action with the form data
     dispatch(updateUser(formData));
-    navigate("/dash");
   };
 
   const handleChange = (e) => {
@@ -68,6 +86,30 @@ const Stepthree = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
+
+  useEffect(() => {
+    if (updateUserError) {
+      setError(updateUserError);
+    }
+  }, [updateUserError]);
+
+  useEffect(() => {
+    let timeout;
+    if (error) {
+      timeout = 3000;
+      setTimeout(() => {
+        setError(false);
+      }, [timeout]);
+    }
+    () => clearTimeout(timeout);
+  }, [error]);
+
+  useEffect(() => {
+    if (userUpdated) {
+      dispatch(resetUpdateUser());
+      window.location.href = "/dash";
+    }
+  }, [userUpdated]);
 
   return (
     <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
@@ -103,7 +145,7 @@ const Stepthree = () => {
           value={formData.nationality}
           onChange={handleChange}
         >
-          <option value="">select nationality</option>
+          <option value="">choose nationality</option>
           {nationalities.map((na, index) => {
             return (
               <option key={index} value={na.name}>
@@ -123,6 +165,7 @@ const Stepthree = () => {
           value={formData.currency}
           onChange={handleChange}
         >
+          <option value="">choose currency</option>
           <option value="usd">USD ($)</option>
           <option value="gbp">GBP (£)</option>
           <option value="eur">EUR (€)</option>
@@ -137,8 +180,8 @@ const Stepthree = () => {
           className={` ${
             error && " outline-red-500"
           } z-10 w-full rounded-md text-sm/[1.125rem] dark:bg-white bg-slate-950 dark:border-slate-200 border-slate-800 focus:border-purple-500 py-2 px-4 border-2 outline-none`}
-          name="investmentExperience"
-          value={formData.investmentExperience}
+          name="experience"
+          value={formData.experience}
           onChange={handleChange}
         >
           <option value="">select an answer</option>
@@ -159,6 +202,7 @@ const Stepthree = () => {
           value={formData.occupation}
           onChange={handleChange}
         >
+          <option value="">choose occupation</option>
           <option value="unemployed">unemployed</option>
           <option value="employed">employed</option>
           <option value="retired">retired</option>
@@ -176,9 +220,9 @@ const Stepthree = () => {
             <input
               error={error}
               type="radio"
-              name="brokerageFamily"
-              value="yes"
-              checked={formData.brokerageFamily === "yes"}
+              name="family"
+              value={formData.family}
+              checked={formData.family === "yes"}
               onChange={handleChange}
             />
           </span>
@@ -187,9 +231,9 @@ const Stepthree = () => {
             <input
               error={error}
               type="radio"
-              name="brokerageFamily"
+              name="family"
               value="no"
-              checked={formData.brokerageFamily === "no"}
+              checked={formData.family === "no"}
               onChange={handleChange}
             />
           </span>
@@ -199,27 +243,27 @@ const Stepthree = () => {
         <Label title={"referral code (optional)"} />
 
         <Input
-          error={error}
+          // error={error}
           type={"text"}
-          name="referralCode"
-          value={formData.referralCode}
+          name="referral"
+          value={formData.referral}
           handleChange={handleChange}
         />
       </Formspan>
       <div className="flex gap-2 items-center">
         <input
-          // error={error}
+          value={terms}
+          name="terms"
           type="checkbox"
-          name="termsAccepted"
-          checked={formData.termsAccepted}
-          onChange={handleChange}
+          checked={terms}
+          onChange={handleTerms}
         />
         <small className="whitespace-nowrap text-xs font-thin">
           I have read &amp; accept <Link>Terms &amp; conditions.</Link>
         </small>
       </div>
-      {updateUserError && <p className="text-red-500">{updateUserError}</p>}
-      <div className="pt-3">
+      {error && <p className="text-red-500">{error}</p>}
+      <div className="pt-3 flex flex-col gap-4">
         <Button
           type={"submit"}
           handleClick={completeProfile}

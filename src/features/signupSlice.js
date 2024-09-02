@@ -12,7 +12,7 @@ const initialState = {
 export const createAccount = createAsyncThunk(
   "create/createAccount",
   async (FormData) => {
-    const url = `${liveserver}/signup`;
+    const url = `${devserver}/signup`;
     try {
       const response = await axios.post(url, FormData, {
         headers: {
@@ -36,11 +36,13 @@ const createAccountSlice = createSlice({
   name: "create",
   initialState,
   reducers: {
-    reset(state) {
-      state.loading = false;
-
-      state.error = false;
-      state.success = false;
+    reducers: {
+      resetSignup(state) {
+        state.loading = false;
+        state.accessToken = null;
+        state.error = false;
+        state.success = false;
+      },
     },
   },
   extraReducers: (builder) => {
@@ -63,5 +65,5 @@ const createAccountSlice = createSlice({
   },
 });
 
-export const { reset } = createAccountSlice.actions;
+export const { resetSignup } = createAccountSlice.actions;
 export default createAccountSlice.reducer;
