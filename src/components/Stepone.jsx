@@ -3,7 +3,6 @@ import Formspan from "./Formspan";
 import Label from "./Label";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import { createAccount } from "../features/signupSlice";
 import Button from "./Button";
 import Modal from "./Modal";
@@ -11,7 +10,7 @@ import { MdCheck } from "react-icons/md";
 
 const Stepone = ({ formData, handleChange, pageSwitch }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [appError, setAppError] = useState(false);
 
   const { loading, error, success, accessToken } = useSelector(
