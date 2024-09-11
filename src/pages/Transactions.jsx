@@ -23,8 +23,8 @@ const Transactions = () => {
   }, [accessToken]);
 
   return (
-    <Section>
-      <div className="container px-3 font-[Montserrat] space-y-4">
+    <section className="pt-10">
+      <div className="container px-3 font-[Montserrat]">
         <div className="mb-7 flex justify-between items-center -mx-3">
           <div className="px-3">
             <h2 className="text-xl font-bold mb-2">History</h2>
@@ -48,7 +48,7 @@ const Transactions = () => {
           <History />
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

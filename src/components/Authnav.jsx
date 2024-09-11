@@ -53,10 +53,8 @@ const Authnav = ({
   }, [accessToken, dispatch]);
 
   const handleLinkClick = (e, path) => {
-    console.log("show");
     e.preventDefault();
-
-    if (user?.KYCstatus == "verified") {
+    if (user?.isKYCVerified) {
       navigate(path);
     } else {
       setVerifyError(true);

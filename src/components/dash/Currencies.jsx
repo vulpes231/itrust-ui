@@ -65,7 +65,7 @@ const Currencies = ({ coinData }) => {
             </span>
           </span>
           <div className="overflow-auto lg:overflow-hidden shadow-lg">
-            <table className="min-w-full divide-y divide-gray-200  dark:border-slate-200 border">
+            <table className="min-w-full divide-y divide-slate-800 dark:divide-slate-200  bg-black dark:bg-white border border-slate-800 dark:border-none">
               <thead>
                 <tr className="">
                   <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-medium  uppercase tracking-tight">
@@ -88,7 +88,7 @@ const Currencies = ({ coinData }) => {
                   </th>
                 </tr>
               </thead>
-              <tbody className=" divide-y divide-gray-200">
+              <tbody className=" divide-y divide-slate-800 dark:divide-slate-200">
                 {coinData?.map((coin, index) => {
                   return (
                     <tr key={coin.id}>
@@ -146,7 +146,7 @@ const Currencies = ({ coinData }) => {
           </div>
         </div>
         {/* recent */}
-        <div className="grid lg:grid-cols-2 overflow-auto">
+        <div className="grid lg:grid-cols-2">
           <RecentActivity />
         </div>
       </div>

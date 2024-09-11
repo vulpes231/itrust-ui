@@ -17,7 +17,7 @@ const Dashbots = ({
   expiry,
 }) => {
   return (
-    <div className="flex flex-col rounded-xl shadow-lg dark:bg-white bg-slate-900 border-slate-800 dark:border-none border text-xs ">
+    <div className="flex flex-col rounded-xl shadow-lg dark:bg-white bg-black border-slate-800 dark:border-none border text-xs ">
       <article className="flex justify-between items-center p-4">
         <figure className="bg-slate-200 w-10 h-10 shadow rounded-lg flex items-center justify-center">
           <img src={botImg} alt="" className="w-[25px]" />

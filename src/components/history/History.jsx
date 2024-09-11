@@ -6,7 +6,7 @@ const History = () => {
   const [active, setActive] = useState("transaction");
 
   return (
-    <div className="w-full py-4 flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       <div className="flex items-center gap-2">
         <button
           onClick={() => setActive("transaction")}
@@ -29,6 +29,7 @@ const History = () => {
           Trade
         </button>
       </div>
+      {/* <Trade /> */}
       <div>{active === "transaction" ? <Trnx /> : <Trade />}</div>
     </div>
   );
