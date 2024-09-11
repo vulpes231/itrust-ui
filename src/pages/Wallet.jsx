@@ -12,6 +12,8 @@ import Trnx from "../components/history/Trnx";
 import Trans from "../components/wallet/Trans";
 import { getUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { styles } from "../constants/styles";
+import Connectwallet from "../components/wallet/Connectwallet";
 
 const headers = [
   { id: "date", name: "date" },
@@ -50,6 +52,7 @@ const Wallet = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { coinData } = useSelector((state) => state.coin);
   const [activeCoin, setActiveCoin] = useState("bitcoin");
+  const [showConnect, setShowConnect] = useState(false);
 
   const handleActiveSection = (section) => {
     setActiveSection(section);
@@ -106,24 +109,43 @@ const Wallet = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // if (getAccountLoading) {
-  //   return (
-  //     <div className="min-h-screen mt-10 p-6">
-  //       <small>Loading...</small>
-  //     </div>
-  //   );
-  // }
+  if (getAccountLoading) {
+    return (
+      <div className="min-h-screen mt-10 p-6">
+        <small>Fetching wallet data...</small>
+      </div>
+    );
+  }
+
+  const handleConnect = () => {
+    setShowConnect(true);
+  };
+
+  const closeConnect = () => {
+    console.log("Closed");
+    setShowConnect(false);
+  };
 
   return (
     <div className="min-h-screen">
       <div className="container px-3 font-[Montserrat] space-y-4 mt-10">
-        <div className="">
-          <h2 className="text-xl font-bold mb-2">Wallet</h2>
-          <ul className="inline-flex items-center text-xs font-medium gap-2">
-            <li>Home </li>
-            <li className="inline-flex items-center mt-0.5">{`>`}</li>
-            <li className="capitalize">{user?.username}</li>
-          </ul>
+        <div className="flex justify-between items-start">
+          <span>
+            <h2 className="text-xl font-bold mb-2">Wallet</h2>
+            <ul className="inline-flex items-center text-xs font-medium gap-2">
+              <li>Home </li>
+              <li className="inline-flex items-center mt-0.5">{`>`}</li>
+              <li className="capitalize">{user?.username}</li>
+            </ul>
+          </span>
+          <span>
+            <button
+              className={`inline-flex justify-center items-center font-medium transition-all text-sm px-5 py-2 gap-3 rounded-md ${styles.hover.lightBg}  text-white ${styles.colors.primaryBgColor} `}
+              onClick={handleConnect}
+            >
+              Connect wallet
+            </button>
+          </span>
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
           {/* aside */}
@@ -135,8 +157,8 @@ const Wallet = () => {
                   onClick={() => setActiveCoin(asset.coinName)}
                   className={`flex justify-between items-center cursor-pointer p-6 rounded-sm ${
                     activeCoin === asset.coinName
-                      ? "bg-[#805af5] text-white"
-                      : "dark:bg-white bg-slate-900"
+                      ? "bg-[#805af5] text-white "
+                      : "dark:bg-white bg-black border border-slate-800 dark:border-none"
                   }`}
                 >
                   <span className="font-semibold flex gap-1 items-center capitalize">
@@ -178,7 +200,7 @@ const Wallet = () => {
           </div>
           {/* content */}
           <div className="lg:col-span-2 overflow-auto">
-            <div className="p-6 pb-10  border dark:border-slate-200 border-slate-800  dark:bg-white bg-slate-950 rounded-xl flex flex-col gap-6 w-full">
+            <div className="p-6 pb-10  border dark:border-slate-200 border-slate-800  dark:bg-white bg-black rounded-xl flex flex-col gap-6 w-full">
               <div>
                 <h3 className="font-medium ">Balances</h3>
               </div>
@@ -235,7 +257,7 @@ const Wallet = () => {
               </div>
             </div>
             {/* seperate */}
-            <div className="p-6 col-span-2 border dark:border-slate-200 border-slate-800  dark:bg-white bg-slate-950 rounded-xl flex flex-col gap-6 my-6 ">
+            <div className="p-6 col-span-2 border dark:border-slate-200 border-slate-800  dark:bg-white bg-black rounded-xl flex flex-col gap-6 my-6 ">
               <div>
                 {activeSection === "deposit" ? (
                   <Deposit
@@ -265,6 +287,7 @@ const Wallet = () => {
             </div>
           </div>
         </div>
+        {showConnect && <Connectwallet closeConnect={closeConnect} />}
       </div>
     </div>
   );

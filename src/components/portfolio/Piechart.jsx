@@ -24,8 +24,8 @@ const PieChart = ({ userBalance, coinData }) => {
   const up = usdtPrice?.price || 0;
 
   return (
-    <div className="dark:bg-white p-6 bg-slate-950 dark:text-slate-950 space-y-5 border dark:border-slate-200 border-slate-800 rounded-lg">
-      <div className="flex justify-between items-center">
+    <div className="dark:bg-white bg-black space-y-5 border dark:border-slate-200 border-slate-800 rounded-lg">
+      <div className="flex justify-between items-center p-6">
         <h3 className="capitalize font-medium text-lg">crypto portfolio</h3>
         <select className="flex items-center gap-2 text-xs font-medium bg-transparent border p-1 rounded-lg">
           <option value="">BTC</option>
@@ -33,7 +33,7 @@ const PieChart = ({ userBalance, coinData }) => {
           <option value="">USDT</option>
         </select>
       </div>
-      <div>
+      <div className="p-6">
         <Doughnut
           data={{
             labels: coins,
@@ -46,9 +46,9 @@ const PieChart = ({ userBalance, coinData }) => {
           }}
         />
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between text-xs">
-          <div className="flex items-center gap-2 ">
+      <div className="flex flex-col">
+        <div className="flex justify-between text-xs bg-slate-900 p-3 dark:bg-slate-100">
+          <div className="flex items-center gap-2">
             <figure>
               <img src={btc} alt="BTC" width={30} />
             </figure>
@@ -62,7 +62,7 @@ const PieChart = ({ userBalance, coinData }) => {
             <small>${userBalance.btcBalance}</small>
           </div>
         </div>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-xs bg-slate-700 p-3 dark:bg-slate-300">
           <div className="flex items-center gap-2 ">
             <figure>
               <img src={eth} alt="ETH" width={20} />
@@ -77,7 +77,7 @@ const PieChart = ({ userBalance, coinData }) => {
             <small>${userBalance.ethBalance}</small>
           </div>
         </div>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-xs bg-slate-900 p-3 dark:bg-slate-100">
           <div className="flex items-center gap-2 ">
             <figure>
               <img src={tether} alt="USDT" width={30} />

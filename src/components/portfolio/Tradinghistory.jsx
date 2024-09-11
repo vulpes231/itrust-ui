@@ -9,10 +9,17 @@ const Tradinghistory = () => {
 
   const accessToken = getAccessToken();
 
-  const myTrades = trades?.trades?.map((trade) => {
+  const myTrades = trades?.trades?.map((trade, index) => {
     const [date, time] = trade.date.split(" ");
     return (
-      <tr key={trade._id} className="capitalize">
+      <tr
+        key={trade._id}
+        className={`capitalize text-xs font-light ${
+          index % 2 !== 0
+            ? `bg-black dark:bg-white`
+            : `bg-slate-900 dark:bg-slate-100`
+        }`}
+      >
         <td className="px-4 py-3 whitespace-nowrap ">{trade.botName}</td>
         <td className="px-4 py-3 whitespace-nowrap ">
           <span className="flex flex-col">
@@ -32,20 +39,20 @@ const Tradinghistory = () => {
     dispatch(getUserTrades());
   }, [accessToken]);
   return (
-    <div className="dark:bg-white bg-slate-950 rounded-lg border border-slate-700 dark:border-none">
+    <div className="flex flex-col gap-4 dark:bg-white bg-slate-950 border-slate-800">
       <div className="flex justify-between items-center p-4">
-        <h3 className="capitalize font-medium text-md">recent trades</h3>
+        <h3 className="text-lg font-medium capitalize">recent trades</h3>
         <button
-          className={`text-xs bg-purple-500 text-white px-2 py-1 rounded-sm `}
+          className={`text-xs bg-purple-500 text-white px-4 py-1 rounded-3xl `}
         >
           See all
         </button>
       </div>
       {/* <hr /> */}
       <div className="overflow-x-scroll">
-        <table className="text-xs min-w-full">
+        <table className="min-w-full text-xs divide-y divide-gray-800 border-collapse border bg-black">
           <thead className="text-left">
-            <tr className=" capitalize bg-slate-700 dark:bg-slate-200">
+            <tr className="capitalize bg-white text-black dark:bg-slate-800 dark:text-white font-medium ">
               <th className="px-4 py-3 whitespace-nowrap ">copy bot</th>
               <th className="px-4 py-3 whitespace-nowrap">date</th>
               <th className="px-4 py-3 whitespace-nowrap">amount traded</th>

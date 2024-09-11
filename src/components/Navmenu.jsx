@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { profile } from "../assets";
 import Sidebarlink from "./Sidebarlink";
 import {
@@ -23,11 +23,18 @@ const Navmenu = ({ handleLogout, success, setToken }) => {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
   const accessToken = getAccessToken();
+  const menuRef = useRef(null);
 
   const { user } = useSelector((state) => state.user);
 
   const showMenu = () => {
     setMenu((prev) => !prev);
+  };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setMenu(false);
+    }
   };
 
   useEffect(() => {
@@ -42,13 +49,20 @@ const Navmenu = ({ handleLogout, success, setToken }) => {
       sessionStorage.clear();
       dispatch(resetLogin());
       dispatch(resetLogout());
-      // dispatch(resetLogout())
       setToken(false);
     }
   }, [success, dispatch]);
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
+      ref={menuRef}
       onClick={showMenu}
       className="border-2 p-0.5 rounded-full cursor-pointer hover:border-purple-500 flex items-center"
     >
@@ -89,13 +103,11 @@ const Navmenu = ({ handleLogout, success, setToken }) => {
               icon={<MdEditDocument />}
               path={"/docs"}
             />
-
             <Sidebarlink
               title={"settings"}
               icon={<FaGears />}
               path={"/settings"}
             />
-
             <button
               className={`flex items-center gap-2 font-medium text-xs ${styles.hover.lightText}  has-toggle menu-link py-2 xl:py-3 active capitalize`}
               onClick={handleLogout}

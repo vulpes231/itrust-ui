@@ -45,7 +45,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
   return (
     <form
       ref={myRef}
-      className={`flex flex-col text-xs gap-4 text-[#333] ${
+      className={`flex flex-col text-xs gap-4  ${
         activeBorder
           ? "bg-slate-50 border-2 border-[#805af5] p-2 rounded-md"
           : "border-none"
@@ -59,7 +59,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
           <select
             name=""
             id=""
-            className={`p-2 w-full capitalize bg-transparent border rounded-sm dark:bg-white bg-slate-950`}
+            className={`p-2 w-full capitalize bg-transparent border border-slate-800 dark:border-slate-200 rounded-sm dark:bg-white bg-slate-950`}
           >
             <option value="">coin balance</option>
           </select>
@@ -69,7 +69,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
             Coin
           </label>
           <select
-            className={`p-2 w-full capitalize bg-transparent border rounded-sm dark:bg-white bg-slate-950`}
+            className={`p-2 w-full capitalize bg-transparent border border-slate-800 dark:border-slate-200 rounded-sm dark:bg-white bg-slate-950`}
             value={formData.walletType}
             onChange={handleInput}
             name="walletType"
@@ -93,7 +93,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
           Select Bot
         </label>
         <select
-          className={`p-2 w-full capitalize bg-transparent border border-slate-800 rounded-sm   dark:bg-white bg-slate-950 dark:border-none shadow`}
+          className={`p-2 w-full capitalize bg-transparent border border-slate-800 rounded-sm dark:bg-white bg-slate-950 dark:border-slate-200 `}
           value={formData.botId}
           onChange={handleInput}
           name="botId"
@@ -109,10 +109,10 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
         </select>
       </div>
 
-      <div className="w-full flex justify-between gap-1">
+      <div className="w-full flex justify-between gap-1  border border-slate-800 dark:border-slate-200">
         <label
           htmlFor=""
-          className=" bg-zinc-300 p-2 w-[30%] capitalize text-center font-semibold"
+          className=" bg-gray-200 p-2 w-[30%] capitalize text-center font-semibold"
         >
           amount
         </label>
@@ -127,7 +127,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
         />
         <label
           htmlFor=""
-          className=" bg-zinc-300 w-[20%] p-2 uppercase text-center font-semibold"
+          className=" bg-gray-200 w-[20%] p-2 uppercase text-center font-semibold"
         >
           usd
         </label>
@@ -143,7 +143,7 @@ const Botform = ({ userAccounts, bots, myRef, activeBorder }) => {
         )}
         <button
           onClick={activateBot}
-          className={`${styles.colors.primaryBgColor} w-full text-white rounded-3xl capitalize p-2`}
+          className={`${styles.colors.primaryBgColor} w-full text-white rounded-3xl capitalize py-2.5 font-medium`}
         >
           {!activateLoading ? "activate bot" : "activating bot..."}
         </button>

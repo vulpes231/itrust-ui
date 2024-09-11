@@ -1,70 +1,111 @@
-import React from "react";
-import { Bar, Line } from "react-chartjs-2";
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserEarnings } from "../../features/tradeSlice";
+import { getAccessToken } from "../../constants";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
 
-import { Chart as ChartJS } from "chart.js/auto";
-import { styles } from "../../constants/styles";
+// Register the components you use
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+  LineElement
+);
 
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const Userchart = ({ darkMode }) => {
+  const dispatch = useDispatch();
+  const [earningsData, setEarningsData] = useState({ labels: [], data: [] });
 
-const earnings = [1, 5, 4, 8, 6, 10, 15, 20, 18, 30, 28, 40, 20, 50, 55];
+  const { earnings } = useSelector((state) => state.trade);
+  const accessToken = getAccessToken();
 
-const Userchart = () => {
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getUserEarnings());
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (earnings) {
+      const labels = earnings?.labels;
+      const data = earnings?.data;
+      setEarningsData({ labels, data });
+    }
+  }, [earnings]);
+
+  const data = {
+    labels: earningsData.labels,
+    datasets: [
+      {
+        label: "Earnings (Thousand)",
+        data: earningsData.data,
+        borderColor: !darkMode ? "white" : "black", // Line color based on dark mode
+        backgroundColor: !darkMode
+          ? "rgba(255, 255, 255, 0.2)" // Background color under the line in dark mode
+          : "rgba(0, 0, 0, 0.2)", // Background color under the line in light mode
+        borderWidth: 2, // Line width
+        tension: 0.1, // Line tension for smooth curves
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (tooltipItem) => `$${tooltipItem.raw}K`, // Tooltip label formatting
+        },
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          color: !darkMode
+            ? "rgba(255, 255, 255, 0.2)" // Grid line color in dark mode
+            : "rgba(0, 0, 0, 0.2)", // Grid line color in light mode
+        },
+        ticks: {
+          color: !darkMode ? "white" : "black", // X-axis label color
+        },
+      },
+      y: {
+        grid: {
+          color: !darkMode
+            ? "rgba(255, 255, 255, 0.2)" // Grid line color in dark mode
+            : "rgba(0, 0, 0, 0.2)", // Grid line color in light mode
+        },
+        ticks: {
+          color: !darkMode ? "white" : "black", // Y-axis label color
+        },
+      },
+    },
+    maintainAspectRatio: false, // Prevent chart resizing issues
+  };
+
   return (
-    <div className="dark:bg-white p-6 bg-slate-950 border dark:border-slate-200 border-slate-800 rounded-lg">
+    <div className={`p-6 rounded-lg ${darkMode ? "bg-white" : "bg-black"}`}>
       <div className="flex justify-between items-center">
-        <h3 className="capitalize font-medium text-lg">
-          my portfolio statistics
+        <h3 className={`capitalize font-medium text-lg `}>
+          My Portfolio Statistics
         </h3>
-        <span className="flex items-center gap-2 text-xs font-medium">
-          <button
-            className={`py-2 px-3 bg-purple-500 ${styles.colors.primaryBgColor} text-white`}
-          >
-            1M
-          </button>
-          <button
-            className={`py-2 px-3 bg-purple-500 ${styles.colors.primaryBgColor} text-white`}
-          >
-            6M
-          </button>
-          <button
-            className={`py-2 px-3 bg-purple-500 ${styles.colors.primaryBgColor} text-white`}
-          >
-            1Y
-          </button>
-          <button
-            className={`py-2 px-3 ${styles.colors.primaryBgColor} text-white`}
-          >
-            ALL
-          </button>
-        </span>
+        {/* Add buttons for time periods if needed */}
       </div>
-      <div>
-        <Line
-          data={{
-            labels: months,
-            datasets: [
-              {
-                label: "Earnings (Thousand)",
-                data: earnings,
-                borderRadius: 2,
-                borderColor: "white",
-              },
-            ],
-          }}
-        />
+      <div className="relative h-80">
+        {/* Adjust height as needed */}
+        <Line data={data} options={options} />
       </div>
     </div>
   );

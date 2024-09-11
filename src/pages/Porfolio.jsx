@@ -17,7 +17,7 @@ import Bots from "../components/dash/Bots";
 import { getUserAccount, getUserBalance } from "../features/walletSlice";
 import { getUser } from "../features/userSlice";
 
-const Porfolio = () => {
+const Porfolio = ({ mode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = getAccessToken();
@@ -108,7 +108,7 @@ const Porfolio = () => {
                 totalBalance={totalBalance}
                 userAccount={userAccounts}
               />
-              <Userchart />
+              <Userchart darkMode={mode} />
             </div>
             <>
               <Piechart userBalance={userBalance} coinData={coinData} />

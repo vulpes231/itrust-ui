@@ -165,7 +165,7 @@ const App = () => {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dash" element={<Dashboard />} />
-          <Route path="/portfolio" element={<Porfolio />} />
+          <Route path="/portfolio" element={<Porfolio mode={darkMode} />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/tradingbot" element={<Tradingbot />} />
           <Route path="/history" element={<Transactions />} />

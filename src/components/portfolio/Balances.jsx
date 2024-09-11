@@ -24,7 +24,7 @@ const Balances = ({ totalBalance, userAccount }) => {
         </p>
       </div>
 
-      <div className="bg-white rounded-md border border-slate-200 p-5 h-full text-slate-950 flex flex-col gap-2">
+      <div className="dark:bg-white bg-black rounded-md border border-slate-800 dark:border-slate-200 p-5 h-full flex flex-col gap-2">
         <span className="flex justify-between">
           <h6 className="font-medium text-sm">Today's profit</h6>
           <PiHandCoins
@@ -39,7 +39,7 @@ const Balances = ({ totalBalance, userAccount }) => {
         </span>
       </div>
 
-      <div className="bg-white rounded-md border border-slate-200 p-5 h-full text-slate-950 flex flex-col gap-2">
+      <div className="dark:bg-white bg-black rounded-md border border-slate-800 dark:border-slate-200 p-5 h-full flex flex-col gap-2">
         <span className="flex justify-between">
           <h6 className="font-medium text-sm">Average daily earnings</h6>
           <FaChartLine

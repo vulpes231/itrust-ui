@@ -108,16 +108,18 @@ const Tradingbot = () => {
               botData={userBots}
             />
           </div>
-          <div className="flex flex-col gap-4 ">
-            <h3 className="bg-white text-slate-900 text-center p-3 rounded shadow font-medium text-sm capitalize">
-              add bot
-            </h3>
-            <Botform
-              userAccounts={userAccounts}
-              bots={bots}
-              myRef={formRef}
-              activeBorder={showBorder}
-            />
+          <div className=" ">
+            <div className="flex flex-col gap-4 bg-black dark:bg-white p-4 rounded-lg shadow-xl  border border-slate-800 dark:border-none">
+              <h3 className=" text-center p-3 font-medium text-sm capitalize border border-slate-800 dark:border-slate-200">
+                add bot
+              </h3>
+              <Botform
+                userAccounts={userAccounts}
+                bots={bots}
+                myRef={formRef}
+                activeBorder={showBorder}
+              />
+            </div>
           </div>
         </div>
       </div>
