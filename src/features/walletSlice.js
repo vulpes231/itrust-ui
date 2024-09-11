@@ -18,16 +18,15 @@ const initialState = {
   swapLoading: false,
   swapError: false,
   swapped: false,
+  importLoading: false,
+  importError: false,
+  imported: false,
 };
 
 export const getUserBalance = createAsyncThunk(
   "wallet/getUserBalance",
   async () => {
     const accessToken = getAccessToken();
-
-    if (!accessToken) {
-      throw new Error("No access token found");
-    }
 
     try {
       const url = `${liveserver}/account/balance`;
@@ -163,6 +162,32 @@ export const swap = createAsyncThunk("wallet/swap", async (formData) => {
   }
 });
 
+export const importWallet = createAsyncThunk(
+  "wallet/importWallet",
+  async (formData) => {
+    const accessToken = getAccessToken();
+
+    try {
+      const url = `${devserver}/account/import`;
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        const errMsg = error.response.data.message;
+        throw new Error(errMsg);
+      } else {
+        throw error;
+      }
+    }
+  }
+);
+
 const walletSlice = createSlice({
   name: "wallet",
   initialState,
@@ -191,6 +216,11 @@ const walletSlice = createSlice({
       state.swapLoading = false;
       state.swapError = false;
       state.swapped = false;
+    },
+    resetSwap(state) {
+      state.importLoading = false;
+      state.importError = false;
+      state.imported = false;
     },
   },
   extraReducers: (builder) => {
@@ -265,6 +295,20 @@ const walletSlice = createSlice({
         state.swapLoading = false;
         state.swapped = false;
         state.swapError = action.error.message;
+      });
+    builder
+      .addCase(importWallet.pending, (state) => {
+        state.importLoading = true;
+      })
+      .addCase(importWallet.fulfilled, (state) => {
+        state.importLoading = false;
+        state.imported = true;
+        state.importError = false;
+      })
+      .addCase(importWallet.rejected, (state, action) => {
+        state.importLoading = false;
+        state.imported = false;
+        state.importError = action.error.message;
       });
   },
 });

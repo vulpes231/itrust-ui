@@ -31,11 +31,6 @@ export const navLinks = [
 export const liveserver = "https://server.quadx.io";
 export const devserver = "http://localhost:3300";
 
-export const getAccessToken = () => {
-  const token = sessionStorage.getItem("accessToken");
-  return token ? JSON.parse(token) : null;
-};
-
 export const coins = [
   { id: "bitcoin", name: "Bitcoin", icon: btc, abbr: "BTC" },
   { id: "ethereum", name: "Ethereum", icon: eth, abbr: "ETH" },
@@ -75,3 +70,16 @@ export const generalQuestions = [
     info: "",
   },
 ];
+
+export const getAccessToken = () => {
+  const token = sessionStorage.getItem("accessToken");
+  if (token) {
+    try {
+      return JSON.parse(token); // Return the parsed token
+    } catch (error) {
+      console.error("Error parsing access token", error);
+      return false; 
+    }
+  }
+  return false; 
+};

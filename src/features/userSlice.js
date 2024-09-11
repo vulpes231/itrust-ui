@@ -96,6 +96,11 @@ const userSlice = createSlice({
       state.userUpdated = false;
       state.updateUserLoading = false;
     },
+    resetChangePass(state) {
+      state.changeError = false;
+      state.changeLoading = false;
+      state.passwordChanged = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -145,4 +150,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { resetUpdateUser } = userSlice.actions;
+export const { resetUpdateUser, resetChangePass } = userSlice.actions;

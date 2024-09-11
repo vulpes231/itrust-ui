@@ -64,8 +64,6 @@ const Profile = () => {
 
   useEffect(() => {
     if (!accessToken) {
-      console.log("yes");
-      // dispatch(resetLogin());
       navigate("/signin");
     }
   }, [accessToken]);

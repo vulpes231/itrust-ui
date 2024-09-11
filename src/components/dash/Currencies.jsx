@@ -146,7 +146,7 @@ const Currencies = ({ coinData }) => {
           </div>
         </div>
         {/* recent */}
-        <div className="grid lg:grid-cols-2">
+        <div className="grid ">
           <RecentActivity />
         </div>
       </div>

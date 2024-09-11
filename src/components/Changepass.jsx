@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changePassword } from "../features/userSlice";
+import { changePassword, resetChangePass } from "../features/userSlice";
 
 const intitialState = {
   password: "",
@@ -9,11 +9,11 @@ const intitialState = {
 };
 
 const styles = {
-  input: `outline-none w-full p-2 border bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs focus:border-none focus:outline-purple-500 order border-slate-600 dark:border-slate-200`,
+  input: `outline-none w-full p-2 border bg-transparent placeholder:capitalize placeholder:font-thin placeholder:text-xs focus:border-none focus:outline-purple-500 order border-slate-800 dark:border-slate-200`,
   label: `capitalize text-sm font-medium`,
 };
 
-const Changepass = () => {
+const Changepass = ({ togglePass }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(intitialState);
   const [error, setError] = useState(false);
@@ -34,6 +34,7 @@ const Changepass = () => {
     console.log(form);
     if (form.newPassword !== form.confirmNewPass) {
       setError("passwords do not match!");
+      return;
     }
 
     const data = {
@@ -45,7 +46,7 @@ const Changepass = () => {
 
   useEffect(() => {
     if (changeError) {
-      setError(error);
+      setError(changeError);
     }
   }, [changeError]);
 
@@ -55,6 +56,7 @@ const Changepass = () => {
       timeout = 3000;
       setTimeout(() => {
         setError(false);
+        dispatch(resetChangePass());
       }, timeout);
     }
     return () => clearTimeout(timeout);
@@ -65,54 +67,61 @@ const Changepass = () => {
     if (passwordChanged) {
       timeout = 2000;
       setTimeout(() => {
+        dispatch(resetChangePass());
         window.location.reload();
       }, timeout);
     }
     return () => clearTimeout(timeout);
   }, [passwordChanged]);
   return (
-    <form action="" className="flex flex-col gap-2 bg-black dark:bg-white">
-      <h4 className="text-xs lg:text-lg font-semibold capitalize p-6">
-        password update
-      </h4>
-      <hr className="order border-slate-600 dark:border-slate-200" />
-      <div className="grid gap-4 p-6">
-        <div className="flex flex-col gap-1">
-          <label className={styles.label} htmlFor="">
-            current password
-          </label>
-          <input
-            type="text"
-            onChange={handleInput}
-            value={form.password}
-            name="password"
-            className={styles.input}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className={styles.label} htmlFor="">
-            new password
-          </label>
-          <input
-            type="text"
-            onChange={handleInput}
-            value={form.newPassword}
-            name="newPassword"
-            className={styles.input}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className={styles.label} htmlFor="">
-            confirm password
-          </label>
-          <input
-            type="text"
-            onChange={handleInput}
-            value={form.confirmNewPass}
-            name="confirmNewPass"
-            className={styles.input}
-          />
-        </div>
+    <form className={togglePass ? "flex flex-col gap-4 p-4" : "hidden"}>
+      <div className="flex flex-col gap-1">
+        <label className={styles.label} htmlFor="">
+          current password
+        </label>
+        <input
+          type="password"
+          onChange={handleInput}
+          value={form.password}
+          name="password"
+          className={` ${
+            error && error === "invalid password entered!"
+              ? "border-2 border-red-500 bg-transparent p-2"
+              : "border-slate-800 border bg-transparent p-2 dark:border-slate-300 outline-none focus:outline-purple-500"
+          }`}
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <label className={styles.label} htmlFor="">
+          new password
+        </label>
+        <input
+          type="password"
+          onChange={handleInput}
+          value={form.newPassword}
+          name="newPassword"
+          className={` ${
+            error && error === "passwords do not match!"
+              ? "border-2 border-red-500 bg-transparent p-2"
+              : "border-slate-800 border bg-transparent p-2 dark:border-slate-300 outline-none focus:outline-purple-500"
+          }`}
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <label className={styles.label} htmlFor="">
+          confirm password
+        </label>
+        <input
+          type="password"
+          onChange={handleInput}
+          value={form.confirmNewPass}
+          name="confirmNewPass"
+          className={` ${
+            error && error === "passwords do not match!"
+              ? "border-2 border-red-500 bg-transparent p-2"
+              : "border-slate-800 border bg-transparent p-2 dark:border-slate-300  outline-none focus:outline-purple-500"
+          }`}
+        />
       </div>
       {error && <p className="text-red-500 px-3">{error}</p>}
       {passwordChanged && (

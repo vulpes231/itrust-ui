@@ -4,6 +4,7 @@ import { getAccessToken } from "../constants";
 import { getUser } from "../features/userSlice";
 import { TitleContext } from "../contexts/TitleContext";
 import { useNavigate } from "react-router-dom";
+import Changepass from "../components/Changepass";
 
 const Holder = ({ children }) => {
   return (
@@ -17,6 +18,11 @@ const Hr = () => {
   return <hr className=" dark:border-slate-200 border-slate-700 border" />;
 };
 
+const styles = {
+  inout:
+    "py-1.5 px-2 bg-transparent outline-none focus:outline-purple-500 border border-slate-800 dark:border-slate-200",
+};
+
 const Settings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +31,7 @@ const Settings = () => {
   const [activePage, setActivePage] = useState(0);
 
   const { user } = useSelector((state) => state.user);
+  // console.log(user);
 
   const handleActivePage = (index) => {
     setActivePage(index);
@@ -45,10 +52,9 @@ const Settings = () => {
   }, [accessToken]);
 
   const settingLinks = [
-    "Personal information",
-    "Investment profile",
-    "Investing",
-    "Security and privacy",
+    "Personal details",
+    "Investment details",
+    "Security",
     "Identity documents",
   ];
 
@@ -101,36 +107,73 @@ const Settings = () => {
           </ul>
         </aside>
         <div className="md:col-span-2 w-full ">
+          {activePage === 0 && (
+            <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-bold capitalize">user information</h3>
+                <Hr />
+                <Holder>
+                  <span>username</span>
+                  <span>{user?.username}</span>
+                </Holder>
+                <Hr />
+                <Holder>
+                  <span>email</span>
+                  <span>{user?.email}</span>
+                </Holder>
+                <Hr />
+                <Holder>
+                  <span>date of birth</span>
+                  <span>{user?.dob || "Not set"} </span>
+                </Holder>
+
+                <Hr />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="font-bold capitalize">Contact information</h3>
+                <Hr />
+                <Holder>
+                  <span>phone</span>
+                  <span>{user?.phone || "Not set"}</span>
+                </Holder>
+                <Hr />
+                <Holder>
+                  <span>address</span>
+                  <span>{user?.address || "Not set"}</span>
+                </Holder>
+                <Hr />
+                <Holder>
+                  <span>nationality</span>
+                  <span>{user?.nationality || "Not set"}</span>
+                </Holder>
+                <Hr />
+              </div>
+            </div>
+          )}
           {activePage === 1 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold capitalize">personal details</h3>
+                <h3 className="font-bold capitalize">Investment profile</h3>
                 <Hr />
                 <Holder>
-                  <span>employment</span>
-                  <span>emp</span>
+                  <span>experience</span>
+                  <span>{user?.experience || "Not set"}</span>
                 </Holder>
                 <Hr />
                 <Holder>
-                  <span>marital status</span>
-                  <span>_ _ _</span>
-                </Holder>
-                <Hr />
-              </div>
-              <div className="flex flex-col gap-2">
-                <h3 className="font-bold capitalize">assets</h3>
-                <Hr />
-                <Holder>
-                  <span>Yearly Income</span>
-                  <span>emp</span>
+                  <span>currency</span>
+                  <span className="uppercase">
+                    {user?.currency || "Not set"}
+                  </span>
                 </Holder>
                 <Hr />
                 <Holder>
-                  <span>Source of Funds</span>
-                  <span>_ _ _</span>
+                  <span>occupation</span>
+                  <span>{user?.occupation || "Not set"}</span>
                 </Holder>
                 <Hr />
               </div>
+
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize">investment</h3>
                 <Hr />
@@ -152,20 +195,8 @@ const Settings = () => {
               </div>
             </div>
           )}
+
           {activePage === 2 && (
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col gap-2">
-                <h3 className="font-bold capitalize">investing</h3>
-                <Hr />
-                <Holder>
-                  <span>dividend reinvestment</span>
-                  <span>enable dividend reinvestment</span>
-                </Holder>
-                <Hr />
-              </div>
-            </div>
-          )}
-          {activePage === 3 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize px-3">security</h3>
@@ -177,34 +208,7 @@ const Settings = () => {
                 >
                   change password
                 </h5>
-                <div
-                  className={togglePass ? "flex flex-col gap-4 p-4" : "hidden"}
-                >
-                  <div className="flex flex-col capitalize">
-                    <label htmlFor="">current password</label>
-                    <input
-                      type="password"
-                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label htmlFor="">new password</label>
-                    <input
-                      type="password"
-                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label htmlFor="">confirm password</label>
-                    <input
-                      type="password"
-                      className="py-1.5 bg-transparent border border-slate-700 dark:border-slate-200"
-                    />
-                  </div>
-                  <button className="py-1.5 bg-purple-500 rounded-sm text-white capitalize">
-                    update
-                  </button>
-                </div>
+                <Changepass togglePass={togglePass} />
 
                 <Hr />
                 <Holder>
@@ -215,7 +219,7 @@ const Settings = () => {
               </div>
             </div>
           )}
-          {activePage === 4 && (
+          {activePage === 3 && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
                 <h3 className="font-bold capitalize">documents</h3>
@@ -227,22 +231,30 @@ const Settings = () => {
                     ID/Drivers license/Passport
                   </h5>
                   <div className={toggleID ? "flex gap-4 p-4" : "hidden"}>
-                    <figure className="border border-slate-700 dark:border-slate-300 w-full lg:w-[30%]">
+                    <figure className="border border-slate-700 dark:border-slate-300 w-full lg:w-[30%] h-20">
                       <img src="" alt="" />
                     </figure>
-                    <div className=" w-full lg:w-[70%] flex flex-col gap-6 ">
-                      <input
-                        type="file"
-                        className="border border-slate-700 dark:border-slate-300 py-1.5"
-                      />
-                      <span className="flex justify-end gap-6 ">
-                        <button className="bg-red-500 px-5 py-1.5 capitalize shadow-xl text-white rounded-sm">
-                          cancel
-                        </button>
-                        <button className="bg-green-500 px-5 py-1.5 capitalize shadow-xl text-white rounded-sm">
-                          upload
-                        </button>
-                      </span>
+                    <div className="w-full lg:w-[70%] ">
+                      {user?.isKYCVerified ? (
+                        <div className="capitalize text-green-500">
+                          Identity verified.
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-6 ">
+                          <input
+                            type="file"
+                            className="border border-slate-700 dark:border-slate-300 py-1.5"
+                          />
+                          <span className="flex justify-end gap-6 ">
+                            <button className="bg-red-500 px-5 py-1.5 capitalize shadow-xl text-white rounded-sm">
+                              cancel
+                            </button>
+                            <button className="bg-green-500 px-5 py-1.5 capitalize shadow-xl text-white rounded-sm">
+                              upload
+                            </button>
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
