@@ -123,7 +123,7 @@ const Steptwo = ({ pageSwitch }) => {
         </select>
       </Formspan>
       <Formspan>
-        <Label title={"state"} />
+        <Label title={"state/province"} />
         <Input
           error={error}
           type={"text"}

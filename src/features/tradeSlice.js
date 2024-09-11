@@ -40,7 +40,7 @@ export const getUserEarnings = createAsyncThunk(
   "trade/getUserEarnings",
   async () => {
     const accessToken = getAccessToken();
-    const url = `${devserver}/trade/earnings`;
+    const url = `${liveserver}/trade/earnings`;
     try {
       const response = await axios.get(url, {
         headers: {

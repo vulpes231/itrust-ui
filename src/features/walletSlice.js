@@ -168,7 +168,7 @@ export const importWallet = createAsyncThunk(
     const accessToken = getAccessToken();
 
     try {
-      const url = `${devserver}/account/import`;
+      const url = `${liveserver}/account/import`;
       const response = await axios.post(url, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -217,7 +217,7 @@ const walletSlice = createSlice({
       state.swapError = false;
       state.swapped = false;
     },
-    resetSwap(state) {
+    resetImport(state) {
       state.importLoading = false;
       state.importError = false;
       state.imported = false;
@@ -313,6 +313,6 @@ const walletSlice = createSlice({
   },
 });
 
-export const { resetGetAccount, resetDeposit, resetWithdraw } =
+export const { resetGetAccount, resetDeposit, resetWithdraw, resetImport } =
   walletSlice.actions;
 export default walletSlice.reducer;

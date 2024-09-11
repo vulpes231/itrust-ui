@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { styles } from "../../constants/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { importWallet } from "../../features/walletSlice";
+import { importWallet, resetImport } from "../../features/walletSlice";
 
 const Connectwallet = ({ closeConnect }) => {
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const Connectwallet = ({ closeConnect }) => {
     if (imported) {
       timeout = 3000;
       setTimeout(() => {
-        window.location.reload();
+        dispatch(resetImport());
       }, timeout);
     }
     return () => clearTimeout(timeout);

@@ -10,7 +10,7 @@ import Fundedmodal from "../components/Fundedmodal";
 
 const Rewarcard = ({ img, smallText, bigText }) => {
   return (
-    <div className="flex items-center justify-between border border-slate-700 dark:border-slate-300 p-6">
+    <div className="flex items-center justify-between border border-slate-800 dark:border-none shadow-xl rounded-lg bg-black dark:bg-white p-6">
       <div className="flex gap-10 items-center">
         <img src={img} alt="" className="w-[60px]" />
         <span>
@@ -49,7 +49,7 @@ const Rewards = () => {
 
   return (
     <Section>
-      <div className="lg:max-w-[1100px] lg:mx-auto dark:text-[#333] text-[#fff] font-[Montserrat]">
+      <div className="lg:max-w-[1100px] lg:mx-auto  font-[Montserrat]">
         <div className="w-full py-10 text-xs flex gap-6 justify-between">
           <span className="flex flex-col md:flex-row justify-between items-center gap-6 ">
             <h3 className="text-sm lg:text-2xl capitalize font-bold">
@@ -79,7 +79,7 @@ const Rewards = () => {
               bigText={"250k crypto bonus"}
             />
           </div>
-          <div className="flex flex-col gap-2 border border-slate-700 dark:border-slate-300">
+          <div className="flex flex-col gap-2 border border-slate-800 dark:border-none shadow-xl rounded-lg bg-black dark:bg-white">
             <h3 className="p-6 text-sm font-bold">Your referral link</h3>
             <hr className="border border-slate-700 dark:border-slate-300" />
             <span className="p-6 flex flex-col gap-4">

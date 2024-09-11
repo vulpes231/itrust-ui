@@ -13,6 +13,9 @@ const initialState = {
   changeLoading: false,
   changeError: false,
   passwordChanged: false,
+  getFundLoading: false,
+  getFundError: false,
+  fundRequested: false,
 };
 
 export const getUser = createAsyncThunk("user/getUser", async () => {
@@ -87,6 +90,31 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+export const getFunded = createAsyncThunk(
+  "user/getFunded",
+  async (formData) => {
+    const accessToken = getAccessToken();
+    const url = `${liveserver}/user/getfunded`;
+    try {
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        const errMsg = error.response.data.message;
+        throw new Error(errMsg);
+      } else {
+        throw new Error("An error occurred. ");
+      }
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -100,6 +128,11 @@ const userSlice = createSlice({
       state.changeError = false;
       state.changeLoading = false;
       state.passwordChanged = false;
+    },
+    resetFunding(state) {
+      state.getFundError = false;
+      state.getFundLoading = false;
+      state.fundRequested = false;
     },
   },
   extraReducers: (builder) => {
@@ -146,8 +179,23 @@ const userSlice = createSlice({
         state.passwordChanged = false;
         state.changeError = action.error.message;
       });
+    builder
+      .addCase(getFunded.pending, (state) => {
+        state.getFundLoading = true;
+      })
+      .addCase(getFunded.fulfilled, (state) => {
+        state.getFundLoading = false;
+        state.fundRequested = true;
+        state.getFundError = false;
+      })
+      .addCase(getFunded.rejected, (state, action) => {
+        state.getFundLoading = false;
+        state.fundRequested = false;
+        state.getFundError = action.error.message;
+      });
   },
 });
 
 export default userSlice.reducer;
-export const { resetUpdateUser, resetChangePass } = userSlice.actions;
+export const { resetUpdateUser, resetChangePass, resetFunding } =
+  userSlice.actions;

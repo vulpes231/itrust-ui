@@ -114,7 +114,7 @@ const Stepthree = () => {
   return (
     <div className="flex flex-col gap-4 capitalize text-sm font-semibold">
       <Formspan>
-        <Label title={"social security number"} />
+        <Label title={"ID Number/social security number"} />
         <Input
           error={error}
           type={"text"}

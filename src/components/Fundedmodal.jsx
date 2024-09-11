@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFunded, resetFunding } from "../features/userSlice";
 
 const styles = {
   input: `w-full border border-slate-700 dark:border-slate-200 bg-transparent p-2 outline-none focus:outline-purple-500 focus:border-none`,
@@ -8,8 +10,8 @@ const styles = {
 };
 
 const Fundedmodal = ({ closeModal }) => {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
-    account: "",
     reason: "",
     code: "",
     amount: "",
@@ -17,6 +19,10 @@ const Fundedmodal = ({ closeModal }) => {
 
   const [error, setError] = useState(false);
   const modalRef = useRef();
+
+  const { getFundError, getFundLoading, fundRequested } = useSelector(
+    (state) => state.user
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,16 +35,46 @@ const Fundedmodal = ({ closeModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
+    dispatch(getFunded(form));
   };
 
-  const handleReset = () => {
+  useEffect(() => {
+    if (getFundError) {
+      setError(getFundError);
+    }
+  }, [getFundError]);
+
+  useEffect(() => {
+    let timeout;
+    if (error) {
+      timeout = 3000;
+      setTimeout(() => {
+        setError(false);
+        handleReset();
+      }, timeout);
+    }
+    return () => clearTimeout(timeout);
+  }, [error]);
+
+  useEffect(() => {
+    let timeout;
+    if (fundRequested) {
+      timeout = 5000;
+      setTimeout(() => {
+        dispatch(resetFunding());
+        handleReset();
+      }, timeout);
+    }
+    return () => clearTimeout(timeout);
+  }, [fundRequested]);
+
+  function handleReset() {
     setForm({
-      account: "",
       reason: "",
       code: "",
       amount: "",
     });
-  };
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -55,7 +91,7 @@ const Fundedmodal = ({ closeModal }) => {
   }, [closeModal]);
 
   return (
-    <div className="w-full h-screen fixed top-0 left-0 flex items-center pb-10 pt-20 bg-black bg-opacity-30">
+    <div className="w-full h-screen fixed top-0 left-0 flex items-center pb-10 pt-20 bg-white dark:bg-black bg-opacity-40 dark:bg-opacity-40">
       <div
         ref={modalRef}
         className="h-full dark:bg-white bg-black w-full lg:max-w-[32%] lg:mx-auto"
@@ -103,6 +139,10 @@ const Fundedmodal = ({ closeModal }) => {
                 rows={8}
               ></textarea>
             </div>
+            {error && <p className="text-red-500">{error} </p>}
+            {fundRequested && (
+              <p className="text-green-500">Funding requested </p>
+            )}
             <div className="flex justify-end gap-4">
               <button
                 type="button"
@@ -116,7 +156,7 @@ const Fundedmodal = ({ closeModal }) => {
                 onClick={handleSubmit}
                 className="bg-purple-500 py-2 px-6 text-white rounded-lg"
               >
-                Confirm
+                {!getFundLoading ? "Confirm" : "Wait..."}
               </button>
             </div>
           </form>
